@@ -1,0 +1,65 @@
+( function( $ ) {
+
+
+
+(function($,sr){
+
+  // debouncing function from John Hann
+  // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
+  var debounce = function (func, threshold, execAsap) {
+      var timeout;
+
+      return function debounced () {
+          var obj = this, args = arguments;
+          function delayed () {
+              if (!execAsap)
+                  func.apply(obj, args);
+              timeout = null;
+          };
+
+          if (timeout)
+              clearTimeout(timeout);
+          else if (execAsap)
+              func.apply(obj, args);
+
+          timeout = setTimeout(delayed, threshold || 100);
+      };
+  }
+  // smartresize 
+  jQuery.fn[sr] = function(fn){  return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr); };
+
+})(jQuery,'smartresize');
+
+
+$("#simple-menu").sidr({
+    side: "right"
+})
+
+
+// usage:
+$(window).smartresize(function(){
+    if ($(window).width() >= 968 ) {
+        $.sidr('close');
+        $('#simple-menu').removeClass('is-open');
+    }
+});
+
+
+
+
+$('[data-toggle-title]').on('click', function(){
+  var $this = $(this);
+   var content = $this.next('div');
+   $this.toggleClass('is-active');
+   content.toggleClass('is-hidden');
+  // if (content.data('toggle-content') == 'open' ) {
+  //   console.log('if ran');
+  //     content.attr('data-toggle-content', 'closed')
+  //     return
+  // }
+  //   console.log('title was selected');
+  //   content.attr('data-toggle-content', 'open');
+
+});
+
+} )( jQuery );

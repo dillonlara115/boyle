@@ -1,0 +1,37 @@
+[data-toggle-title] {
+	cursor: pointer;
+	font-weight: bold;
+	font-family: Trebuchet MS, Arial;
+
+	&:before {
+		content: '';
+		background: url(http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/04/Bullet-Blue-Plus.gif) no-repeat;
+		display: inline-block;
+		width: 17px;
+		height: 17px;
+		padding-right: .5em;
+		vertical-align: middle;
+	}
+	&.is-active {
+		&:before {
+			background: url(http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/04/Bullet-Blue-Minus.gif) no-repeat;
+
+		}
+	}
+}
+
+.toggle-content {
+	padding: 1.5em 0;
+	clear: both;
+	float: left;
+	&.is-hidden {
+		display: none;
+	}
+}
+
+.static-expandable-content {
+	hr {
+		margin: 1.5em 0;
+		clear: both;
+	}
+}
