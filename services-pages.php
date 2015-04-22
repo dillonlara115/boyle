@@ -5,8 +5,9 @@ Template Name: Services Pages
 ?>
 
 <?php get_header(); ?>
-
-<?php echo get_the_post_thumbnail( $page->ID, 'large', array( 'class'	=> "static-header-image") ); ?> 
+<div class="static-header-image-container">
+	<?php echo get_the_post_thumbnail( $page->ID, 'large', array( 'class'	=> "static-header-image") ); ?>
+</div> 
 <div id="content" class="static-container" >
 	<?php the_post(); ?>
 	<div id="post-<?php the_ID(); ?>" class="services-container" >

@@ -81,18 +81,7 @@ function about_widget_init() {
 	'after_title'   => '</h2>',
     ) );
 }
-// add_action( 'widgets_init', 'contact_widget_init' );
-// function contact_widget_init() {
-//     register_sidebar( array(
-//         'name' => 'contact Sidebar' ,
-//         'id' => 'about',
-//         'description' => __( 'Widgets in this area will be shown on all contact pages' ),
-//         'before_widget' => '<div id="%1$s" class="contact-sidebar-container %2$s">',
-// 	'after_widget'  => '</div>',
-// 	'before_title'  => '<h2 class="contact-sidebar-title">',
-// 	'after_title'   => '</h2>',
-//     ) );
-// }
+
 
 // Creates directory custom post type
 function company_directory_init() {

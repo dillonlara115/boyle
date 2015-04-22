@@ -1,0 +1,262 @@
+.desktop-nav {
+	display: none;
+	@media (min-width: 48em) {
+		display: block;
+		text-align: center;
+		margin: 0 auto;
+		padding-bottom: 10px;
+	}
+	.lte9 & {
+		display: block;
+		text-align: center;
+		margin: 0 auto;
+		padding-bottom: 10px;
+	}
+
+}
+
+.header-nav-primary {
+	width: 920px;
+	margin: 0 auto;
+	&-sub {
+		margin-top: .7em!important;
+	}
+	.header-nav-subsection {
+		width: 150px;
+		text-align: right;
+		vertical-align: bottom;
+		float: right;
+		padding-right: 1em;
+
+	}
+	ul {
+		float: left;
+		margin-top: 1.7em;
+		.lte9 & {
+			margin-top: 0;
+
+		}
+	}
+}
+
+
+.header-nav-primary, .header-nav-1 {
+	display: none;
+	@media (min-width: 60em) {
+		display: block;
+	}
+	.lte9 & {
+		display: block;
+	} 
+}
+
+
+.mobile-header {
+	
+	padding: .3em .5em 0;
+	display: block;
+	height: 30px;
+	line-height: 30px;
+	@media (min-width: 60em) {
+		display: none;
+	}
+	.lte9 & {
+		display: none;
+	}
+	.mobile-logo {
+		display: inline-block;
+		float: left;
+		margin-bottom: .5em;
+		margin-left: 2.7%;
+		@media (min-width: 60em) {
+			display: none;
+		}
+		.lte9 & {
+			display: none;
+		}
+		img {
+			width: 125px;
+			height: 33px;
+		}
+	}
+}
+
+
+#simple-menu {
+
+	display: none;
+
+	@media (max-width: 60em) {
+		line-height: 1;
+		display: block;
+		font-size: 3em;
+		float: right;
+		margin: -.18em .7% 0 0;
+
+	}
+	.lte9 & {
+		line-height: 1;
+		display: block;
+		font-size: 3em;
+		float: right;
+		margin: -.1em .1em 0 0;
+	}
+	&:hover {
+		text-decoration: none;
+		color: #ccc;
+	}
+}
+
+#sidr {
+	.simple-menu-social {
+		padding-top: 1em;
+		a {
+			display: inline-block;
+			margin: 0 1em;
+			padding: 0;
+		}
+		input {
+			margin: 0 1em;
+			padding: 0;
+		}
+		&:hover {
+			border-top: initial;
+			line-height: 48px;
+			a {
+				webkit-box-shadow: none!important;
+				-moz-box-shadow: none!important;
+				box-shadow: none!important;
+			}
+		}
+	}
+}
+
+.header-nav-1 {
+	margin: 0 auto;
+	background: url('http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/04/nav-bg-boyle.png') no-repeat;
+	background-size: contain;
+	width: 900px;
+	padding-top: 0.4em;
+	height: 42px;
+	clear: both;
+}
+
+
+
+// new header
+.header-main-menu {
+	.menu {
+		line-height: 32px;
+		> .menu-item {
+			display: inline-block;
+			text-transform: uppercase;
+			position: relative;
+			padding: 0 .7em;
+			> a {
+				color: #fff;
+				font-family: Tahoma, Arial;
+				font-size: 0.96em;
+				font-weight: normal;
+				-webkit-font-smoothing: antialiased;
+				transition: text-shadow 250ms ease;
+				&:visited {
+					color: #eee;
+				}
+				&:hover {
+					text-decoration: none;
+					text-shadow: 0px 0px 4px rgba(93, 135, 189, 1), 0px 0px 8px rgba(255, 255, 255, 1);
+				}
+			}
+			&:after {
+				content: "";
+				background: url('http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/04/nav-bullet-bg.png') no-repeat;
+				display: inline-block;
+				width: 1px;
+				height: 9px;
+
+				padding: 0 .5em;
+				position: relative;
+				left: 12px;
+			}
+			&:last-child:after {
+				content:'';
+				background: none;
+			}
+		}
+	}
+
+}
+
+
+
+/* Actual navmenu CSS */
+.header-main-menu {
+	.sub-menu {
+		visibility: hidden;
+		min-height: 0;
+		opacity: 0;
+		position: absolute;
+		min-width: 100%;
+		background: #c1c1c1;
+		margin-left: 0;
+		padding-left: 1.3em;
+		top: 75px;
+
+		&:after {
+			content: "";
+			background: transparent;
+			min-height: 5px;
+			position: absolute;
+			top: -5px;
+			width: 100%;
+			left: 0;
+		}
+		li {
+			list-style-type: none;
+			text-align: left;
+			transition: all 250ms ease;
+			background: #dfdfdf;
+			position: relative;
+			border-left: 1px solid #898a8b;
+			padding: 0 0.5em;
+		}
+		a {
+			display: block;
+			line-height: 30px !important;
+			white-space: nowrap;
+			color: #274777;
+			font-weight: bold;
+			font-size: 0.7em;
+			padding-left: .2em;
+			text-transform: initial;
+			&:hover {
+				text-decoration: none;
+			}
+		}
+	}
+
+}
+
+.header-main-menu .menu > li:hover .sub-menu{
+	visibility: visible;
+	opacity: .95;
+	top: 34px;
+	min-height: 50px;
+	left: -1em;
+	z-index: 9999;
+	li:hover {
+		background: #fff;
+		a {
+			&:before {
+				content: "\25B6";
+				position: absolute;
+				left: -1.5em;
+				color: #000;
+			}
+		}
+	}
+}	
+/* Hide next level of subnavigation */
+#primary-menu > li:hover > .subm-enu .sub-menu{
+	display: none;
+}

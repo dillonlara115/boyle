@@ -23,7 +23,7 @@
     
 		<?php if (! is_front_page()) {  ?> 
 		<ul class="header-nav-primary-sub">
-			<li class="nav-logo"><a href="<?php bloginfo('template_directory'); ?>/index.php" class="header-logo"><img src="<?php bloginfo('template_directory'); ?>/images/boyle-blue-logo.gif"></a></li>
+			<li class="nav-logo"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="header-logo"><img src="<?php bloginfo('template_directory'); ?>/images/boyle-blue-logo.gif"></a></li>
 			<li class="TopNav TopNav-sub"><a href="#">REGISTER/LOGIN</a></li>
 	    	<li class="TopNav TopNav-sub"><a href="#">BOYLE BLOG</a></li>
 	    	<li class="TopNav TopNav-sub"><a href="http://www.boyleinsuranceagency.com/">BOYLE INSURANCE AGENCY</a></li>
@@ -64,7 +64,7 @@
 
 <!-- Mobile Navigation Label -->
 <div class="mobile-header">
-    <a href="#" class="mobile-logo"><img src="<?php bloginfo('template_directory'); ?>/images/boyle-blue-logo.gif"></a>
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="mobile-logo"><img src="<?php bloginfo('template_directory'); ?>/images/boyle-blue-logo.gif"></a>
     <a id="simple-menu" href="#sidr"></a>
 </div>
     

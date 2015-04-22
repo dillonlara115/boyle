@@ -26,6 +26,7 @@ hr
 		padding: 3em 2em 0;
 		
 	}
+
 	a{
 		color: #355c88;
 		text-decoration: none;
@@ -58,6 +59,12 @@ hr
 
 }
 
+.header-nav-primary-sub {
+	.TopNav {
+		padding: 1em 8em 1em 4em;
+	}
+}
+
 .BottomNav {
 	color: #355c88;
 	text-decoration: none;
@@ -81,6 +88,9 @@ hr
 			text-decoration: underline;
 
 		}
+	}
+	&.copy-nav{
+		margin-top: 0;
 	}
 	&-office {
 		display: block;

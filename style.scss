@@ -9,8 +9,11 @@ Author URI: http://www.ventamarketing.com/
 // imports
 @import 'css/default';
 @import 'css/sidebar';
+@import 'css/header';
+@import 'css/accordion';
 @import 'css/slide-in-navigation';
-
+@import 'css/agents';
+@import 'css/gform';
 
 //DEFAULT styles
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,acronym,address,big,cite,code,del,
@@ -64,7 +67,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{
 ----------------------------------------------- */
 
 #page {
-	max-width: 960px;
+	max-width: 900px;
 	margin: 0 auto;
 	clear: both;
 }
@@ -95,11 +98,24 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{
 h1, h2, h3, h4, h5, h6 {
 	font-size: 22px;
 	line-height: 1.5em;
-	color: #000;
+	color: #336699;
+	text-align: left;
+}
+
+h1 {
+	font-size: 16px;
+	font-family: Arial;
+}
+h3 {
+	font-size: 14px;
 }
 
 p {
 	margin: 0 0 15px;
+	text-align: left;
+	font-size: 12px;
+	color: rgb(128, 128, 128);
+	line-height: normal;
 }
 
 strong {
@@ -109,7 +125,19 @@ strong {
 em {
 	font-style: italic;
 }
-
+.static-header-image {
+	background-color: rgb(255,255,255);
+	width: 100%;
+	height: auto;
+	padding: 10px;
+	box-sizing: border-box;
+	-webkit-box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.65);
+	-moz-box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.65);
+	box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.65);
+}
+.static-header-image-container {
+	max-height: 407px;
+}
 
 //Main Menu
 .Menu {
@@ -225,10 +253,14 @@ em {
 .bucket-container {
 	position: relative;
 	@media (min-width: 37em) {
-		height: 60px;
+		height: 130px;
+		overflow: hidden;
+		top: -40px;
 	}
  	.lte9 & {
- 		height: 60px;
+ 		height: 130px;
+ 		overflow: hidden;
+ 		top: -40px;
  	}
 }
 .homepage-divider {
@@ -242,7 +274,7 @@ em {
 		background-size: cover;
 		margin: 0 auto;
 		position: relative;
-		top: -125px;
+		top: -85px;
 		z-index: 1;
 		width: 98%;
 	}
@@ -262,144 +294,7 @@ em {
 }
 	  
 
-.desktop-nav {
-	display: none;
-	@media (min-width: 48em) {
-		display: block;
-		text-align: center;
-		margin: 0 auto;
-		padding-bottom: 10px;
-	}
-	.lte9 & {
-		display: block;
-		text-align: center;
-		margin: 0 auto;
-		padding-bottom: 10px;
-	}
 
-}
-
-.header-nav-primary {
-	width: 920px;
-	margin: 0 auto;
-	.header-nav-subsection {
-		width: 150px;
-		text-align: right;
-		vertical-align: bottom;
-		float: right;
-		padding-right: 1em;
-
-	}
-	ul {
-		float: left;
-		margin-top: 1.7em;
-		.lte9 & {
-			margin-top: 0;
-
-		}
-	}
-}
-
-
-.header-nav-primary, .header-nav-1 {
-	display: none;
-	@media (min-width: 60em) {
-		display: block;
-	}
-	.lte9 & {
-		display: block;
-	} 
-}
-
-
-.mobile-header {
-	
-	padding: .3em .5em 0;
-	display: block;
-	height: 30px;
-	line-height: 30px;
-	@media (min-width: 60em) {
-		display: none;
-	}
-	.lte9 & {
-		display: none;
-	}
-	.mobile-logo {
-		display: inline-block;
-		float: left;
-		margin-bottom: .5em;
-		margin-left: 2.7%;
-		@media (min-width: 60em) {
-			display: none;
-		}
-		.lte9 & {
-			display: none;
-		}
-		img {
-			width: 125px;
-			height: 33px;
-		}
-	}
-}
-
-
-#simple-menu {
-
-	display: none;
-
-	@media (max-width: 60em) {
-		line-height: 1;
-		display: block;
-		font-size: 3em;
-		float: right;
-		margin: -.18em .7% 0 0;
-
-	}
-	.lte9 & {
-		line-height: 1;
-		display: block;
-		font-size: 3em;
-		float: right;
-		margin: -.1em .1em 0 0;
-	}
-	&:hover {
-		text-decoration: none;
-		color: #ccc;
-	}
-}
-
-#sidr {
-	.simple-menu-social {
-		padding-top: 1em;
-		a {
-			display: inline-block;
-			margin: 0 1em;
-			padding: 0;
-		}
-		input {
-			margin: 0 1em;
-			padding: 0;
-		}
-		&:hover {
-			border-top: initial;
-			line-height: 48px;
-			a {
-				webkit-box-shadow: none!important;
-				-moz-box-shadow: none!important;
-				box-shadow: none!important;
-			}
-		}
-	}
-}
-
-.header-nav-1 {
-	margin: 0 auto;
-	background: rgba(147, 147, 147, 0.29);
-	width: 900px;
-	padding-top: 0.4em;
-	height: 40px;
-	clear: both;
-}
 
 //homepage
 .homepage-sub {
@@ -412,7 +307,6 @@ em {
 		text-align: center;
 		display: inline-block;
 		clear: both;
-		top: -50px;
 		width: 94%;
 	}
 	.lte9 & {
@@ -422,7 +316,6 @@ em {
 		text-align: center;
 		display: inline-block;
 		clear: both;
-		top: -50px;
 		width: 94%;
 	}
 
@@ -443,6 +336,7 @@ em {
 	height: 60px;
 	text-align: left;
 	background: #567da8;
+	position: relative;
 	background: -moz-linear-gradient(top,  #567da8 0%, #4F7399 30%, #2f4155 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#567da8), color-stop(30%, #4F7399), color-stop(100%,#2f4155));
 	background: -webkit-linear-gradient(top #567da8 0%,#4F7399 30%, #2f4155 100%);
@@ -507,7 +401,7 @@ em {
 		}
 		@media (min-width: 48em) {
 			width: 64px;
-			padding-right: .8em;
+			padding-right: .5em;
 			top: 1em;
 		}
 		.lte9 & {
@@ -521,7 +415,6 @@ em {
 	}
 	&-content {
 		text-align: left;
-		width: 100%;
 		display: inline-block;
 		position: relative;
 		vertical-align: top;
@@ -538,7 +431,7 @@ em {
 			text-align: left; 
 			vertical-align: top;
 			float: left;
-			width: 57%;
+			width: 62%;
 			top: 14px;
 			line-height: 1.4;
 			padding: 0;
@@ -548,7 +441,7 @@ em {
 			text-align: left; 
 			vertical-align: top;
 			float: left;
-			width: 57%;
+			width: 60%;
 			line-height: 1.4;
 			padding: 0;
 		}
@@ -600,12 +493,16 @@ $primary-dark: darken(#355c88, 25%);
 		}
 	}
 }
-
+.sidr ul.mobile-nav {
+	@media (min-width: 60em) {
+		display: none;
+	}
+}
 .mobile-icon {
 	font-size: 3em;
 	position: absolute;
-	right: 35px;
-	top: -3px;
+	left: 88%;
+	top: 0;
 	height: 47px;
 	background: url(images/nav-arrow.gif);
 	width: 38px;
@@ -616,11 +513,143 @@ $primary-dark: darken(#355c88, 25%);
 		display: none;
 	}
 }
+
+// hide the about home page h1 to show logo instead 
+#post-2 {
+	h1 {
+		display: none;
+	}
+}
+
+.contact-sidebar-content {
+	padding-left: 1em;
+	p, strong {
+		font-size: .8em;
+	}
+}
+
+//static pages
+.static-container {
+	margin: 1em 0;	
+	text-align: left;
+	display: inline-block;
+	width: 100%;
+	strong {
+		font-weight: bold;
+		font-size: 1em;
+		color: #355c88;
+		font-family: Arial;
+	}
+	ul {
+		text-align: left;
+		font-size: 12px;
+		color: gray;
+	}
+	em {
+		color: rgb(128, 128, 128);
+		font-weight: bold;
+		font-style: italic;
+	}
+	h1 {
+		padding-bottom: 1em;
+	}
+
+	@media (min-width: 48em) and (max-width: 60em) {
+		margin: 1em;
+	}
+}
+.static-pages-content {
+	margin-bottom: 1em;
+}
+.static-pages-title {
+	font-family: Century Gothic, Tahoma, Arial;
+	font-weight: bold;
+	color: #355c88;
+	display: inline-block;
+}
+//static pages container 
+.services-container, .about-container {
+	border-bottom: 1px dashed #ccc;
+	margin-bottom: 1em;
+	padding: 1em;
+	@media (min-width: 48em) {
+		border-bottom: 0;
+		border-left: 1px dashed #ccc;
+		float: right;
+		width: 77%;
+		padding:0 0 0 1em;
+	}
+}
+.contact-container {
+	width: 71%;
+}
+.static-contact-container {
+	h1 {
+		padding-bottom: 0;
+	}
+}
+.content-left {
+	float: left;
+	width: 69%;
+	padding-right: .5em;
+	@media (max-width: 60em) {
+		width: 100%;
+	}
+}
+
+.agent-container {
+	clear: both;
+}
+
+.image-right {
+	width: 200px;
+	float: left;
+	padding-bottom: 1em;
+}
+.wpp_agents_content_agent_card {
+	clear: both;
+}
+.nav-logo {
+	display: inline-block;
+	padding-left: 0.5em;
+}
+//header logo
+.header-logo {
+	img {
+		width: 125px;
+	}
+}
+.header-image {
+	text-align: left;
+	vertical-align: top;
+	width: 35px;
+	padding-top: 7px;
+	float: left;
+	padding-right: 0.3em;
+}
+.contact-page-title {
+	font-family: Century Gothic, Tahoma, Arial;
+	display: inline-block;
+	cursor: #000;
+}
+.contact-page-text {
+	color: #000;
+}
+.contact-form {
+	label {
+		color: #000;
+		font-size: 11px;
+	}
+}
 //footer
 #footer {
 	clear: both;
 	margin-top: 1em;
+	@media (min-width: 37em) {
+		margin-top: -1em;
+	}
 }
+
 .container-footer {
 	max-width:920px;
 	margin: 0 auto;
@@ -643,15 +672,16 @@ $primary-dark: darken(#355c88, 25%);
 	.tp-simpleresponsive >ul li {
 		border: 1px solid #000;
 	}
+	.fullwidthbanner-container {
+		  max-width: 878px!important;
+		  padding: 0.5em;
+		  -webkit-box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.65);
+		  -moz-box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.65);
+		  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.65);
+		  width: 90%;
+		  @media (min-width: 48em) {
+		  	width: 100%;
+		}
+	}
+
 }
-
-.fullwidthbanner-container {
-	  max-width: 878px!important;
-	  padding: 0.5em;
-	  width: 93% !important;
-	  -webkit-box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.65);
-	  -moz-box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.65);
-	  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.65);
-}
-
-
