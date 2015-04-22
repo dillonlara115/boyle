@@ -11,9 +11,8 @@ hr
 	height: 1px;
 	color: #ABC3CC;
 }
-
-
-.TopNav {
+.TopNav
+{
 	color: #355c88;
 	text-decoration: none;
 	font-family: Verdana, Arial;
@@ -23,9 +22,6 @@ hr
 	padding: 1em 10em 1em 4em;
 	text-align: center;
 	display: inline-block;
-	&-sub {
-		padding: 1em 7em 1em 4em;
-	}
 	.lte9 & {
 		padding: 3em 2em 0;
 		
@@ -69,7 +65,7 @@ hr
 	font-size: 8pt;
 	display: inline-block;
 	vertical-align: middle;
-	margin: 0.4em 1.4em;
+	margin: 0.4em 1.5em;
 	line-height: 1.5;
 	a {
 		color: #355c88;

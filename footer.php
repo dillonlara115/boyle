@@ -4,15 +4,15 @@
 	<div class="container-footer">                   
 
     <ul class="footer-nav">
-        <li class="BottomNav"><a href="#" >home</a></li>
-        <li class="BottomNav"><a href="#" >availability report</a></li>
+        <li class="BottomNav"><a href="<?php echo home_url(); ?>" >home</a></li>
+        <li class="BottomNav"><a href="" >availability report</a></li>
         <li class="BottomNav"><a href="#" >search availability</a></li>
         <li class="BottomNav"><a href="#" >property portfolio</a></li>
-        <li class="BottomNav"><a href="#" >services</a></li>
+        <li class="BottomNav"><a href="<?php echo get_permalink( 13 ); ?>" >services</a></li>
         <li class="BottomNav"><a href="#" >news</a></li>
-        <li class="BottomNav"><a href="#" >about</a></li>
-        <li class="BottomNav"><a href="#" >contact</a></li>
-        <li class="BottomNav"><a href="#" >disclaimer</a></li>
+        <li class="BottomNav"><a href="<?php echo get_permalink( 2 ); ?>" >about</a></li>
+        <li class="BottomNav"><a href="<?php echo get_permalink( 25 ); ?>" >contact</a></li>
+        <li class="BottomNav"><a href="<?php echo get_permalink( 11 ); ?>" >disclaimer</a></li>
         <li class="BottomNav"><a href="#" >site map</a></li>
     </ul>
 
