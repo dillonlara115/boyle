@@ -1,6 +1,7 @@
 ( function( $ ) {
 
-
+$('.header-nav-primary').show();
+$('.header-nav-1').show();
 
 (function($,sr){
 
@@ -52,13 +53,7 @@ $('[data-toggle-title]').on('click', function(){
    var content = $this.next('div');
    $this.toggleClass('is-active');
    content.toggleClass('is-hidden');
-  // if (content.data('toggle-content') == 'open' ) {
-  //   console.log('if ran');
-  //     content.attr('data-toggle-content', 'closed')
-  //     return
-  // }
-  //   console.log('title was selected');
-  //   content.attr('data-toggle-content', 'open');
+
 
 });
 

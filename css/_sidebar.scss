@@ -61,6 +61,9 @@ img.logo {
 			height: 47px;
 			background: url(images/nav-arrow.gif);
 			width: 38px;
+			@media (min-width: 60em) {
+				display: none;
+			}
 		}
 		@media (max-width: 48em) {
 			color: #fff;
