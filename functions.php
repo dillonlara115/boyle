@@ -81,34 +81,38 @@ function about_widget_init() {
 	'after_title'   => '</h2>',
     ) );
 }
-
+// add_action( 'widgets_init', 'contact_widget_init' );
+// function contact_widget_init() {
+//     register_sidebar( array(
+//         'name' => 'contact Sidebar' ,
+//         'id' => 'about',
+//         'description' => __( 'Widgets in this area will be shown on all contact pages' ),
+//         'before_widget' => '<div id="%1$s" class="contact-sidebar-container %2$s">',
+// 	'after_widget'  => '</div>',
+// 	'before_title'  => '<h2 class="contact-sidebar-title">',
+// 	'after_title'   => '</h2>',
+//     ) );
+// }
 
 // Creates directory custom post type
-function company_directory_init() {
+function staff_directory_init() {
     $args = array(
-      'label' => 'Company Directory',
+      'label' => 'Staff',
         'public' => true,
         'show_ui' => true,
         'capability_type' => 'post',
         'hierarchical' => false,
-        'rewrite' => array('slug' => 'company-directory'),
+        'rewrite' => array('slug' => 'staff-directory'),
         'query_var' => true,
         'menu_icon' => 'dashicons-groups',
         'supports' => array(
             'title',
-            'editor',
-            'excerpt',
-            'trackbacks',
-            'custom-fields',
-            'comments',
-            'revisions',
             'thumbnail',
-            'author',
             'page-attributes',)
         );
-    register_post_type( 'company-directory', $args );
+    register_post_type( 'staff_directory', $args );
 }
-add_action( 'init', 'company_directory_init' );
+add_action( 'init', 'staff_directory_init' );
 
 
 $preset_widgets = array (

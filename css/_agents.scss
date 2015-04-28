@@ -1,6 +1,6 @@
 
 .static-pages-content {
-	.wpp_agents_content_agent_card {
+	.wpp_agents_content_agent_card, .staff-item{
 		clear: both;
 		padding: 1em;
 		height: 120px;
@@ -13,7 +13,7 @@
 		}
 	}
 
-	.wpp_agent_stats_agent_image {
+	.wpp_agent_stats_agent_image, .staff-item-image {
 		float: left;
 		padding-right: .7em;
 		height: 120px;
@@ -22,10 +22,18 @@
 			height: auto;
 		}
 	}
-	.wpp_agent_stats_display_name p:first-child {
+	.wpp_agent_stats_display_name p:first-child, .staff-item-content h3 {
 		margin-bottom: 0;
 	}
-	.wpp_agent_stats_display_name p, .wpp_agent_stats_widget_bio p, .wpp_agent_info_list dd, .wpp_agent_info_list dt {
+	.staff-item-content h3 {
+		text-align: left;
+		font-size: 12px;
+		color: gray;
+		line-height: normal;
+		font-weight: bold;
+		font-family: Arial;
+	}
+	.wpp_agent_stats_display_name p, .wpp_agent_stats_widget_bio p, .wpp_agent_info_list dd, .wpp_agent_info_list dt, .staff-item-content a {
 		font-weight: bold;
 		font-family: Arial;
 	}
@@ -33,5 +41,19 @@
 		font-size: 12px;
 		color: gray;
 		line-height: normal;
+	}
+	.staff-item-content-contact {
+		margin-top: 15px;
+		p {
+			margin-bottom: 0;
+			font-weight: bold;
+			font-family: Arial;
+		}
+		a {
+			font-size: 12px;
+			color: gray;
+			line-height: normal;
+			font-weight: bold;
+		}
 	}
 }
