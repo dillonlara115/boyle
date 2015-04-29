@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Sales and Lease Page
+Template Name: Appraisals Page
 */
 ?>
 
@@ -27,7 +27,7 @@ if ( $query->have_posts() ) : ?>
 		<div class="staff-container">
 						<?php
 				$values = get_field('general_tag');
-				if( in_array( "Sales & Leasing", get_field('general_tag')) )
+				if( in_array( "Appraisals", get_field('general_tag')) )
 				{
 					$image = get_field('picture'); ?>
 					<div class="staff-item">
