@@ -153,7 +153,7 @@ Template Name: Memphis Team Pages
 									?>
 								
 							<?php endwhile; wp_reset_postdata(); ?>
-
+						</div>
 					</div>
 					<hr>
 				</li>

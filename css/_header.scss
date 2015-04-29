@@ -42,9 +42,9 @@
 
 .header-nav-primary, .header-nav-1 {
 	display: none;
-	// @media (min-width: 60em) {
-	// 	display: block;
-	// }
+	 @media (min-width: 60em) {
+	 	display: block;
+	 }
 	.lte9 & {
 		display: block;
 	} 
@@ -108,6 +108,9 @@
 }
 
 #sidr {
+	@media (min-width: 60em) {
+		display: none;
+	}
 	.simple-menu-social {
 		padding-top: 1em;
 		a {

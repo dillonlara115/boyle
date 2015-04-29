@@ -57,3 +57,23 @@
 		}
 	}
 }
+.agent-title {
+	color: gray;
+	font-size: 12px;
+	font-weight: bold;
+	font-family: Tahoma, Arial;
+	margin: 1em 0;
+}
+
+.content-pull-left {
+	float: left;
+	width: 650px;
+	padding-right: 1em;
+	@media (max-width: 48em) {
+		width: 100%;
+	}
+}
+
+.pull-left {
+	float: left;
+}

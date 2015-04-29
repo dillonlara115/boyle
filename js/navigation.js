@@ -1,8 +1,5 @@
 ( function( $ ) {
 
-$('.header-nav-primary').show();
-$('.header-nav-1').show();
-
 (function($,sr){
 
   // debouncing function from John Hann
