@@ -114,6 +114,25 @@ function staff_directory_init() {
 }
 add_action( 'init', 'staff_directory_init' );
 
+// Creates properties custom post type
+function properties_init() {
+    $args = array(
+      'label' => 'Properties',
+        'public' => true,
+        'show_ui' => true,
+        'capability_type' => 'post',
+        'hierarchical' => false,
+        'rewrite' => array('slug' => 'properties'),
+        'query_var' => true,
+        'menu_icon' => 'dashicons-admin-home',
+        'supports' => array(
+            'title',
+            'thumbnail',
+            'page-attributes',)
+        );
+    register_post_type( 'properties', $args );
+}
+add_action( 'init', 'properties_init' );
 
 $preset_widgets = array (
 'primary-aside'  => array( 'search', 'pages', 'categories', 'archives' ),
