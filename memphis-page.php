@@ -17,7 +17,7 @@ Template Name: Memphis Team Pages
 		<div class="static-pages-content">
 			<?php the_content(); ?>
 
-			<?php	$query = new WP_Query( array( 'post_type' => 'staff_directory' ) );
+			<?php	$query = new WP_Query( array( 'post_type' => 'staff_directory', 'orderby'=>'title','order'=>'ASC' ) );
 				if ( $query->have_posts() ) : ?>
 
 

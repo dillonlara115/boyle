@@ -6,7 +6,7 @@
 
 
 <div class="entry-content">
-<h1 class="agent-title"><?php the_title(); ?></h1>
+<h1 class="agent-title"><?php the_title(); ?>, <?php the_field('title'); ?>, <?php the_field('office'); ?></h1>
 <?php the_content(); 
 $image = get_field('picture'); ?>
 	<div class="content-pull-left">
