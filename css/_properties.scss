@@ -10,6 +10,10 @@
 		border-left: 0;
 		padding: 0 2em;
 		box-sizing: border-box;
+		font-family: Tahoma, Arial;
+		strong, p {
+			font-family: Tahoma;
+		}
 	}
 }
 
@@ -115,7 +119,7 @@
 	font-family: Georgia, Times New Roman;
 	text-transform: uppercase;
 	margin: 1em 0 .5em;
-	font-size: 1em;
+	font-size: 1.2em;
 	a {
 		font-family: Georgia, Times New Roman;
 		font-size: 1em;
@@ -123,48 +127,54 @@
 	span {
 		font-size: 1.3em;
 	}
+	&:before {
+		content: '';
+		margin: 0 8px;
+		display: inline-block;
+		background-repeat: no-repeat;
+		background-size: contain;
+	}
 	&-site-plan {
 		&:before {
-			content: '';
-			background: url(../../uploads/2015/04/Icon-MagnifyingGlass.gif);
+			background-image: url(../../uploads/2015/04/Icon-MagnifyingGlass.gif);
 			width: 27px;
 			height: 22px;
-			margin: 0 8px;
-			display: inline-block;
-			background-repeat: no-repeat;
 		}		
 	}
 	&-documents {
 		&:before {
-			content: '';
-			background: url(../../uploads/2015/05/Icon-Report.png);
+			background-image: url(../../uploads/2015/05/Icon-Report.png);
 			width: 27px;
 			height: 22px;
-			margin: 0 8px;
-			display: inline-block;
-			background-repeat: no-repeat;
 		}		
+	}
+	&-availability {
+		&:before {
+			content: '';
+			background-image: url(../../uploads/2015/06/Icon-Tree.png);
+			width: 27px;
+			height: 22px;
+		}
 	}
 	&-price-list {
 		&:before {
-			content: '';
-			background: url(../../uploads/2015/05/Icon-Acorn-1.png);
+			background-image: url(../../uploads/2015/05/Icon-Acorn-1.png);
 			width: 22px;
 			height: 22px;
-			margin: 0 8px;
-			display: inline-block;
-			background-repeat: no-repeat;
 		}
 	}
 	&-featured-builders {
 		&:before {
-			content: '';
-			background: url(../../uploads/2015/05/Icon-Acorn-1.png);
+			background-image: url(../../uploads/2015/05/Icon-Acorn-1.png);
 			width: 22px;
 			height: 22px;
-			margin: 0 8px;
-			display: inline-block;
-			background-repeat: no-repeat;
+		}
+	}
+	&-community-news {
+		&:before {
+			background-image: url(../../uploads/2015/06/Icon-Radio.png);
+			width: 22px;
+			height: 22px;
 		}
 	}
 }
@@ -192,13 +202,41 @@
 		font-weight: 700;
 	}
 	&:last-child {
-		width: 30%;
+		width: 29%;
+		text-align: right;
+		p {
+			text-align: right;
+		}
 	}
 	&:first-child {
+		width: 21%;
 		margin-top: 9em;
 	}
 }
 
+.side-property-inner-container {
+	margin-bottom: 3em;
+}
+
+.single-property-agent-container {
+	margin-top: 3em;
+	img {
+		float: left;
+		padding-right: .5em;
+	}
+	strong {
+		display: block;
+		margin-bottom: 1em;
+	}
+	ul {
+		float: left;
+		margin-left: 1.5em;
+	}
+	li {
+		list-style-type: disc;
+		margin-bottom: .75em;
+	}
+}
 
 .outer-image-container {
 	overflow: hidden;
