@@ -1,11 +1,143 @@
 <?php get_header(); ?>
-<article id="content">
+	<div class="outer-image-container">
+		<div class="static-header-image-container">
+			<?php echo get_the_post_thumbnail( $page->ID, 'large', array( 'class'	=> "static-header-image") ); ?>
+		</div> 
+	</div>
+
 <?php the_post(); ?>
+
+<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<div class="single-property-sub-navigation">
+	<?php $image = get_field('property_logo');
+	if( !empty($image) ): ?>
+		<div class="property-logo">
+			<img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
+		</div>
+	<?php endif; ?>
+	<div class="single-property-bucket-container">
+		<div class="bucket bucket-availability"><a href=""><span>A</span>vailability <span>R</span>eport</a></div>
+	</div>
+	<div class="single-property-bucket-container bucket-gallery-container">
+		<div class="bucket bucket-gallery"><a href=""><span>G</span>allery</a></div>
+	</div>
+	<div class="single-property-bucket-container">
+		<div class="bucket bucket-news"><a href=""><span>C</span>ommunity <span>N</span>ews</a></div>
+	</div>
+	<div class="single-property-bucket-container bucket-contact-container">
+		<div class="bucket bucket-contact "><a href=""><span>C</span>ontact</a></div>
+	</div>
+</div>
+
+<div id="content" class="static-container single-properties-container">
+	<div class="properties-sidebar-container">
+		
+
+		<?php if(get_field('site_plan')) {
+			$attachment_id = get_field('field_name');
+			$url = wp_get_attachment_url( $attachment_id );
+			$title = get_the_title( $attachment_id );
+			$planimg = get_field('site_plan_image');
+		 ?>
+			<h3 class="side-property-header side-property-header-site-plan"><a href="<?php echo $url; ?>"><span>V</span>iew <span>S</span>ite <span>P</span>lan</a></h3>
+			<p><img src="<?php echo $planimg['url']; ?>" alt="<?php echo $planimg['alt']; ?>" /></p>
+		<?php } ?>
+		
+		<?php if(get_field('add_a_document')) { 
+			$attachment_id = get_field('field_name');
+			$url = wp_get_attachment_url( $attachment_id );
+			$title = get_the_title( $attachment_id );
+		?>
+			<h3 class="side-property-header side-property-header-documents"></span>D</span>ocuments</h3>
+			<p><a href="<?php echo $url; ?>"><?php echo $title; ?></a></p>
+		<?php } ?>
+
+		<?php if(get_field('price_list')) { 
+			$attachment_id = get_field('field_name');
+			$url = wp_get_attachment_url( $attachment_id );
+			$title = get_the_title( $attachment_id );
+		?>
+			<h3 class="side-property-header side-property-header-price-list"><a href="<?php echo $url; ?>"><span>P</span>rice <span>L</span>ist</a></h3>
+			
+		<?php } ?>
+		<?php if(get_field('featured_builders')) { 	?>
+			<h3 class="side-property-header side-property-header-featured-builders"><span>F</span>eatured <span>B</span>uilders</h3>
+			<b><?php echo the_field('featured_builders'); ?></b>
+			
+		<?php } ?>
+		
+	</div>
+		<div class="services-container">
+	
+		<p><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a> <?php if(in_array('This property is a community', get_field('community_property'))){ echo '/ Community'; } ?> / <a href="<?php echo the_permalink(); ?>"><?php the_title();?></a></p>
+		<?php if(get_field('description')) { ?>
+			<p><?php echo the_field('description'); ?></p>
+		<?php } ?>
+		<?php if(get_field('address')) { ?>
+			<p><strong>Address: </strong><?php echo the_field('address'); ?></p>
+		<?php } ?>
+		<?php if(get_field('property_type')) { ?>
+			<p><strong>Property Type: </strong><?php echo the_field('property_type'); ?></p>
+		<?php } ?>
+		<?php if(get_field('home_price_max')) { ?>
+			<p><strong>Home Price Range: </strong>$<?php echo the_field('home_price_min'); ?> - $<?php echo the_field('home_price_max'); ?></p>
+		<?php } ?>
+		<?php if(get_field('lot_price_max')) { ?>
+			<p><strong>Lot Price Range: </strong>$<?php echo the_field('lot_price_min'); ?> - $<?php echo the_field('lot_price_max'); ?></p>
+		<?php } ?>
+		<?php if(get_field('schools')) { ?>
+			<p><strong>Schools: </strong><?php echo the_field('schools'); ?></p>
+		<?php } ?>
+		<?php if(get_field('amenities')) { ?>
+			<p><strong>Amenities: </strong><?php echo the_field('amenities'); ?></p>
+		<?php } ?>
+		<?php if(get_field('availability')) { ?>
+			<p><strong>Availability: </strong><?php echo the_field('availability'); ?></p>
+		<?php } ?>
+		<?php if(get_field('parent_property')) { ?>
+			<p><strong>Parent Properties: </strong><?php echo the_field('parent_property'); ?></p>
+		<?php } ?>
+
+		<?php 
+
+		$agents = get_field('agent');
+
+		?>
+		<?php if($agents) { ?>
+			<?php foreach($agents as $agent): 
+			$image = get_field('picture', $agent->ID); ?>
+				<img src="<?php echo $image['url'];?>"/>
+				<strong><a href="mailto:<?php echo the_field('email', $agent->ID); ?>">Contact <?php echo get_the_title( $agent->ID ); ?></a></strong>
+				<a href="<?php echo get_permalink( $agent->ID ); ?>">Click for Biography</a>
+			<?php endforeach; ?>
+		<?php } ?>
+
+
+
+	</div>
+
+		<div class="properties-sidebar-container">
+			<?php $location = get_field('location');
+			if( !empty($location) ): ?>
+				<div class="acf-map">
+					<div class="marker" data-lat="<?php echo $location['lat']; ?>" data-lng="<?php echo $location['lng']; ?>"></div>
+				</div>
+			<?php endif; ?>
+		</div>
+	
+
+</div>
+<div style="clear: both;"></div>
+</div>
+
+<?php comments_template('', false); ?>
+
+
 <style type="text/css">
 
 .acf-map {
 	width: 100%;
-	height: 400px;
+	height: 200px;
 	border: #ccc solid 1px;
 	margin: 20px 0;
 }
@@ -171,42 +303,4 @@ $(document).ready(function(){
 
 })(jQuery);
 </script>
-<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
-
-<div class="entry-content">
-<h1 class="agent-title"><?php the_title(); ?></h1>
-
-	<div class="content-pull-left">
-		<?php if(get_field('availability')) { ?>
-			<p><strong>Availability: </strong><?php echo the_field('availability'); ?></p>
-		<?php } ?>
-		<?php if(get_field('parent_property')) { ?>
-			<p><strong>Parent Properties: </strong><?php echo the_field('parent_property'); ?></p>
-		<?php } ?>
-
-		<?php 
-
-$location = get_field('location');
-
-if( !empty($location) ):
-?>
-<div class="acf-map">
-	<div class="marker" data-lat="<?php echo $location['lat']; ?>" data-lng="<?php echo $location['lng']; ?>"></div>
-</div>
-<?php endif; ?>
-
-	</div>
-
-	
-	
-
-
-</div>
-
-</div>
-
-<?php comments_template('', false); ?>
-</article>
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>
