@@ -16,7 +16,7 @@
 		</div>
 	<?php endif; ?>
 	<div class="single-property-bucket-container">
-		<div class="bucket bucket-availability"><a href=""><span>A</span>vailability <span>R</span>eport</a></div>
+		<div class="bucket bucket-availability"><a href="#"><span>A</span>vailability <span>R</span>eport</a></div>
 	</div>
 	<div class="single-property-bucket-container bucket-gallery-container">
 		<div class="bucket bucket-gallery"><a href=""><span>G</span>allery</a></div>
@@ -46,7 +46,45 @@
 		<?php } ?>
 		<?php if(get_field('availability')) { ?>
 			<h3 class="side-property-header side-property-header-availability"><span>A</span>vailability</h3>
-			<p><?php echo the_field('availability'); ?></p>
+				        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+			    <tbody><tr>
+			        <td class="Text-Black" style="height: 20px; text-align: center; vertical-align: middle; font-weight: bold;">Lot#</td>
+			        <td class="Text-Black" style="text-align: center; vertical-align: middle; font-weight: bold;">Acres</td>
+			        <td class="Text-Black" style="text-align: center; vertical-align: middle; font-weight: bold;">Price</td>
+
+			    </tr>   
+			<?php
+
+				// check if the repeater field has rows of data
+				if( have_rows('suite_information') ):
+
+
+			         
+				 	// loop through the rows of data
+				    while ( have_rows('suite_information') ) : the_row();
+						$attachment = get_sub_field('lot_file'); ?>
+
+        
+
+			<tr>
+			    <td class="Text-Black" style="height: 20px; text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_title'); ?></td>
+			    <td class="Text-Black" style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_size'); ?></td>
+			    <td class="Text-Black" style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
+
+			</tr>
+
+
+
+				 <?php   endwhile;
+
+				else :
+
+				    // no rows found
+
+				endif;
+
+				?>
+							</tbody></table>
 		<?php } ?>
 		
 		<?php if(get_field('add_a_document')) { 
@@ -84,9 +122,17 @@
 		<?php } ?>
 		
 	</div>
-		<div class="services-container">
-	
-		<p><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a> <?php if(in_array('This property is a community', get_field('community_property'))){ echo '/ Community'; } ?> / <a href="<?php echo the_permalink(); ?>"><?php the_title();?></a></p>
+	<div class="services-container">
+
+			<p><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a> <?php if(in_array('This property is a community', get_field('community_property'))){ echo '/ Community'; } ?> / <a href="<?php echo the_permalink(); ?>"><?php the_title();?></a></p>
+		
+		<div class="report-container inner-container is-hidden">
+			<?php get_template_part('templates/property-portfolio-availability-report'); ?>
+		</div>
+		<div class="gallery-container inner-container is-hidden">
+			<?php get_template_part('templates/property-portfolio-gallery'); ?>
+		</div>
+		<div class="inner-container home-container">
 		<?php if(get_field('description')) { ?>
 			<p><?php echo the_field('description'); ?></p>
 		<?php } ?>
@@ -131,12 +177,14 @@
 				</div>
 			<?php endforeach; ?>
 		<?php } ?>
+		</div>
+		
 
 
 
 	</div>
 
-		<div class="properties-sidebar-container">
+		<div class="properties-sidebar-container property-map-sidebar">
 			<a href="javascript:window.print()" class="single-property-print"><img src="<?php bloginfo('url'); ?>/wp-content/uploads/2015/06/Icon-Print.gif"></a>
 			<?php $location = get_field('location');
 			if( !empty($location) ): ?>

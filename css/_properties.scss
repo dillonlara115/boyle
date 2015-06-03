@@ -18,6 +18,69 @@
 }
 
 
+.is-hidden {
+	display: none;
+}
+.full-width {
+	width: 77%!important;
+}
+
+.Item {
+  background-color: #E6EBF0;
+  color: #000000;
+  font-family: Verdana, Arial;
+  font-size: 8pt;
+  td {
+  	padding: 5px;
+  	border: 1px solid #fff;
+  }
+}
+.List {
+	border-collapse: initial;
+	tr:nth-child(even) {
+		background-color: #F4F6F8;
+	}
+}
+tr.Header {
+  background-image: url(../../uploads/2015/06/Background-Gradient-Grey.gif);
+  color: #ffffff;
+  font-family: Tahoma, Arial;
+  font-size: 8pt;
+  font-weight: bold;
+  td {
+  	padding: 5px;
+  }
+}
+
+
+.gallery-container {
+	text-align: center;
+	small {
+		margin-top: 1em;
+	}
+	.main-image {
+		width: 95%;
+		border: 1px solid #000;
+	}
+	.thumb {
+		cursor: pointer;
+	}
+	li {
+		display: inline-block;
+		text-align: center;
+		width: 150px;
+		vertical-align: top;
+		padding: 5px;
+		box-sizing: border-box;
+		img {
+			width: 100%;
+		}
+	}
+	.gallery-caption {
+		font-weight: bold;
+		text-align: center;
+	}
+}
 
 
 .single-property-sub-navigation {
