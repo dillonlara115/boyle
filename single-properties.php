@@ -34,17 +34,17 @@
 		
 
 		<?php if(get_field('site_plan')) {
-			$attachment_id = get_field('field_name');
+			$attachment_id = get_field('site_plan');
 			$url = wp_get_attachment_url( $attachment_id );
 			$title = get_the_title( $attachment_id );
 			$planimg = get_field('site_plan_image');
 		 ?>
 		 	<div class="side-property-inner-container">
-				<h3 class="side-property-header side-property-header-site-plan"><a href="<?php echo $url; ?>"><span>V</span>iew <span>S</span>ite <span>P</span>lan</a></h3>
-				<p><a href="<?php echo $url; ?>"><img src="<?php echo $planimg['url']; ?>" alt="<?php echo $planimg['alt']; ?>" /></a></p>
+				<h3 class="side-property-header side-property-header-site-plan"><a href="<?php echo $url; ?>" target="_blank"><span>V</span>iew <span>S</span>ite <span>P</span>lan</a></h3>
+				<p><a href="<?php echo $url; ?>" target="_blank"><img src="<?php echo $planimg['url']; ?>" alt="<?php echo $planimg['alt']; ?>" /></a></p>
 			</div>
 		<?php } ?>
-		<?php if(get_field('availability')) { ?>
+		<?php if(get_field('suite_information')) { ?>
 			<h3 class="side-property-header side-property-header-availability"><span>A</span>vailability</h3>
 				        <table width="100%" cellpadding="0" cellspacing="0" border="0">
 			    <tbody><tr>
@@ -56,25 +56,16 @@
 			<?php
 
 				// check if the repeater field has rows of data
-				if( have_rows('suite_information') ):
-
-
-			         
+				if( have_rows('suite_information') ):			         
 				 	// loop through the rows of data
 				    while ( have_rows('suite_information') ) : the_row();
 						$attachment = get_sub_field('lot_file'); ?>
-
-        
-
 			<tr>
 			    <td class="Text-Black" style="height: 20px; text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_title'); ?></td>
 			    <td class="Text-Black" style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_size'); ?></td>
 			    <td class="Text-Black" style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
 
 			</tr>
-
-
-
 				 <?php   endwhile;
 
 				else :
@@ -88,24 +79,24 @@
 		<?php } ?>
 		
 		<?php if(get_field('add_a_document')) { 
-			$attachment_id = get_field('field_name');
+			$attachment_id = get_field('add_a_document');
 			$url = wp_get_attachment_url( $attachment_id );
 			$title = get_the_title( $attachment_id );
 		?>
 			<div class="side-property-inner-container">
 				<h3 class="side-property-header side-property-header-documents"></span>D</span>ocuments</h3>
-				<p><a href="<?php echo $url; ?>"><?php echo $title; ?></a></p>
+				<p><a href="<?php echo $url; ?>" target="_blank"><?php echo $title; ?></a></p>
 			</div>
 			
 		<?php } ?>
 
 		<?php if(get_field('price_list')) { 
-			$attachment_id = get_field('field_name');
+			$attachment_id = get_field('price_list');
 			$url = wp_get_attachment_url( $attachment_id );
 			$title = get_the_title( $attachment_id );
 		?>
 			<div class="side-property-inner-container">
-				<h3 class="side-property-header side-property-header-price-list"><a href="<?php echo $url; ?>"><span>P</span>rice <span>L</span>ist</a></h3>
+				<h3 class="side-property-header side-property-header-price-list"><a href="<?php echo $url; ?>" target="_blank"><span>P</span>rice <span>L</span>ist</a></h3>
 			</div>
 		<?php } ?>
 		<?php if(get_field('featured_builders')) { 	?>
@@ -124,14 +115,28 @@
 	</div>
 	<div class="services-container">
 
-			<p><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a> <?php if(in_array('This property is a community', get_field('community_property'))){ echo '/ Community'; } ?> / <a href="<?php echo the_permalink(); ?>"><?php the_title();?></a></p>
-		
+		<p class="bread-crumbs"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a> <?php if(in_array('This property is a community', get_field('community_property'))){ echo '/ Community'; } ?> / <a href="<?php echo the_permalink(); ?>"><?php the_title();?></a></p>
+		<!-- availability report -->
 		<div class="report-container inner-container is-hidden">
 			<?php get_template_part('templates/property-portfolio-availability-report'); ?>
 		</div>
+
+		<!-- image gallery -->
 		<div class="gallery-container inner-container is-hidden">
 			<?php get_template_part('templates/property-portfolio-gallery'); ?>
 		</div>
+
+		<!-- contact form -->
+		<div class="contact-container inner-container is-hidden">
+			<?php get_template_part('templates/property-portfolio-contact'); ?>
+		</div>
+
+		<!-- community news -->
+		<div class="community-news-container inner-container is-hidden">
+			<?php get_template_part('templates/property-portfolio-community-news'); ?>
+		</div>
+
+		<!-- main info -->
 		<div class="inner-container home-container">
 		<?php if(get_field('description')) { ?>
 			<p><?php echo the_field('description'); ?></p>

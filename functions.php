@@ -134,6 +134,29 @@ function properties_init() {
 }
 add_action( 'init', 'properties_init' );
 
+
+
+// add_filter( "gform_notification_{$form_id}", 'my_custom_function', 10, 3 );
+add_filter( 'gform_notification_2', 'change_email_address', 10, 3 );
+function change_email_address( $notification, $form, $entry ) {
+       // append a signature to the existing notification 
+       // message with .=
+
+    $agents = get_field('agent');
+
+    if($agents) { 
+        foreach($agents as $agent): 
+
+            $email = get_field('email', $agent->ID);
+        endforeach; 
+    } 
+    
+    $notification['from'] .= $email;
+
+    return $notification;
+}
+
+
 $preset_widgets = array (
 'primary-aside'  => array( 'search', 'pages', 'categories', 'archives' ),
 );

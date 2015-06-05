@@ -15,6 +15,20 @@ $('.bucket-gallery').on('click', function(e){
 	$('.gallery-container').removeClass('is-hidden');
 });
 
+$('.bucket-contact').on('click', function(e){
+	e.preventDefault();
+	$(this).addClass('is-active');
+	toggleViews();
+	$('.contact-container').removeClass('is-hidden');
+});
+
+$('.bucket-news').on('click', function(e){
+	e.preventDefault();
+	$(this).addClass('is-active');
+	toggleViews();
+	$('.community-news-container').removeClass('is-hidden');
+});
+
 
 //gallery
 $('.thumb').on('click', function(){
@@ -22,6 +36,8 @@ $('.thumb').on('click', function(){
 	console.log(largeSrc);
 	$('.main-image').attr('src', largeSrc);
 });
+
+
 
 function toggleViews() {
 	$('.services-container').addClass('full-width');
