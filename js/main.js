@@ -38,6 +38,17 @@ $('.thumb').on('click', function(){
 });
 
 
+$('.portfolio-header-gallery').slick({
+	slidestoshow: 1,
+	infinie: true,
+	autoplay: true,
+	autoplaySpeed: 2000,
+	speed: 500,
+	fade: true,
+	cssEase: 'linear'
+});
+
+
 
 function toggleViews() {
 	$('.services-container').addClass('full-width');

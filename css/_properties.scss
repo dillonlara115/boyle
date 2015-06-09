@@ -11,6 +11,7 @@
 	p {
 		font-size: 11px;
 		color: #000;
+		margin-bottom: 1.2em;
 	}
 	.services-container {
 		float: left;
@@ -33,7 +34,19 @@
 		}
 	}
 }
-
+.property-image-container {
+	position: relative;
+	h2 {
+		position: absolute;
+		top: .7em;
+		left: 1em;
+		font-size: 2em;
+		font-family: Georgia, "Times New Roman";
+		color: #fff;
+		text-transform: uppercase;
+		text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);
+	}
+}
 
 .is-hidden {
 	display: none;
@@ -209,7 +222,7 @@ tr.Header {
 	font-family: Georgia, Times New Roman;
 	text-transform: uppercase;
 	margin: 1em 0 .5em;
-	font-size: 1.2em;
+	font-size: 1em;
 	a {
 		font-family: Georgia, Times New Roman;
 		font-size: 1em;
@@ -223,6 +236,13 @@ tr.Header {
 		display: inline-block;
 		background-repeat: no-repeat;
 		background-size: contain;
+	}
+	&-community-overview {
+		&:before {
+			background-image: url(../../uploads/2015/06/Icon-House.png);
+			width: 27px;
+			height: 22px;
+		}		
 	}
 	&-site-plan {
 		&:before {

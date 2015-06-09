@@ -1,8 +1,19 @@
 <?php get_header(); ?>
-	<div class="outer-image-container">
+	<div class="outer-image-container property-image-container">
 		<div class="static-header-image-container">
-			<?php echo get_the_post_thumbnail( $page->ID, 'large', array( 'class'	=> "static-header-image") ); ?>
+			<?php 
+				$images = get_field('property_gallery');
+				if( $images ): ?>
+				    <ul class="portfolio-header-gallery">
+				        <?php foreach( $images as $image ): ?>
+				            <li>
+				                <img src="<?php echo $image['sizes']['large']; ?>" alt="<?php echo $image['alt']; ?>" data-swap="<?php echo $image['sizes']['large']; ?>" class="static-header-image"/>
+				            </li>
+				        <?php endforeach; ?>
+				    </ul>
+			<?php endif; ?> 
 		</div> 
+		<h2><?php echo the_title(); ?></h2>
 	</div>
 
 <?php the_post(); ?>
@@ -31,7 +42,24 @@
 
 <div id="content" class="static-container single-properties-container">
 	<div class="properties-sidebar-container">
-		
+		<?php 
+
+		$communities = get_field('community');
+
+		?>
+		<?php if($communities) { ?>
+			<?php foreach($communities as $community): ?>
+				<div class="">
+					
+					<h3 class="side-property-header side-property-header-community-overview"><a href="<?php echo get_permalink( $community->ID ); ?>"><span>C</span>ommunity <span>O</span>verview</a>
+						
+				</div>
+			<?php endforeach; ?>
+		<?php } ?>
+
+		<?php if(get_field('web_site')) { ?>
+			<h3 class="side-property-header"><a href="<?php echo the_field('web_site');  ?>" target="_blank"><span>V</span>isit <span>C</span>ommunity <span>W</span>eb <span>S</span>ite</a></h3>
+		<?php } ?>
 
 		<?php if(get_field('site_plan')) {
 			$attachment_id = get_field('site_plan');
@@ -78,14 +106,15 @@
 							</tbody></table>
 		<?php } ?>
 		
-		<?php if(get_field('add_a_document')) { 
-			$attachment_id = get_field('add_a_document');
-			$url = wp_get_attachment_url( $attachment_id );
-			$title = get_the_title( $attachment_id );
-		?>
+		<?php if(get_field('add_a_document')) { ?>
 			<div class="side-property-inner-container">
 				<h3 class="side-property-header side-property-header-documents"></span>D</span>ocuments</h3>
-				<p><a href="<?php echo $url; ?>" target="_blank"><?php echo $title; ?></a></p>
+				<?php while (have_rows('add_a_document')) : the_row();
+					$attachment_id = get_sub_field('upload_a_document');
+					$url = wp_get_attachment_url( $attachment_id );
+					$title = get_the_title( $attachment_id ); ?>
+						<p><a href="<?php echo $url; ?>" target="_blank"><?php echo $title; ?></a></p>
+				<?php endwhile ;?>
 			</div>
 			
 		<?php } ?>
@@ -143,6 +172,16 @@
 		<?php } ?>
 		<?php if(get_field('address')) { ?>
 			<p><strong>Address: </strong><?php echo the_field('address'); ?></p>
+		<?php } ?>
+		<?php $communities = get_field('community'); ?>
+		<?php if($communities) { ?>
+			<?php foreach($communities as $community): ?>
+				<p><strong>Community: </strong><a href="<?php echo get_permalink( $community->ID ); ?>"><?php echo get_the_title( $community->ID ); ?></a></p>
+				
+			<?php endforeach; ?>
+		<?php } ?>
+		<?php if(get_field('transaction_type')) { ?>
+			<p><strong>Transactions: </strong><?php echo implode(', ', get_field('transaction_type')); ?></p>
 		<?php } ?>
 		<?php if(get_field('property_type')) { ?>
 			<p><strong>Property Type: </strong><?php echo the_field('property_type'); ?></p>
