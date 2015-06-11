@@ -12,6 +12,7 @@
 		font-size: 11px;
 		color: #000;
 		margin-bottom: 1.2em;
+		line-height: 2;
 	}
 	.services-container {
 		float: left;
@@ -223,6 +224,7 @@ tr.Header {
 	text-transform: uppercase;
 	margin: 1em 0 .5em;
 	font-size: 1em;
+	clear: both;
 	a {
 		font-family: Georgia, Times New Roman;
 		font-size: 1em;
@@ -330,6 +332,43 @@ tr.Header {
 			order: 2;
 		}
 	}
+	&.single-sidebar-container {
+		margin-top:0;
+		.single-property-agent-container {
+			margin-top: 0;
+			img {
+				max-width: 75px;
+			}
+			li:before {
+				content: none;
+			}
+		}
+	}
+}
+
+.report-container {
+	p {
+		margin-top: 1em;
+	}
+	.pull-right {
+		float: right;
+	}
+	li {
+		background-color: #F4F6F8;
+		clear: both;
+		padding: 1em;
+		display: inline-block;
+		border: 1px solid #fff;
+		&:nth-child(even) {
+			background-color: #E6EBF0;
+		}
+	}
+}
+
+.availability-report-image {
+	float: left;
+	margin-right: 1em;
+	border: 1px solid #000;
 }
 
 .side-property-inner-container {

@@ -17,11 +17,13 @@
 	</div>
 
 <?php the_post(); ?>
-
+<?php $communities = get_field('community'); ?>
+<?php $image = get_field('property_logo'); ?>
 <div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+<?php if( in_array('This property is a community', get_field('community_property'))) { ?>
 <div class="single-property-sub-navigation">
-	<?php $image = get_field('property_logo');
-	if( !empty($image) ): ?>
+	<?php if( !empty($image) ): ?>
 		<div class="property-logo">
 			<img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
 		</div>
@@ -39,14 +41,31 @@
 		<div class="bucket bucket-contact "><a href=""><span>C</span>ontact</a></div>
 	</div>
 </div>
-
+<?php } ?>
 <div id="content" class="static-container single-properties-container">
+<?php if( in_array('This property is a community', get_field('community_property'))) { ?>
 	<div class="properties-sidebar-container">
-		<?php 
-
-		$communities = get_field('community');
-
-		?>
+	<?php } else { ?>
+		<div class="properties-sidebar-container single-sidebar-container">
+	<?php } ?>
+		<?php if(empty($image)) : ?>
+			<?php $agents = get_field('agent');	?>
+			<?php if($agents) { ?>
+				<?php foreach($agents as $agent): 
+				$image = get_field('picture', $agent->ID); ?>
+					<div class="single-property-agent-container">
+						<img src="<?php echo $image['url'];?>"/>
+						<strong><?php echo get_the_title( $agent->ID ); ?></strong>
+						<strong><a href="mailto:<?php echo the_field('email', $agent->ID); ?>">Email <?php echo get_the_title( $agent->ID ); ?></a></strong>
+						<span><?php echo the_field('phone_number', $agent->ID ); ?></span>
+						<ul>
+							<li><a href="<?php echo get_permalink( $agent->ID ); ?>"><?php echo get_the_title( $agent->ID ); ?>'s Biography</a></li>
+							<li><a href="#"><?php echo get_the_title( $agent->ID ); ?>'s Properties</a></li>
+						</ul>
+					</div>
+				<?php endforeach; ?>
+			<?php } ?>
+		<?php endif; ?>
 		<?php if($communities) { ?>
 			<?php foreach($communities as $community): ?>
 				<div class="">
@@ -56,6 +75,9 @@
 				</div>
 			<?php endforeach; ?>
 		<?php } ?>
+		
+
+
 
 		<?php if(get_field('web_site')) { ?>
 			<h3 class="side-property-header"><a href="<?php echo the_field('web_site');  ?>" target="_blank"><span>V</span>isit <span>C</span>ommunity <span>W</span>eb <span>S</span>ite</a></h3>
@@ -145,26 +167,27 @@
 	<div class="services-container">
 
 		<p class="bread-crumbs"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a> <?php if(in_array('This property is a community', get_field('community_property'))){ echo '/ Community'; } ?> / <a href="<?php echo the_permalink(); ?>"><?php the_title();?></a></p>
-		<!-- availability report -->
-		<div class="report-container inner-container is-hidden">
-			<?php get_template_part('templates/property-portfolio-availability-report'); ?>
-		</div>
+		<?php if( in_array('This property is a community', get_field('community_property'))) { ?>
+			<!-- availability report -->
+			<div class="report-container inner-container is-hidden">
+				<?php get_template_part('templates/property-portfolio-availability-report'); ?>
+			</div>
 
-		<!-- image gallery -->
-		<div class="gallery-container inner-container is-hidden">
-			<?php get_template_part('templates/property-portfolio-gallery'); ?>
-		</div>
+			<!-- image gallery -->
+			<div class="gallery-container inner-container is-hidden">
+				<?php get_template_part('templates/property-portfolio-gallery'); ?>
+			</div>
 
-		<!-- contact form -->
-		<div class="contact-container inner-container is-hidden">
-			<?php get_template_part('templates/property-portfolio-contact'); ?>
-		</div>
+			<!-- contact form -->
+			<div class="contact-container inner-container is-hidden">
+				<?php get_template_part('templates/property-portfolio-contact'); ?>
+			</div>
 
-		<!-- community news -->
-		<div class="community-news-container inner-container is-hidden">
-			<?php get_template_part('templates/property-portfolio-community-news'); ?>
-		</div>
-
+			<!-- community news -->
+			<div class="community-news-container inner-container is-hidden">
+				<?php get_template_part('templates/property-portfolio-community-news'); ?>
+			</div>
+		<?php } ?>
 		<!-- main info -->
 		<div class="inner-container home-container">
 		<?php if(get_field('description')) { ?>
@@ -184,7 +207,23 @@
 			<p><strong>Transactions: </strong><?php echo implode(', ', get_field('transaction_type')); ?></p>
 		<?php } ?>
 		<?php if(get_field('property_type')) { ?>
-			<p><strong>Property Type: </strong><?php echo the_field('property_type'); ?></p>
+			<p><strong>Property Type: </strong><?php echo implode(', ', get_field('property_type')); ?> 
+				<?php if(get_field('residential_type')) { ?>
+					<?php echo implode(', ', get_field('residential_type')); ?>
+				<?php } ?>
+				<?php if(get_field('hotel_type')) { ?>
+					<?php echo implode(', ', get_field('hotel_type')); ?>
+				<?php } ?>
+				<?php if(get_field('industrial_type')) { ?>
+					<?php echo implode(', ', get_field('industrial_type')); ?>
+				<?php } ?>
+				<?php if(get_field('land_type')) { ?>
+					<?php echo implode(', ', get_field('land_type')); ?>
+				<?php } ?>
+				<?php if(get_field('retail_type')) { ?>
+					<?php echo implode(', ', get_field('retail_type')); ?>
+				<?php } ?>
+			</p>
 		<?php } ?>
 		<?php if(get_field('home_price_max')) { ?>
 			<p><strong>Home Price Range: </strong>$<?php echo the_field('home_price_min'); ?> - $<?php echo the_field('home_price_max'); ?></p>
@@ -198,32 +237,33 @@
 		<?php if(get_field('amenities')) { ?>
 			<p><strong>Amenities: </strong><?php echo the_field('amenities'); ?></p>
 		<?php } ?>
-		
-		<?php if(get_field('parent_property')) { ?>
-			<p><strong>Parent Properties: </strong><?php echo the_field('parent_property'); ?></p>
-		<?php } ?>
-
-		<?php 
-
-		$agents = get_field('agent');
-
-		?>
-		<?php if($agents) { ?>
-			<?php foreach($agents as $agent): 
-			$image = get_field('picture', $agent->ID); ?>
-				<div class="single-property-agent-container">
-					<img src="<?php echo $image['url'];?>"/>
-					<strong><a href="mailto:<?php echo the_field('email', $agent->ID); ?>">Contact <?php echo get_the_title( $agent->ID ); ?></a></strong>
-					<ul>
-						<li><a href="<?php echo get_permalink( $agent->ID ); ?>"><?php echo get_the_title( $agent->ID ); ?>'s Biography</a></li>
-						<li><a href="#"><?php echo get_the_title( $agent->ID ); ?>'s Properties</a></li>
-					</ul>
-				</div>
+		<?php $parentproperty = get_field('parent_property'); ?>
+		<?php if($parentproperty) { ?>
+			<?php foreach($parentproperty as $parent): ?>
+				<p><strong>Parent Properties: </strong><a href="<?php echo get_permalink( $parent->ID ); ?>"><?php echo get_the_title( $parent->ID ); ?></a></p>
+				
 			<?php endforeach; ?>
 		<?php } ?>
-		</div>
 		
+		<?php if( in_array('This property is a community', get_field('community_property'))) { ?>
+			<?php $agents = get_field('agent');	?>
+			<?php if($agents) { ?>
+				<?php foreach($agents as $agent): 
+				$image = get_field('picture', $agent->ID); ?>
+					<div class="single-property-agent-container">
+						<img src="<?php echo $image['url'];?>"/>
+						<strong><a href="mailto:<?php echo the_field('email', $agent->ID); ?>">Contact <?php echo get_the_title( $agent->ID ); ?></a></strong>
+						<ul>
+							<li><a href="<?php echo get_permalink( $agent->ID ); ?>"><?php echo get_the_title( $agent->ID ); ?>'s Biography</a></li>
+							<li><a href="#"><?php echo get_the_title( $agent->ID ); ?>'s Properties</a></li>
+						</ul>
+					</div>
+				<?php endforeach; ?>
+			<?php } ?>
+		<?php } ?>
+		</div>
 
+		
 
 
 	</div>
