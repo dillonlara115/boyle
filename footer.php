@@ -5,7 +5,7 @@
 
     <ul class="footer-nav">
         <li class="BottomNav"><a href="<?php echo home_url(); ?>" >home</a></li>
-        <li class="BottomNav"><a href="" >availability report</a></li>
+        <li class="BottomNav"><a href="<?php echo get_permalink( 581 ); ?>" >availability report</a></li>
         <li class="BottomNav"><a href="#" >search availability</a></li>
         <li class="BottomNav"><a href="#" >property portfolio</a></li>
         <li class="BottomNav"><a href="<?php echo get_permalink( 13 ); ?>" >services</a></li>
