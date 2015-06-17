@@ -10,8 +10,10 @@ Template Name: Availability Report Page
 	<?php the_post(); ?>
 	
 	<div id="post-<?php the_ID(); ?>" class="search-availability-container" >
-		<?php the_title(); ?>
 		<?php the_content(); ?>
+		<img src="http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/05/Icon-Report.png" alt="Availability Report" title="Availability Report" class="header-image">
+		<h1 class="contact-page-title">Availability Report</h1>
+		<p class="contact-page-text">Select the tab of the property type for which you are interested in seeing properties.</p>
 
 		<div class="property-sub-navigation">
 
