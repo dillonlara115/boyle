@@ -5,6 +5,7 @@
 	height: 40px;
 	width: 100%;
 	margin: 1.5em 0;
+	clear: both;
 	@media (max-width: 48em) {
 		display: none;
 	}
@@ -87,6 +88,12 @@
 			position: relative;
 			border-bottom: 0;
 		}
+	}
+}
+
+.menu-availability-report-regions-menu-container {
+	.current-menu-item a {
+		background: url(../../uploads/2015/06/Background-Gradient-LightBlue.gif);
 	}
 }
 
