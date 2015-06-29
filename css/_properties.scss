@@ -299,6 +299,7 @@ tr.Header {
 	-webkit-box-shadow: 6px 6px 8px 1px rgba(102,102,102,1);
 	-moz-box-shadow: 6px 6px 8px 1px rgba(102,102,102,1);
 	box-shadow: 6px 6px 8px 1px rgba(102,102,102,1);
+	max-width: 190px;
 	img {
 		border: 1px solid #f1f1f1;
 		margin: 5px;
@@ -334,6 +335,12 @@ tr.Header {
 	}
 	&.single-sidebar-container {
 		margin-top:0;
+		.property-logo {
+			position: relative;
+			width: 100%;
+			top: 0;
+			margin-bottom: 1em;
+		}
 		.single-property-agent-container {
 			margin-top: 0;
 			img {
@@ -352,6 +359,9 @@ tr.Header {
 	}
 	.pull-right {
 		float: right;
+		@media (max-width: 32em) {
+			float: none;
+		}
 	}
 	li {
 		background-color: #F4F6F8;
@@ -359,6 +369,9 @@ tr.Header {
 		padding: 1em;
 		display: inline-block;
 		border: 1px solid #fff;
+		width: 100%;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
 		&:nth-child(even) {
 			background-color: #E6EBF0;
 		}
@@ -369,6 +382,10 @@ tr.Header {
 	float: left;
 	margin: 0 1em 1em 0;
 	border: 1px solid #000;
+	@media (max-width: 32em) {
+		float: none;
+		width: 100%;
+	}
 }
 
 .side-property-inner-container {

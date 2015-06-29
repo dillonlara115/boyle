@@ -8,6 +8,14 @@
 	clear: both;
 	@media (max-width: 48em) {
 		display: none;
+		.search-availability-container & {
+			display: block;
+			background: transparent;
+			height: auto;
+			ul {
+				text-align: center;
+			}
+		}
 	}
 	li {
 		width: 191px;
@@ -17,7 +25,13 @@
 		display: block;
 		padding: 5px;
 		float: left;
-  		margin: 0 .5em;
+  		margin: 0 .9em;
+  		@media (max-width: 48em) {
+  			width: 43%;
+  			margin: .5em;
+  			display: inline-block;
+  			float: none;
+  		}
 	}
 	.bucket {
 		background: url(../../uploads/2015/06/Background-Gradient-LightGray.gif);
@@ -60,7 +74,7 @@
 	position: relative;
 	li {
 		display: inline-block;
-		padding: 0.5em 41.5px;
+		padding: 0.5em 35px;
 		border-top-right-radius: 5px;
 		border-top-left-radius: 5px;
 		background: #fbfbfb;
@@ -75,6 +89,14 @@
 		vertical-align: bottom;
 		position: relative;
 		bottom: -1px;
+		@media (max-width: 48em) {
+			display: block;
+			border-radius: 0;
+			bottom: 0;
+			margin: 0;
+			padding-top: 1em;
+			padding-bottom: 1em;
+		}
 		&.current-menu-item  {
 			background: #fbfbfb;
 			background: -moz-linear-gradient(top,  #fbfbfb 0%, #bec9d5 33%);
@@ -96,7 +118,33 @@
 		background: url(../../uploads/2015/06/Background-Gradient-LightBlue.gif);
 	}
 }
+//all regions
+#post-985, #post-606, #post-604, #post-608, #post-595, #post-597, #post-601, #post-599 {
+	.menu-item-999 a {
+		background: url(../../uploads/2015/06/Background-Gradient-LightBlue.gif);
+	}
+}
 
+//greater memphis
+#post-621, #post-624, #post-619, #post-610, #post-612, #post-617, #post-614, #post-987 {
+	.menu-item-1000 a {
+		background: url(../../uploads/2015/06/Background-Gradient-LightBlue.gif);
+	}
+}
+
+//greater nashville
+#post-636, #post-634, #post-638, #post-626, #post-628, #post-632, #post-630, #post-989 {
+	.menu-item-1001 a {
+		background: url(../../uploads/2015/06/Background-Gradient-LightBlue.gif);
+	}
+}
+
+//other regions
+#post-650, #post-648, #post-652, #post-640, #post-642, #post-646, #post-644, #post-991 {
+	.menu-item-1002 a {
+		background: url(../../uploads/2015/06/Background-Gradient-LightBlue.gif);
+	}
+}
 .property-type-list-content {
 	background: #bec9d5;
 	border: 1px solid #666;

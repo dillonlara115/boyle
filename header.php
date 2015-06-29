@@ -29,12 +29,14 @@
 			<li class="TopNav TopNav-sub"><a href="#">REGISTER/LOGIN</a></li>
 	    	<li class="TopNav TopNav-sub"><a href="#">BOYLE BLOG</a></li>
 	    	<li class="TopNav TopNav-sub"><a href="http://www.boyleinsuranceagency.com/">BOYLE INSURANCE AGENCY</a></li>
+	    	<li class="TopNav TopNav-sub"><a href="<?php echo get_permalink( 985 ); ?>">AVAILABILITY REPORT</a></li>
     	</ul>
 		<?php } else { ?> 
 		<ul>
 	    	<li class="TopNav"><a href="#">REGISTER/LOGIN</a></li>
 	    	<li class="TopNav"><a href="#">BOYLE BLOG</a></li>
 	    	<li class="TopNav"><a href="http://www.boyleinsuranceagency.com/">BOYLE INSURANCE AGENCY</a></li>
+	    	<li class="TopNav TopNav-sub"><a href="<?php echo get_permalink( 985 ); ?>">AVAILABILITY REPORT</a></li>
     	</ul>
     	<?php } ?>
     

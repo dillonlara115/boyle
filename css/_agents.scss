@@ -76,4 +76,7 @@
 
 .pull-left {
 	float: left;
+	@media (max-width: 48em) {
+		padding: 0 1em;
+	}
 }

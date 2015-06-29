@@ -43,12 +43,15 @@
 </div>
 <?php } ?>
 <div id="content" class="static-container single-properties-container">
-<?php if( in_array('This property is a community', get_field('community_property'))) { ?>
+	<?php if( in_array('This property is a community', get_field('community_property'))) { ?>
 	<div class="properties-sidebar-container">
 	<?php } else { ?>
 		<div class="properties-sidebar-container single-sidebar-container">
-	<?php } ?>
-		<?php if(empty($image)) : ?>
+		<?php if( !empty($image) ): ?>
+				<div class="property-logo">
+					<img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
+				</div>
+			<?php endif; ?>
 			<?php $agents = get_field('agent');	?>
 			<?php if($agents) { ?>
 				<?php foreach($agents as $agent): 
@@ -65,7 +68,9 @@
 					</div>
 				<?php endforeach; ?>
 			<?php } ?>
-		<?php endif; ?>
+	<?php } ?>
+			
+		
 		<?php if($communities) { ?>
 			<?php foreach($communities as $community): ?>
 				<div class="">
@@ -230,6 +235,12 @@
 		<?php } ?>
 		<?php if(get_field('lot_price_max')) { ?>
 			<p><strong>Lot Price Range: </strong>$<?php echo the_field('lot_price_min'); ?> - $<?php echo the_field('lot_price_max'); ?></p>
+		<?php } ?>
+		<?php if(get_field('lot_size_max_feet')) { ?>
+			<p><strong>Lot Size(feet): </strong><?php echo the_field('lot_size_min_feet'); ?> - <?php echo the_field('lot_size_max_feet'); ?></p>
+		<?php } ?>
+		<?php if(get_field('lot_size_max_acres')) { ?>
+			<p><strong>Lot Size(acres): </strong><?php echo the_field('lot_size_min_acres'); ?> - <?php echo the_field('lot_size_max_acres'); ?></p>
 		<?php } ?>
 		<?php if(get_field('schools')) { ?>
 			<p><strong>Schools: </strong><?php echo the_field('schools'); ?></p>

@@ -1,28 +1,34 @@
 <?php
 /*
-Template Name: Availability Report Page
+Template Name: Main Property Portfolio Page
 */
 ?>
 
 <?php get_header(); ?>
+	<div class="outer-image-container property-image-container">
+		<div class="static-header-image-container">
+			<?php 
+				$images = get_field('image_gallery');
+				if( $images ): ?>
+				    <ul class="portfolio-header-gallery">
+				        <?php foreach( $images as $image ): ?>
+				            <li>
+				                <img src="<?php echo $image['sizes']['large']; ?>" alt="<?php echo $image['alt']; ?>" data-swap="<?php echo $image['sizes']['large']; ?>" class="static-header-image"/>
+				            </li>
+				        <?php endforeach; ?>
+				    </ul>
+			<?php endif; ?> 
+		</div> 
+		<h2><?php echo the_title(); ?></h2>
+	</div>
 
 <div id="content" class="static-container static-contact-container" >
 	<?php the_post(); ?>
-	
 	<div id="post-<?php the_ID(); ?>" class="search-availability-container" >
-		<?php the_content(); ?>
-		<div class="pull-left">
-			<img src="http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/05/Icon-Report.png" alt="Availability Report" title="Availability Report" class="header-image">
-			<h1 class="contact-page-title">Availability Report</h1>
-			<p class="contact-page-text">Select the tab of the property type for which you are interested in seeing properties.</p>
-		</div>
-		<a href="javascript:window.print()" class="single-property-print pull-right"><img src="<?php bloginfo('url'); ?>/wp-content/uploads/2015/06/Icon-Print.gif"></a>
 		<div class="property-sub-navigation">
-
 			<?php wp_nav_menu( array('menu' => 'Availability Report Regions Menu' )); ?>
-
 		</div>
-
+		<?php the_content(); ?>
 		<div class="search-availability-content">
 
 			<?php if ( is_page( 'all-regions' ) || is_page(606) || is_page(604) || is_page(608) || is_page(595) || is_page(597)|| is_page(601) || is_page(599) || is_page(985) ) {     ?>

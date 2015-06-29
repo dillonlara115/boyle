@@ -546,6 +546,10 @@ $primary-dark: darken(#355c88, 25%);
 		font-size: 1em;
 		color: #355c88;
 		font-family: Arial;
+		@media (max-width: 32em) {
+			display: block;
+			margin-bottom: 1em;
+		}
 	}
 	ul {
 		text-align: left;
