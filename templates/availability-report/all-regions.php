@@ -28,12 +28,12 @@
 					),
 					array(
 						'key'		=> 'region_name',
-						'value'		=> 'Greater Nashville',
+						'value'		=> 'greaterNashville',
 						'compare'	=> 'LIKE'
 					),
 					array(
 						'key'		=> 'region_name',
-						'value'		=> 'Greater Memphis',
+						'value'		=> 'greaterMemphis',
 						'compare'	=> 'LIKE'
 					),
 				),
@@ -116,7 +116,7 @@
 					),
 					array(
 						'key'		=> 'region_name',
-						'value'		=> 'Greater Nashville',
+						'value'		=> 'greaterNashville',
 						'compare'	=> 'LIKE'
 					),
 					array(
