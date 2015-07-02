@@ -84,7 +84,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{
 }
 
 .container {
-	text-align: center; 
+	//text-align: center; 
 	margin: .5em auto; 
 	padding-bottom: 10px;
 }
@@ -122,6 +122,9 @@ p {
 
 strong {
 	font-weight: 900;
+	a {
+		text-align: left!important;
+	}
 }
 
 em {
@@ -296,8 +299,12 @@ em {
 }
 	  
 
-
-
+.search-page-container {
+	.entry-title {
+		display: inline-block;
+		margin-bottom: .5em;
+	}
+}
 //homepage
 .homepage-sub {
 	margin-top: 1em;
@@ -326,6 +333,10 @@ em {
 
 .pull-right {
 	float: right;
+}
+
+.header-search-input {
+	width: 65%;
 }
 
 .homepage-sub-section {
@@ -653,14 +664,25 @@ $primary-dark: darken(#355c88, 25%);
 		font-size: 11px;
 	}
 }
+
 //footer
 #footer {
 	clear: both;
 	margin-top: 1em;
+	&.footer-home {
 	@media (min-width: 37em) {
 		margin-top: -1em;
+		}
 	}
 }
+.pull-left {
+	float: left;
+}
+
+p.search-description {
+	margin-top: 1.75em;
+}
+
 
 .container-footer {
 	max-width:920px;

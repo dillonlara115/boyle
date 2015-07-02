@@ -1,6 +1,9 @@
 </div>
-
+<?php if ( is_front_page()) {  ?> 
+<div id="footer" class="footer-home">
+<?php } else { ?> 
 <div id="footer">
+<?php } ?>
 	<div class="container-footer">                   
 
     <ul class="footer-nav">

@@ -54,8 +54,7 @@
 	    		</a>
 	    	</div>
 	        <div id="ctl00_PanelSearch" onkeypress="javascript:return WebForm_FireDefaultButton(event, 'ctl00_ImageButtonSearch')" style="padding-bottom: 5px;">
-				<input name="ctl00$TextBoxSearch" type="text" value="SEARCH BOYLE" id="ctl00_TextBoxSearch" class="Text-Gray" OnFocus="return ClearKeywordTextBox(this);" OnBlur="return ClearKeywordTextBox(this);" style="width:100px;padding-left: 3px; padding-top: 3px; padding-bottom: 3px;" />&nbsp;
-				<input type="image" name="ctl00$ImageButtonSearch" id="ctl00_ImageButtonSearch" src="<?php bloginfo('template_directory'); ?>/images/Button-Search-Off.gif" align="absmiddle" style="border-width:0px;" />
+				<?php get_search_form( true ); ?>&nbsp;
 			</div>
 		</div>  
     </div>
