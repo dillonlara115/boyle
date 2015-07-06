@@ -136,6 +136,30 @@ add_action( 'init', 'properties_init' );
 
 
 
+
+//sort search results by post type
+add_filter('relevanssi_hits_filter', 'products_first');
+function products_first($hits) {
+    $types = array();
+ 
+    $types['properties'] = array();
+    $types['post'] = array();
+    $types['staff-directory'] = array();
+    $types['page'] = array();
+ 
+    // Split the post types in array $types
+    if (!empty($hits)) {
+        foreach ($hits[0] as $hit) {
+            if (!is_array($types[$hit->post_type])) $types[$hit->post_type] = array(); 
+                array_push($types[$hit->post_type], $hit);     
+        }
+    }
+ 
+    // Merge back to $hits in the desired order
+    $hits[0] = array_merge($types['properties'], $types['post'], $types['staff-directory'], $types['page']);
+    return $hits;
+}
+
 // array of filters (field key => field name)
 $GLOBALS['my_query_filters'] = array( 
     'Choose a Region...'   => 'region_name', 
@@ -143,6 +167,10 @@ $GLOBALS['my_query_filters'] = array(
     'Memphis'   => 'memphis_metro_area',
     'Other Regions'   => 'other'
 );
+
+
+
+
 
 
 // action
