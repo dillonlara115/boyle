@@ -48,7 +48,14 @@ $('.portfolio-header-gallery').slick({
 	cssEase: 'linear'
 });
 
-
+$('.portfolio-sidebar-gallery').slick({
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  dots: true,
+  
+});
 
 function toggleViews() {
 	$('.services-container').addClass('full-width');

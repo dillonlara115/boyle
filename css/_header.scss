@@ -38,7 +38,12 @@
 		}
 	}
 }
-
+.header-search-container {
+	padding-bottom: 5px;
+	input[type='text'] {
+		width: 66%;
+	}
+}
 
 .header-nav-primary, .header-nav-1 {
 	display: none;

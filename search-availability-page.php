@@ -19,10 +19,10 @@ Template Name: Search Availability Page
 		<div class="search-availability-content">
 			<?php wp_nav_menu( array('menu' => 'Search Availability Menu' )); ?>
 			<div class="property-type-list-content" id="search-houses">
-				<?php the_title(); ?>
+				<h2><?php the_title(); ?></h2>	
 				<?php the_content(); ?>
-				<strong>Region</strong>
-				<div id="archive-filters">
+				<div id="archive-filters" class="search-filters">
+					<strong>Region</strong>
 					<select>
 						<?php foreach( $GLOBALS['my_query_filters'] as $key => $name ): 	
 							// get the field's settings without attempting to load a value
@@ -38,9 +38,12 @@ Template Name: Search Availability Page
 						<?php endforeach; ?>
 					</select>
 				</div>
-				<strong>Metro Area</strong>
-				<div class="metro-filters">
+				<br>
+				
 					<?php if (strstr($_SERVER['REQUEST_URI'], "memphis_metro_area")){ ?>
+					
+					<div class="metro-filters search-filters">
+					<strong>Metro Area</strong>
 						<?php 
 						/*
 						*  Get a field object and create a select form element
@@ -57,7 +60,12 @@ Template Name: Search Availability Page
 								}
 							echo '</select>';
 						} ?>
-						<?php } elseif (strstr($_SERVER['REQUEST_URI'], 'nashville_metro_area')){ ?>
+						</div>
+					<br>
+					<?php } elseif (strstr($_SERVER['REQUEST_URI'], 'nashville_metro_area')){ ?>
+						
+						<div class="metro-filters search-filters">
+						<strong>Metro Area</strong>
 							<?php 
 							/*
 							*  Get a field object and create a select form element
@@ -76,7 +84,12 @@ Template Name: Search Availability Page
 								echo '</select>';
 							}
 							?>
-							<?php } elseif (strstr($_SERVER['REQUEST_URI'], 'other')){ ?>
+							</div>
+					<br>
+					<?php } elseif (strstr($_SERVER['REQUEST_URI'], 'other')){ ?>
+							
+							<div class="metro-filters search-filters">
+							<strong>Metro Area</strong>
 							<?php 
 							/*
 							*  Get a field object and create a select form element
@@ -95,7 +108,27 @@ Template Name: Search Availability Page
 								echo '</select>';
 							}
 							?>
-						<?php } ?>
+							</div>
+					<br>
+					<?php } ?>
+					<div class="search-filters">
+						<strong>Transaction:</strong>
+						<?php 
+						/*
+						*  Get a field object and create a select form element
+						*/
+
+						$field_key = "field_55490ec27d601";
+						$field = get_field_object($field_key);
+
+						if( $field ) {
+							
+							foreach( $field['choices'] as $k => $v )
+							{
+								echo '<input type="checkbox" class="filter" data-filter="' . $k . '"  value="' . $k . '"/><small>' . $v . '</small>';
+							}
+								
+						} ?>
 					</div>
 				</div>
 			</div>

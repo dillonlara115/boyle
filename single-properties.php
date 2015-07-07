@@ -99,21 +99,72 @@
 				<p><a href="<?php echo $url; ?>" target="_blank"><img src="<?php echo $planimg['url']; ?>" alt="<?php echo $planimg['alt']; ?>" /></a></p>
 			</div>
 		<?php } ?>
-		<?php if(get_field('suite_information')) { ?>
+			<?php
+
+			$featured_properties = get_posts(array(
+				'post_type' => 'properties',
+				'meta_query' => array(
+					'relation'	=> 'AND',
+					array(
+						'key' => 'community', // name of custom field
+						'value' => '"' . get_the_ID() . '"', // matches exaclty "123", not just 123. This prevents a match for "1234"
+						'compare' => 'LIKE'
+					),
+					array(
+						'key' => 'feature_property_select', // name of custom field
+						'value' => '"Feature this property in its community"', // matches exaclty "123", not just 123. This prevents a match for "1234"
+						'compare' => 'LIKE'
+					)
+				)
+			));
+			?>
+			<?php if( $featured_properties ): ?>
+			 	<div class="side-property-inner-container">
+					<h3 class="side-property-header side-property-header-availabilty"><a href="<?php echo $url; ?>" target="_blank"><span>F</span>eatured <span>P</span>roperties</a></h3>
+					<?php foreach( $featured_properties as $property ): ?>
+						<?php 
+							$images = get_field('property_gallery', $property->ID);
+							$image_1 = $images[0]; 
+
+						?>
+						<p>
+							<a href="<?php echo get_permalink( $property->ID ); ?>">
+								<img src="<?php echo $image_1['url']; ?>" alt="<?php echo $image_1['alt']; ?>" class="featured-property-image" />
+								<?php echo get_the_title( $property->ID ); ?>
+							</a>
+							<?php the_field('address', $property->ID); ?>
+						</p>
+							<?php $agents = get_field('agent');	?>
+							<?php if($agents) { ?>
+								<?php foreach($agents as $agent): 
+								$image = get_field('picture', $agent->ID); ?>
+									<div class="single-property-agent-container">
+										<strong><a href="#"><?php echo get_the_title( $agent->ID ); ?></a></strong>
+										<small><?php echo the_field('phone_number', $agent->ID); ?></small>
+										<p><a href="mailto:<?php echo the_field('email', $agent->ID); ?>"><?php echo the_field('email', $agent->ID); ?></a>
+										</p>
+									</div>
+								<?php endforeach; ?>
+							<?php } ?>
+						
+					<?php endforeach; ?>
+				</div>
+			<?php endif; ?>
+
+		<?php if(get_field('suite_information_acres')) { ?>
 			<h3 class="side-property-header side-property-header-availability"><span>A</span>vailability</h3>
-				        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+		        <table width="100%" cellpadding="0" cellspacing="0" border="0">
 			    <tbody><tr>
 			        <td class="Text-Black" style="height: 20px; text-align: center; vertical-align: middle; font-weight: bold;">Lot#</td>
 			        <td class="Text-Black" style="text-align: center; vertical-align: middle; font-weight: bold;">Acres</td>
 			        <td class="Text-Black" style="text-align: center; vertical-align: middle; font-weight: bold;">Price</td>
-
 			    </tr>   
 			<?php
 
 				// check if the repeater field has rows of data
-				if( have_rows('suite_information') ):			         
+				if( have_rows('suite_information_acres') ):			         
 				 	// loop through the rows of data
-				    while ( have_rows('suite_information') ) : the_row();
+				    while ( have_rows('suite_information_acres') ) : the_row();
 						$attachment = get_sub_field('lot_file'); ?>
 			<tr>
 			    <td class="Text-Black" style="height: 20px; text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_title'); ?></td>
@@ -130,7 +181,38 @@
 				endif;
 
 				?>
-							</tbody></table>
+				</tbody></table>
+		<?php } elseif(get_field('suite_information_feet')) { ?>
+			<h3 class="side-property-header side-property-header-availability"><span>A</span>vailability</h3>
+		        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+			    <tbody><tr>
+			        <td class="Text-Black" style="height: 20px; text-align: center; vertical-align: middle; font-weight: bold;">Lot#</td>
+			        <td class="Text-Black" style="text-align: center; vertical-align: middle; font-weight: bold;">Feet</td>
+			        <td class="Text-Black" style="text-align: center; vertical-align: middle; font-weight: bold;">Price</td>
+			    </tr>   
+			<?php
+
+				// check if the repeater field has rows of data
+				if( have_rows('suite_information_feet') ):			         
+				 	// loop through the rows of data
+				    while ( have_rows('suite_information_feet') ) : the_row();
+						$attachment = get_sub_field('lot_file'); ?>
+			<tr>
+			    <td class="Text-Black" style="height: 20px; text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_title'); ?></td>
+			    <td class="Text-Black" style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_size'); ?></td>
+			    <td class="Text-Black" style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
+
+			</tr>
+				 <?php   endwhile;
+
+				else :
+
+				    // no rows found
+
+				endif;
+
+				?>
+				</tbody></table>
 		<?php } ?>
 		
 		<?php if(get_field('add_a_document')) { ?>
@@ -211,6 +293,15 @@
 		<?php if(get_field('transaction_type')) { ?>
 			<p><strong>Transactions: </strong><?php echo implode(', ', get_field('transaction_type')); ?></p>
 		<?php } ?>
+		<?php if(get_field('total_lots')) { ?>
+			<p><strong>Total Lots: </strong><?php echo the_field('total_lots'); ?></p>
+		<?php } ?>
+		<?php if(get_field('major_tenants')) { ?>
+			<p><strong>Tenants: </strong><?php echo the_field('major_tenants'); ?></p>
+		<?php } ?>
+		<?php if(get_field('total_square_feet')) { ?>
+			<p><strong>Total Square Feet: </strong><?php echo the_field('total_square_feet'); ?></p>
+		<?php } ?>
 		<?php if(get_field('property_type')) { ?>
 			<p><strong>Property Type: </strong><?php echo implode(', ', get_field('property_type')); ?> 
 				<?php if(get_field('residential_type')) { ?>
@@ -236,11 +327,19 @@
 		<?php if(get_field('lot_price_max')) { ?>
 			<p><strong>Lot Price Range: </strong>$<?php echo the_field('lot_price_min'); ?> - $<?php echo the_field('lot_price_max'); ?></p>
 		<?php } ?>
-		<?php if(get_field('lot_size_max_feet')) { ?>
-			<p><strong>Lot Size(feet): </strong><?php echo the_field('lot_size_min_feet'); ?> - <?php echo the_field('lot_size_max_feet'); ?></p>
+		<?php if(get_field('lot_size_max_feet') != get_field('lot_size_min_feet')) { ?>
+			<p><strong>Lot Size(feet): </strong>
+				<?php echo the_field('lot_size_min_feet'); ?> - <?php echo the_field('lot_size_max_feet'); ?></p>
+		<?php } elseif(get_field('lot_size_max_feet') && get_field('lot_size_max_feet') === get_field('lot_size_min_feet')) { ?>
+		else if ran
+			<p><strong>Lot Size(feet): </strong>
+				<?php echo the_field('lot_size_min_feet'); ?></p>
 		<?php } ?>
 		<?php if(get_field('lot_size_max_acres')) { ?>
 			<p><strong>Lot Size(acres): </strong><?php echo the_field('lot_size_min_acres'); ?> - <?php echo the_field('lot_size_max_acres'); ?></p>
+		<?php } ?>
+		<?php if(get_field('notes')) { ?>
+			<p><strong>Notes: </strong><?php echo the_field('notes'); ?></p>
 		<?php } ?>
 		<?php if(get_field('schools')) { ?>
 			<p><strong>Schools: </strong><?php echo the_field('schools'); ?></p>
@@ -281,6 +380,21 @@
 
 		<div class="properties-sidebar-container property-map-sidebar">
 			<a href="javascript:window.print()" class="single-property-print"><img src="<?php bloginfo('url'); ?>/wp-content/uploads/2015/06/Icon-Print.gif"></a>
+			<?php if( !in_array('This property is a community', get_field('community_property'))) { ?>
+			<?php 
+				$images = get_field('property_gallery');
+				if( $images ): ?>
+				    <div class="portfolio-sidebar-gallery">
+				        <?php foreach( $images as $image ): ?>
+				            <span>
+				                <img src="<?php echo $image['sizes']['large']; ?>" alt="<?php echo $image['alt']; ?>" data-swap="<?php echo $image['sizes']['large']; ?>" class="static-sidebar-image"/>
+				            </span>
+				        <?php endforeach; ?>
+				    </div>
+			<?php endif; ?> 
+			<?php } ?>
+
+
 			<?php $location = get_field('location');
 			if( !empty($location) ): ?>
 				<div class="acf-map">

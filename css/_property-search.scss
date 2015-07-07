@@ -150,8 +150,20 @@
 	border: 1px solid #666;
 	clear: both;
 	padding: 1em;
+	strong {
+		color: #000000!important;
+		font-family: Tahoma, Arial!important;
+		font-size: 8pt!important;
+	}
 }
-
+.search-filters {
+	display: inline-block;
+	margin-bottom: 1em;
+	small {
+		font-size: 12px;
+		margin-right: .5em;
+	}
+}
 
 .search-availability-content {
 	clear: both;

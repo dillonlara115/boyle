@@ -291,6 +291,11 @@ tr.Header {
 	}
 }
 
+.featured-property-image {
+	width: 100%;
+	border: 1px solid #ccc;
+}
+
 .property-logo {
 	width: 20%;
 	background-color: #fff;
@@ -326,7 +331,7 @@ tr.Header {
 	}
 	&:first-child {
 		width: 21%;
-		margin-top: 9em;
+		margin-top: 11em;
 		@media (max-width: 48em) {
 			width: 100%;
 			margin-top: 0;

@@ -11,11 +11,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><?php wp_title(' | ', true, 'right'); ?></title>
 
-<link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_uri(); ?>" />
+
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <link rel="stylesheet" href="http://maxtestdomain.com/reinhardt/wp-content/themes/reinhardt/sidr/jquery.sidr.dark.css">
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.0/slick.css"/>
-
+<link href="<?php bloginfo('template_url'); ?>/css/slick-theme.css" rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_uri(); ?>" />
 <?php wp_head(); ?>
 </head>
 <body class="container" <?php body_class(); ?>>
@@ -53,7 +54,7 @@
 	        		<img src="<?php bloginfo('template_directory'); ?>/Media/Images/Icons/Icon-GooglePlus-Small.png" alt="Follow us on Google+" style="border:0; width:22px; height:22px;" title="Follow us on Google+" />
 	    		</a>
 	    	</div>
-	        <div id="ctl00_PanelSearch" onkeypress="javascript:return WebForm_FireDefaultButton(event, 'ctl00_ImageButtonSearch')" style="padding-bottom: 5px;">
+	        <div class="header-search-container">
 				<?php get_search_form( true ); ?>&nbsp;
 			</div>
 		</div>  

@@ -143,7 +143,12 @@ em {
 .static-header-image-container {
 	max-height: 407px;
 }
-
+.static-sidebar-image {
+	width: 100%;
+	height: auto;
+	padding: 10px;
+	box-sizing: border-box;
+}
 //Main Menu
 .Menu {
 	border-width: 0px;
@@ -329,7 +334,12 @@ em {
 	}
 
 }
-
+ul.slick-dots {
+	text-align: center!important;
+	li:before {
+		content: none;
+	}
+}
 
 .pull-right {
 	float: right;

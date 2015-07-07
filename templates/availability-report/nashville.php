@@ -43,9 +43,9 @@
 							<?php endforeach; ?>
 						<?php } ?>
 						<p><?php echo the_field('description'); ?></p>
-
-						<?php // check if the repeater field has rows of data
-						if( have_rows('suite_information') ): ?>
+<?php
+						// check if the repeater field has rows of data
+						if( have_rows('suite_information_acres') ): ?>
 							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
 							    <tbody><tr class="Header">
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
@@ -53,7 +53,7 @@
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
 							    </tr>
 									    
-						  <?php  while ( have_rows('suite_information') ) : the_row();
+						  <?php  while ( have_rows('suite_information_acres') ) : the_row();
 								$attachment = get_sub_field('lot_file'); ?>
 
 						         <tr class="Item">
@@ -66,6 +66,26 @@
 										
 						</tbody></table>
 
+						<?php elseif( have_rows('suite_information_feet') ): ?>
+							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
+							    <tbody><tr class="Header">
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Acres</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
+							    </tr>
+									    
+						  <?php  while ( have_rows('suite_information_feet') ) : the_row();
+								$attachment = get_sub_field('lot_file'); ?>
+
+						         <tr class="Item">
+							        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
+							        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size'); ?></td>
+							        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
+							    </tr> 
+
+						 <?php  endwhile; ?>
+										
+						</tbody></table>
 						<?php else :
 							// no rows found
 						endif; ?>
@@ -117,8 +137,9 @@
 						<?php } ?>
 						<p><?php echo the_field('description'); ?></p>
 
-						<?php // check if the repeater field has rows of data
-						if( have_rows('suite_information') ): ?>
+						<?php
+						// check if the repeater field has rows of data
+						if( have_rows('suite_information_acres') ): ?>
 							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
 							    <tbody><tr class="Header">
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
@@ -126,7 +147,7 @@
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
 							    </tr>
 									    
-						  <?php  while ( have_rows('suite_information') ) : the_row();
+						  <?php  while ( have_rows('suite_information_acres') ) : the_row();
 								$attachment = get_sub_field('lot_file'); ?>
 
 						         <tr class="Item">
@@ -139,6 +160,26 @@
 										
 						</tbody></table>
 
+						<?php elseif( have_rows('suite_information_feet') ): ?>
+							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
+							    <tbody><tr class="Header">
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Acres</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
+							    </tr>
+									    
+						  <?php  while ( have_rows('suite_information_feet') ) : the_row();
+								$attachment = get_sub_field('lot_file'); ?>
+
+						         <tr class="Item">
+							        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
+							        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size'); ?></td>
+							        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
+							    </tr> 
+
+						 <?php  endwhile; ?>
+										
+						</tbody></table>
 						<?php else :
 							// no rows found
 						endif; ?>
@@ -190,8 +231,9 @@
 						<?php } ?>
 						<p><?php echo the_field('description'); ?></p>
 
-						<?php // check if the repeater field has rows of data
-						if( have_rows('suite_information') ): ?>
+						<?php
+						// check if the repeater field has rows of data
+						if( have_rows('suite_information_acres') ): ?>
 							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
 							    <tbody><tr class="Header">
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
@@ -199,7 +241,7 @@
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
 							    </tr>
 									    
-						  <?php  while ( have_rows('suite_information') ) : the_row();
+						  <?php  while ( have_rows('suite_information_acres') ) : the_row();
 								$attachment = get_sub_field('lot_file'); ?>
 
 						         <tr class="Item">
@@ -212,6 +254,26 @@
 										
 						</tbody></table>
 
+						<?php elseif( have_rows('suite_information_feet') ): ?>
+							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
+							    <tbody><tr class="Header">
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Acres</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
+							    </tr>
+									    
+						  <?php  while ( have_rows('suite_information_feet') ) : the_row();
+								$attachment = get_sub_field('lot_file'); ?>
+
+						         <tr class="Item">
+							        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
+							        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size'); ?></td>
+							        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
+							    </tr> 
+
+						 <?php  endwhile; ?>
+										
+						</tbody></table>
 						<?php else :
 							// no rows found
 						endif; ?>
@@ -262,9 +324,9 @@
 							<?php endforeach; ?>
 						<?php } ?>
 						<p><?php echo the_field('description'); ?></p>
-
-						<?php // check if the repeater field has rows of data
-						if( have_rows('suite_information') ): ?>
+<?php
+						// check if the repeater field has rows of data
+						if( have_rows('suite_information_acres') ): ?>
 							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
 							    <tbody><tr class="Header">
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
@@ -272,7 +334,7 @@
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
 							    </tr>
 									    
-						  <?php  while ( have_rows('suite_information') ) : the_row();
+						  <?php  while ( have_rows('suite_information_acres') ) : the_row();
 								$attachment = get_sub_field('lot_file'); ?>
 
 						         <tr class="Item">
@@ -285,6 +347,26 @@
 										
 						</tbody></table>
 
+						<?php elseif( have_rows('suite_information_feet') ): ?>
+							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
+							    <tbody><tr class="Header">
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Acres</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
+							    </tr>
+									    
+						  <?php  while ( have_rows('suite_information_feet') ) : the_row();
+								$attachment = get_sub_field('lot_file'); ?>
+
+						         <tr class="Item">
+							        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
+							        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size'); ?></td>
+							        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
+							    </tr> 
+
+						 <?php  endwhile; ?>
+										
+						</tbody></table>
 						<?php else :
 							// no rows found
 						endif; ?>
@@ -336,8 +418,9 @@
 						<?php } ?>
 						<p><?php echo the_field('description'); ?></p>
 
-						<?php // check if the repeater field has rows of data
-						if( have_rows('suite_information') ): ?>
+						<?php
+						// check if the repeater field has rows of data
+						if( have_rows('suite_information_acres') ): ?>
 							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
 							    <tbody><tr class="Header">
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
@@ -345,7 +428,7 @@
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
 							    </tr>
 									    
-						  <?php  while ( have_rows('suite_information') ) : the_row();
+						  <?php  while ( have_rows('suite_information_acres') ) : the_row();
 								$attachment = get_sub_field('lot_file'); ?>
 
 						         <tr class="Item">
@@ -358,6 +441,26 @@
 										
 						</tbody></table>
 
+						<?php elseif( have_rows('suite_information_feet') ): ?>
+							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
+							    <tbody><tr class="Header">
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Acres</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
+							    </tr>
+									    
+						  <?php  while ( have_rows('suite_information_feet') ) : the_row();
+								$attachment = get_sub_field('lot_file'); ?>
+
+						         <tr class="Item">
+							        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
+							        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size'); ?></td>
+							        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
+							    </tr> 
+
+						 <?php  endwhile; ?>
+										
+						</tbody></table>
 						<?php else :
 							// no rows found
 						endif; ?>
@@ -409,8 +512,9 @@
 						<?php } ?>
 						<p><?php echo the_field('description'); ?></p>
 
-						<?php // check if the repeater field has rows of data
-						if( have_rows('suite_information') ): ?>
+						<?php
+						// check if the repeater field has rows of data
+						if( have_rows('suite_information_acres') ): ?>
 							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
 							    <tbody><tr class="Header">
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
@@ -418,7 +522,7 @@
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
 							    </tr>
 									    
-						  <?php  while ( have_rows('suite_information') ) : the_row();
+						  <?php  while ( have_rows('suite_information_acres') ) : the_row();
 								$attachment = get_sub_field('lot_file'); ?>
 
 						         <tr class="Item">
@@ -431,6 +535,26 @@
 										
 						</tbody></table>
 
+						<?php elseif( have_rows('suite_information_feet') ): ?>
+							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
+							    <tbody><tr class="Header">
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Acres</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
+							    </tr>
+									    
+						  <?php  while ( have_rows('suite_information_feet') ) : the_row();
+								$attachment = get_sub_field('lot_file'); ?>
+
+						         <tr class="Item">
+							        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
+							        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size'); ?></td>
+							        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
+							    </tr> 
+
+						 <?php  endwhile; ?>
+										
+						</tbody></table>
 						<?php else :
 							// no rows found
 						endif; ?>
@@ -482,8 +606,9 @@
 						<?php } ?>
 						<p><?php echo the_field('description'); ?></p>
 
-						<?php // check if the repeater field has rows of data
-						if( have_rows('suite_information') ): ?>
+						<?php
+						// check if the repeater field has rows of data
+						if( have_rows('suite_information_acres') ): ?>
 							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
 							    <tbody><tr class="Header">
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
@@ -491,7 +616,7 @@
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
 							    </tr>
 									    
-						  <?php  while ( have_rows('suite_information') ) : the_row();
+						  <?php  while ( have_rows('suite_information_acres') ) : the_row();
 								$attachment = get_sub_field('lot_file'); ?>
 
 						         <tr class="Item">
@@ -504,6 +629,26 @@
 										
 						</tbody></table>
 
+						<?php elseif( have_rows('suite_information_feet') ): ?>
+							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
+							    <tbody><tr class="Header">
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Acres</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
+							    </tr>
+									    
+						  <?php  while ( have_rows('suite_information_feet') ) : the_row();
+								$attachment = get_sub_field('lot_file'); ?>
+
+						         <tr class="Item">
+							        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
+							        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size'); ?></td>
+							        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
+							    </tr> 
+
+						 <?php  endwhile; ?>
+										
+						</tbody></table>
 						<?php else :
 							// no rows found
 						endif; ?>
@@ -555,8 +700,9 @@
 						<?php } ?>
 						<p><?php echo the_field('description'); ?></p>
 
-						<?php // check if the repeater field has rows of data
-						if( have_rows('suite_information') ): ?>
+						<?php
+						// check if the repeater field has rows of data
+						if( have_rows('suite_information_acres') ): ?>
 							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
 							    <tbody><tr class="Header">
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
@@ -564,7 +710,7 @@
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
 							    </tr>
 									    
-						  <?php  while ( have_rows('suite_information') ) : the_row();
+						  <?php  while ( have_rows('suite_information_acres') ) : the_row();
 								$attachment = get_sub_field('lot_file'); ?>
 
 						         <tr class="Item">
@@ -577,6 +723,26 @@
 										
 						</tbody></table>
 
+						<?php elseif( have_rows('suite_information_feet') ): ?>
+							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
+							    <tbody><tr class="Header">
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Acres</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
+							    </tr>
+									    
+						  <?php  while ( have_rows('suite_information_feet') ) : the_row();
+								$attachment = get_sub_field('lot_file'); ?>
+
+						         <tr class="Item">
+							        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
+							        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size'); ?></td>
+							        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
+							    </tr> 
+
+						 <?php  endwhile; ?>
+										
+						</tbody></table>
 						<?php else :
 							// no rows found
 						endif; ?>
