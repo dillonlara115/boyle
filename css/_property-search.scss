@@ -70,7 +70,7 @@
 }
 
 
-#menu-search-availability-menu, #menu-availability-report-all-regions-menu, #menu-availability-report-greater-memphis-menu, #menu-availability-report-greater-nashville-menu, #menu-availability-report-other-regions-menu {
+#menu-search-availability-menu, #menu-availability-report-all-regions-menu, #menu-availability-report-greater-memphis-menu, #menu-availability-report-greater-nashville-menu, #menu-availability-report-other-regions-menu, #menu-property-portfolio-all-regions-menu, #menu-property-portfolio-memphis-menu, #menu-property-portfolio-nashville-menu, #menu-property-portfolio-other-regions-menu {
 	position: relative;
 	li {
 		display: inline-block;
@@ -113,6 +113,20 @@
 	}
 }
 
+.portfolio-container .search-availability-content ul li {
+	padding: .5em 22px!important;
+}
+
+#menu-property-portfolio-regions-menu {
+	li {
+		margin: 0 .6em;
+		a {
+			line-height: 2.2;
+			font-size: 1em;
+		}
+	}
+}
+
 .menu-availability-report-regions-menu-container {
 	.current-menu-item a {
 		background: url(../../uploads/2015/06/Background-Gradient-LightBlue.gif);
@@ -124,7 +138,33 @@
 		background: url(../../uploads/2015/06/Background-Gradient-LightBlue.gif);
 	}
 }
+//property portfolio all regions
+#post-1512, #post-1524, #post-1522, #post-1526, #post-1514, #post-1516, #post-1520, #post-1518, #post-1504 {
+	.menu-item-1629 a {
+		background: url(../../uploads/2015/06/Background-Gradient-LightBlue.gif);
+	}
+}
 
+//property portfolio memphis
+#post-1506, #post-1530, #post-1542, #post-1540, #post-1544, #post-1532, #post-1534, #post-1538, #post-1536 {
+	.menu-item-1634 a {
+		background: url(../../uploads/2015/06/Background-Gradient-LightBlue.gif);
+	}
+}
+
+//property portfolio nashville
+#post-1508, #post-1548, #post-1561, #post-1559, #post-1563, #post-1551, #post-1553, #post-1555, #post-1557 {
+	.menu-item-1635 a {
+		background: url(../../uploads/2015/06/Background-Gradient-LightBlue.gif);
+	}
+}
+
+//property portfolio other regions
+#post-1510, #post-1566, #post-1577, #post-1575, #post-1579, #post-1569, #post-1571, #post-1573, #post-1563 {
+	.menu-item-1636 a {
+		background: url(../../uploads/2015/06/Background-Gradient-LightBlue.gif);
+	}
+}
 //greater memphis
 #post-621, #post-624, #post-619, #post-610, #post-612, #post-617, #post-614, #post-987 {
 	.menu-item-1000 a {
@@ -155,6 +195,12 @@
 		font-family: Tahoma, Arial!important;
 		font-size: 8pt!important;
 	}
+}
+
+
+.left-content {
+	float: left;
+	width: 50%;
 }
 .search-filters {
 	display: inline-block;
