@@ -1,4 +1,3 @@
-
 <?php wp_nav_menu( array('menu' => 'Availability Report Other Regions Menu' )); ?>
 <div class="property-type-list-content property-list-container">
 	<h2><?php the_title(); ?></h2>

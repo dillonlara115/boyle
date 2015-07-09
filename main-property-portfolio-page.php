@@ -21,18 +21,16 @@ Template Name: Main Property Portfolio Page
 		</div> 
 		<h2><?php echo the_title(); ?></h2>
 	</div>
-	<div class="property-sub-navigation">
+	<div id="post-<?php the_ID(); ?>" class="property-sub-navigation portfolio-sub-navigation">
 		<?php wp_nav_menu( array('menu' => 'Property Portfolio Regions Menu' )); ?>
 	</div>
 <div id="content" class="static-container static-contact-container" >
 	<?php the_post(); ?>
-	<?php 
-
-$posts = get_field('featured_properties'); ?>
+	<?php $posts = get_field('featured_properties'); ?>
 	<?php if ($posts) { ?>
-		<div id="post-<?php the_ID(); ?>" class="search-availability-container portfolio-container" >
+		<div  class="search-availability-container portfolio-container" >
 	<?php } else { ?>
-		<div id="post-<?php the_ID(); ?>" class="search-availability-container" >
+		<div  class="search-availability-container" >
 	<?php } ?>
 	
 		
@@ -60,15 +58,35 @@ $posts = get_field('featured_properties'); ?>
 
 <?php if( $posts ): ?>
 	<div class="services-sidebar-container">
-	    <ul>
-	    <?php foreach( $posts as $post): // variable must be called $post (IMPORTANT) ?>
+		<h3 class="side-property-header side-property-header-availability"><span>F</span>eatured <span>P</span>roperties</h3>
+	    
+	    <?php foreach( $posts as $post): 
+	    	$images = get_field('property_gallery', $property->ID);
+			$image_1 = $images[0]; 
+	    ?>
 	        <?php setup_postdata($post); ?>
-	        <li>
-	            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-	            <span></span>
-	        </li>
+	        <p>
+	            <a href="<?php the_permalink(); ?>">
+		            <img src="<?php echo $image_1['url']; ?>" alt="<?php echo $image_1['alt']; ?>" class="featured-property-image" />
+		            <?php the_title(); ?>
+	            </a>
+	            <?php the_field('address'); ?>
+            </p>
+            <?php $agents = get_field('agent');	?>
+			<?php if($agents) { ?>
+				<?php foreach($agents as $agent): 
+				$image = get_field('picture', $agent->ID); ?>
+					<div class="single-property-agent-container">
+						<strong class="agent-name"><a href="#"><?php echo get_the_title( $agent->ID ); ?></a></strong>
+						<small><?php echo the_field('phone_number', $agent->ID); ?></small>
+						<p><a href="mailto:<?php echo the_field('email', $agent->ID); ?>"><?php echo the_field('email', $agent->ID); ?></a>
+						</p>
+					</div>
+				<?php endforeach; ?>
+			<?php } ?>
+	        <hr>
 	    <?php endforeach; ?>
-	    </ul>
+	    
     </div>
     <?php wp_reset_postdata(); // IMPORTANT - reset the $post object so the rest of the page works correctly ?>
 <?php endif; ?>

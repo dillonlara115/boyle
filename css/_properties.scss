@@ -223,7 +223,7 @@ tr.Header {
 	font-family: Georgia, Times New Roman;
 	text-transform: uppercase;
 	margin: 1em 0 .5em;
-	font-size: 1em;
+	font-size: 11px;
 	clear: both;
 	a {
 		font-family: Georgia, Times New Roman;
@@ -383,6 +383,19 @@ tr.Header {
 	}
 }
 
+.property-portfolio-title {
+  margin-bottom: 1em;
+  font-weight: bold;
+  font-family: Century Gothic, Tahoma, Arial;
+  font-size: 12pt;
+}
+.portfolio-sub-navigation {
+	margin-top: -1em;
+}
+.agent-name {
+	margin-bottom: 0!important;
+}
+
 .availability-report-image {
 	float: left;
 	margin: 0 1em 1em 0;
@@ -398,14 +411,17 @@ tr.Header {
 }
 
 .single-property-agent-container {
-	margin-top: 3em;
+	margin-top: 2em;
 	img {
 		float: left;
 		padding-right: .5em;
 	}
 	strong {
 		display: block;
-		margin-bottom: 1em;
+		margin-bottom: 11px;
+	}
+	small {
+		font-size: 11px;
 	}
 	ul {
 		float: left;

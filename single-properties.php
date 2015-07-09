@@ -120,7 +120,7 @@
 			?>
 			<?php if( $featured_properties ): ?>
 			 	<div class="side-property-inner-container">
-					<h3 class="side-property-header side-property-header-availabilty"><a href="<?php echo $url; ?>" target="_blank"><span>F</span>eatured <span>P</span>roperties</a></h3>
+					<h3 class="side-property-header side-property-header-availability"><span>F</span>eatured <span>P</span>roperties</h3>
 					<?php foreach( $featured_properties as $property ): ?>
 						<?php 
 							$images = get_field('property_gallery', $property->ID);

@@ -1,6 +1,6 @@
 <?php wp_nav_menu( array('menu' => 'Availability Report All Regions Menu' )); ?>
 <div class="property-type-list-content property-list-container">
-	<h2><?php the_title(); ?></h2>
+	<h2 class="property-p-title"><?php the_title(); ?></h2>
 		<?php if (is_page(985) ) { ?>
 		<?php 
 		// args for residential property types
