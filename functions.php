@@ -171,8 +171,6 @@ $GLOBALS['my_query_filters'] = array(
 
 
 
-
-
 // action
 add_action('pre_get_posts', 'my_pre_get_posts', 10, 1);
 

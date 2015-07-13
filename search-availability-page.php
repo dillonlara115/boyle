@@ -15,6 +15,7 @@ Template Name: Search Availability Page
 	<div id="post-<?php the_ID(); ?>" class="search-availability-container" >
 		<?php 	$region = $_GET['region']; 
 				$metro_area = $_GET['metroarea']; 
+				$transaction = $$_GET['transaction']; 
 		?>
 		<div class="search-availability-content">
 			<?php wp_nav_menu( array('menu' => 'Search Availability Menu' )); ?>
@@ -22,6 +23,7 @@ Template Name: Search Availability Page
 				<h2><?php the_title(); ?></h2>	
 				<?php the_content(); ?>
 				<div class="left-content">
+				<form class='search-availability-form' action="" method="post">
 					<div id="archive-filters" class="search-filters">
 						<strong>Region</strong>
 						<select>
@@ -57,7 +59,7 @@ Template Name: Search Availability Page
 								echo '<select size="5" name="' . $field['key'] . '">';
 									foreach( $field['choices'] as $k => $v )
 									{
-										echo '<option class="filter" data-filter="' . $k . '"  value="' . $k . '">' . $v . '</option>';
+										echo '<option class="filter" name="metroarea" data-filter="' . $k . '"  value="' . $k . '">' . $v . '</option>';
 									}
 								echo '</select>';
 							} ?>
@@ -80,7 +82,7 @@ Template Name: Search Availability Page
 									echo '<select size="5" name="' . $field['key'] . '">';
 									foreach( $field['choices'] as $k => $v )
 									{
-										echo '<option value="' . $k . '">' . $v . '</option>';
+										echo '<option name="metroarea" value="' . $k . '">' . $v . '</option>';
 									}
 									echo '</select>';
 								}
@@ -104,7 +106,7 @@ Template Name: Search Availability Page
 									echo '<select size="5" name="' . $field['key'] . '">';
 									foreach( $field['choices'] as $k => $v )
 									{
-										echo '<option value="' . $k . '">' . $v . '</option>';
+										echo '<option name="metroarea" value="' . $k . '">' . $v . '</option>';
 									}
 									echo '</select>';
 								}
@@ -126,12 +128,30 @@ Template Name: Search Availability Page
 								
 								foreach( $field['choices'] as $k => $v )
 								{
-									echo '<input type="checkbox" class="filter" data-filter="' . $k . '"  value="' . $k . '"/><small>' . $v . '</small>';
+									echo '<input type="checkbox" name="transaction"  class="filter" data-filter="' . $k . '"  value="' . $k . '"/><small>' . $v . '</small>';
 								}
 									
 							} ?>
 						</div>
 					</div>
+						<input type="submit" name="submit" value="search">	
+					</form>
+
+					<?php 
+
+					 // starting the session
+					 session_start();
+
+
+					 if (isset($_POST['submit'])) { 
+						 $_SESSION['transaction'] = $_POST['transaction'];
+					 } 
+					?> 
+
+					<strong><?php echo $region, $metroarea, $transaction,  $_SESSION['transaction'];?></strong>
+
+
+
 					<?php if ( is_page( 1059) ) {  
 						$value = array('Residential', 'Hotels', 'Land', 'Mixed-Use', 'Industrial', 'Retail', 'Office');
 					} elseif ( is_page( 316) ) { 
@@ -169,7 +189,7 @@ Template Name: Search Availability Page
 									'value'		=> $metro_area,
 									'compare'	=> 'LIKE'
 									)
-								) 
+								)
 							) 
 						);
 					?>
@@ -265,40 +285,142 @@ Template Name: Search Availability Page
 
 	});
 
+
+	// $('.search-availability-form').on('change', function(){
+	// 	// vars
+	// 	var url = '<?php echo home_url('property'); ?>';
+	// 		args = {};
+			
+		
+	// 	// loop over filters
+	// 	$('.search-filters .filter').each(function(){
+			
+	// 		// vars
+	// 		var filter = $(this).data('filter'),
+	// 			vals = [];
+			
+			
+	// 		// find checked inputs
+	// 		$('.search-filters').find('input:checked').each(function(){
+	
+	// 			vals.push( $(this).val() );
+	
+	// 		});
+			
+			
+	// 		// append to args
+	// 		args[ filter ] = vals.join(',');
+			
+	// 	});
+	// 	console.log(url);
+		
+	// 	// update url
+	// 	url += '?';
+		
+		
+	// 	// loop over args
+	// 	$.each(args, function( name, value ){
+			
+	// 		url += name + '=' + value + '&';
+			
+	// 	});
+		
+		
+	// 	// remove last &
+	// 	url = url.slice(0, -1);
+		
+	// 	console.log(url);
+	// 	// reload page
+	// 	//window.location.replace( url );
+
+
+	// })
+
+
 	// change
-	$('.metro-filters').on('change', 'select', function(){
-		// vars
-		var url = window.location.href;
-		args = {};
+	// $('.metro-filters').on('change', 'select', function(){
+	// 	// vars
+	// 	var url = window.location.href;
+	// 	args = {};
 
-		// loop over filters
-		$('.metro-filters').each(function(){
-			// vars
-			var filter = $(this).data('filter'),
-			vals = [];
+	// 	// loop over filters
+	// 	$('.metro-filters').each(function(){
+	// 		// vars
+	// 		var filter = $(this).data('filter'),
+	// 		vals = [];
 			
-			// find checked inputs
-			$(this).find('option:selected').each(function(){
-				vals.push( $(this).val() );
-			});
+	// 		// find checked inputs
+	// 		$(this).find('option:selected').each(function(){
+	// 			vals.push( $(this).val() );
+	// 		});
 			
-			// append to args
-			args[ filter ] = vals.join(',');
-		});
+	// 		// append to args
+	// 		args[ filter ] = vals.join(',');
+	// 	});
 		
 		
 		
-		// loop over args
-		$.each(args, function( name, value ){
-			url += '&metroarea=' + value + '&';
-		});
+	// 	// loop over args
+	// 	$.each(args, function( name, value ){
+	// 		url += '&metroarea=' + value + '&';
+	// 	});
 		
 		
 		
-		// reload page
-		window.location.replace( url );
+	// 	// reload page
+	// 	window.location.replace( url );
 
-	});
+	// });
+
+	// change
+	// $('.search-filters').on('change', 'input[type="checkbox"]', function(){
+	// 	console.log('checkbox selected');
+	// 	// vars
+	// 	var url = window.location.href;
+	// 		args = {};
+			
+		
+	// 	// loop over filters
+	// 	$('search-filters .filter').each(function(){
+			
+	// 		// vars
+	// 		var filter = $(this).data('filter'),
+	// 			vals = [];
+			
+			
+	// 		// find checked inputs
+	// 		$(this).find('input:checked').each(function(){
+	
+	// 			vals.push( $(this).val() );
+	
+	// 		});
+			
+			
+	// 		// append to args
+	// 		args[ filter ] = vals.join(',');
+			
+	// 	});
+		
+		
+	// 	// update url
+	// 	url += '?';
+		
+		
+	// 	// loop over args
+	// 	$.each(args, function( name, value ){
+	// 		url += '&transaction=' + value + '&';
+	// 	});
+		
+		
+	// 	// remove last &
+	// 	url = url.slice(0, -1);
+		
+		
+	// 	// reload page
+	// 	window.location.replace( url );
+		
+
+	// });
 
 })(jQuery);
 </script>
