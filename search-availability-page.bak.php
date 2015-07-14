@@ -56,7 +56,7 @@ Template Name: Search Availability Page
 							$field = get_field_object($field_key);
 
 							if( $field ) {
-								echo '<select size="5" name="' . $field['key'] . '">';
+								echo '<select size="5" name="metroarea">';
 									foreach( $field['choices'] as $k => $v )
 									{
 										echo '<option class="filter" name="metroarea" data-filter="' . $k . '"  value="' . $k . '">' . $v . '</option>';
@@ -79,7 +79,7 @@ Template Name: Search Availability Page
 
 								if( $field )
 								{
-									echo '<select size="5" name="' . $field['key'] . '">';
+									echo '<select size="5" name="metroarea">';
 									foreach( $field['choices'] as $k => $v )
 									{
 										echo '<option name="metroarea" value="' . $k . '">' . $v . '</option>';
@@ -103,7 +103,7 @@ Template Name: Search Availability Page
 
 								if( $field )
 								{
-									echo '<select size="5" name="' . $field['key'] . '">';
+									echo '<select size="5" name="metroarea">';
 									foreach( $field['choices'] as $k => $v )
 									{
 										echo '<option name="metroarea" value="' . $k . '">' . $v . '</option>';
@@ -128,7 +128,7 @@ Template Name: Search Availability Page
 								
 								foreach( $field['choices'] as $k => $v )
 								{
-									echo '<input type="checkbox" name="transaction"  class="filter" data-filter="' . $k . '"  value="' . $k . '"/><small>' . $v . '</small>';
+									echo '<input type="checkbox" name="transaction[' . $k . ']"  class="filter" data-filter="' . $k . '"  value="' . $k . '"/><small>' . $v . '</small>';
 								}
 									
 							} ?>
@@ -144,12 +144,22 @@ Template Name: Search Availability Page
 
 
 					 if (isset($_POST['submit'])) { 
+						 $_SESSION['metroarea'] = $_POST['metroarea'];
 						 $_SESSION['transaction'] = $_POST['transaction'];
 					 } 
 					?> 
 
-					<strong><?php echo $region, $metroarea, $transaction,  $_SESSION['transaction'];?></strong>
-
+					<strong>region: <?php echo $region; ?></strong>
+					<strong>metro area: <?php echo $_SESSION['metroarea'];?></strong>
+					<strong>session transaction: 
+						<?php 
+							foreach ($_SESSION['transaction'] as $key => $transaction_value) {
+						 	 echo $transaction_value;
+						 }?>
+						 OR <?php $newValue = explode(', ', $_POST['transaction']);
+						 		echo $newValue;
+						  ?>
+					 </strong>
 
 
 					<?php if ( is_page( 1059) ) {  
@@ -186,9 +196,14 @@ Template Name: Search Availability Page
 									),
 								array(
 									'key'		=> $region,
-									'value'		=> $metro_area,
+									'value'		=> $_SESSION['metroarea'],
 									'compare'	=> 'LIKE'
 									)
+								),
+								array(
+									'key'		=> 'transaction_type',
+									'value'		=> 'Lease',
+									'compare'	=> 'LIKE'
 								)
 							) 
 						);

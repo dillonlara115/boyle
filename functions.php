@@ -168,7 +168,11 @@ $GLOBALS['my_query_filters'] = array(
     'Other Regions'   => 'other'
 );
 
-
+$GLOBALS['my_transaction_filters'] = array( 
+    'Build-to-Suit'   => 'Build-to-Suit', 
+    'Buy'   => 'Buy',
+    'Lease'   => 'Lease',
+);
 
 
 // action

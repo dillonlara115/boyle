@@ -3,6 +3,7 @@
 	<?php 	$region = $_GET['region']; 
 			$metro_area = $_GET['metroarea']; 
 	?>
+	
 	<?php if (strstr($_SERVER['REQUEST_URI'], "memphis_metro_area")){ ?>
 	<?php 
 	$args = array(
