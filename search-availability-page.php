@@ -389,6 +389,8 @@ Template Name: Search Availability Page
 						};
 						$mapposts = new WP_Query( array( 
 							'post_type' 	=> 'properties',
+							'orderby' => 'title',
+							'order'   => 'ASC',
 							'meta_query'	=> array(
 								'relation'	=> 'AND',
 								array(
