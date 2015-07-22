@@ -81,20 +81,7 @@ function about_widget_init() {
 	'after_title'   => '</h2>',
     ) );
 }
-// add_action( 'widgets_init', 'contact_widget_init' );
-// function contact_widget_init() {
-//     register_sidebar( array(
-//         'name' => 'contact Sidebar' ,
-//         'id' => 'about',
-//         'description' => __( 'Widgets in this area will be shown on all contact pages' ),
-//         'before_widget' => '<div id="%1$s" class="contact-sidebar-container %2$s">',
-// 	'after_widget'  => '</div>',
-// 	'before_title'  => '<h2 class="contact-sidebar-title">',
-// 	'after_title'   => '</h2>',
-//     ) );
-// }
 
-// Creates directory custom post type
 function staff_directory_init() {
     $args = array(
       'label' => 'Staff',
@@ -135,6 +122,26 @@ function properties_init() {
 add_action( 'init', 'properties_init' );
 
 
+// Creates news custom post type
+function news_init() {
+    $args = array(
+      'label' => 'News',
+        'public' => true,
+        'show_ui' => true,
+        'capability_type' => 'post',
+        'hierarchical' => false,
+        'rewrite' => array('slug' => 'news'),
+        'query_var' => true,
+        'menu_icon' => 'dashicons-megaphone',
+        'supports' => array(
+            'title',
+            'editor',
+            'thumbnail',
+            'page-attributes',)
+        );
+    register_post_type( 'news', $args );
+}
+add_action( 'init', 'news_init' );
 
 
 //sort search results by post type

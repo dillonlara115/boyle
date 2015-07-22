@@ -8,12 +8,13 @@
 			<p class="nav-next"><?php previous_posts_link(__( 'newer articles <span class="meta-nav">&raquo;</span>', 'blankslate' )) ?></p>
 		</div>
 		<?php } ?>
+		<div class="property-type-list-content property-list-container">
+					<p class="Title-Blue">Property Search Results:</p>
 		<?php while ( have_posts() ) : the_post() ?>
 			<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 				<?php if ( $post->post_type == 'properties' ) { ?>
-				<div class="property-type-list-content property-list-container">
-					<p class="Title-Blue">Property Search Results:</p>
+				
 					<ul>
 						<?php 
 						$images = get_field('property_gallery');
@@ -57,10 +58,11 @@
 					endif; ?>
 				</li>
 			</ul>
-		</div>
-		<?php } ?>
+		
+		<?php } else { ?>
 
 		<strong class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php printf( __('Read', 'blankslate'), the_title_attribute('echo=0') ); ?>" rel="bookmark"><?php the_title(); ?></a></strong>
+		<?php } ?>
 		<?php if ( $post->post_type == 'post' ) { ?>
 		<div class="entry-meta">
 			<span class="meta-prep meta-prep-author"><?php _e('By ', 'blankslate'); ?></span>
@@ -87,6 +89,7 @@
 		<hr>
 	</div>
 <?php endwhile; ?>
+</div>
 <?php global $wp_query; $total_pages = $wp_query->max_num_pages; if ( $total_pages > 1 ) { ?>
 <div id="nav-below" class="navigation">
 	<p class="nav-previous"><?php next_posts_link(__( '<span class="meta-nav">&laquo;</span> older articles', 'blankslate' )) ?></p>

@@ -214,6 +214,37 @@
 				?>
 				</tbody></table>
 		<?php } ?>
+		<?php 
+			$news = get_posts(array(
+				'post_type' => 'News',
+				'meta_query'	=> array(
+						'relation'		=> 'AND',
+						array(
+							'key'		=> 'property_tags',
+							'value'		=>  '"' . get_the_ID() . '"',
+							'compare'	=> 'LIKE'
+						),
+					)
+			));
+
+		?>
+		<?php if( $news ): ?>
+		
+			<h3 class="side-property-header side-property-header-community-news"><span>P</span>roperty <span>N</span>ews</h3>
+			<div>
+			<?php foreach( $news as $item ): ?>
+				<div class="property-news-sidebar-item">
+					<?php if(get_field('date', $item->ID)) { ?>
+						<strong class="news-date"><?php the_field('date', $item->ID); ?></strong>
+					<?php } ?>
+					<a href="<?php echo get_permalink( $item->ID ); ?>">
+						<?php echo get_the_title( $item->ID ); ?>
+					</a>
+				</div>
+			<?php endforeach; ?>
+			</div>
+		
+	<?php endif; ?>
 		
 		<?php if(get_field('add_a_document')) { ?>
 			<div class="side-property-inner-container">

@@ -49,6 +49,20 @@
 	}
 }
 
+.property-news-sidebar-item {
+	margin-bottom: 1em;
+	.news-date {
+		display: block;
+		color: #000;
+	}
+}
+.property-news-item {
+	.news-item-p {
+		line-height: 1.5;
+		margin-top: 1em;
+	}
+}
+
 .is-hidden {
 	display: none;
 }

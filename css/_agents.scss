@@ -80,3 +80,21 @@
 		padding: 0 1em;
 	}
 }
+.entry-col-content {
+	display: inline-block;
+	float: left;
+	width: 72%;
+	.content-pull-left {
+		width: 80%;
+	}
+}
+.news-col-sidebar {
+	float: right;
+	width: 25%;
+}
+
+.agent-property-page-agent-container {
+	vertical-align: top;
+	display: inline-block;
+	width: 300px;
+}
