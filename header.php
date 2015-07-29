@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="http://maxtestdomain.com/reinhardt/wp-content/themes/reinhardt/sidr/jquery.sidr.dark.css">
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.0/slick.css"/>
 <link href="<?php bloginfo('template_url'); ?>/css/slick-theme.css" rel='stylesheet' type='text/css'>
+
 <link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_uri(); ?>" />
 <?php wp_head(); ?>
 </head>
@@ -81,10 +82,10 @@
                 <input type="image" name="ctl00$ImageButtonSearch" id="ctl00_ImageButtonSearch" src="<?php bloginfo('template_directory'); ?>/images/Button-Search-Off.gif" align="absmiddle" class="mobile-search-button" />
            
             </li>
-			<li><a href="#">Search Availability</a></li>
-			<li><a href="#">Property Portfolio</a></li>
+			<li><a href="<?php echo get_permalink( 1059 ); ?>">Search Availability</a></li>
+			<li><a href="<?php echo get_permalink( 1512 ); ?>">Property Portfolio</a></li>
 			<li><a href="<?php echo get_permalink( 13 ); ?>">Services</a></li>
-			<li><a href="#">News</a></li>
+			<li><a href="<?php echo get_permalink( 1894 ); ?>">News</a></li>
 			<li><a href="<?php echo get_permalink( 2 ); ?>">About Us</a></li>
 			<li><a href="<?php echo get_permalink( 25 ); ?>">Contact</a></li>
             <li><a href="#">Register/Login</a></li>

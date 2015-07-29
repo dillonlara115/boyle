@@ -18,9 +18,14 @@
 		$value = 'Retail';
 	} ?>
 		<?php 
+		$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 		// args for residential property types
 		$args = array(
 			'post_type'		=> 'properties',
+			'orderby'	=> 'title',
+			'order'		=> 'ASC',
+			'posts_per_page'	=> 15,
+			'paged'		=> $paged,
 			'meta_query'	=> array(
 				'relation'		=> 'AND',
 				array(
@@ -110,7 +115,7 @@
 							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
 							    <tbody><tr class="Header">
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
-							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Acres</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Sq. Ft.</td>
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
 							    </tr>
 									    
@@ -134,5 +139,21 @@
 			</ul>
 		<?php endif; ?>
 		<?php wp_reset_query();	 // Restore global post data stomped by the_post(). ?>
+<?php
+if($the_query->max_num_pages>1){?>
+    <p class="navrechts">
+    <?php
+      if ($paged > 1) { ?>
+        <a href="<?php echo '?paged=' . ($paged -1); //prev link ?>"><</a>
+                        <?php }
+    for($i=1;$i<=$the_query->max_num_pages;$i++){?>
+        <a href="<?php echo '?paged=' . $i; ?>" <?php echo ($paged==$i)? 'class="selected"':'';?>><?php echo $i;?></a>
+        <?php
+    }
+    if($paged < $the_query->max_num_pages){?>
+        <a href="<?php echo '?paged=' . ($paged + 1); //next link ?>">></a>
+    <?php } ?>
+    </p>
+<?php } ?>
 	
 </div>

@@ -20,10 +20,9 @@ Template Name: Search Availability Page
 		?>
 		<div class="search-availability-content">
 			<?php wp_nav_menu( array('menu' => 'Search Availability Menu' )); ?>
-			<form class='search-availability-form' name="searchform" action="" method="post">
 			<div class="property-type-list-content" id="search-houses">
 				<div class="left-content">
-				
+				<form class='search-availability-form' action="" method="post">
 					<div id="archive-filters" class="search-filters">
 						<strong>Region</strong>
 						<select>
@@ -249,16 +248,16 @@ Template Name: Search Availability Page
 						<?php }?>
 						<hr>
 						<input type="submit" name="submit" class="search-availability-button" value="search">	
-					
+						</form>
 					</div>
 					<?php 
 
 					 // starting the session
 					 session_start();
-					 	
-				 	 // $_SESSION = array();
+
+				 	 $_SESSION = array();
 					 if (isset($_POST['submit'])) { 
-					 	 $_SESSION['search-form'] = $_POST;
+					 	 $_SESSION['region'] = $_POST['region'];
 						 $_SESSION['metroarea'] = $_POST['metroarea'];
 						 $_SESSION['transaction'] = $_POST['transaction'];
 						 $_SESSION['residentialType'] = $_POST['residentialType'];
@@ -268,7 +267,6 @@ Template Name: Search Availability Page
 						 $_SESSION['lotPrice'] = $_POST['lotPrice'];
 						 $_SESSION['orderResults'] = $_POST['orderResults'];
 						 $_SESSION['resultsPerPage'] = $_POST['resultsPerPage'];
-						 
 					 } 
 					?> 
 
@@ -359,14 +357,14 @@ Template Name: Search Availability Page
 
 
 
-				    <?php if( $_SESSION['resultsPerPage'] == 15) { 
-						$resultsPerPage = 15;
-					} elseif( $_SESSION['resultsPerPage'] == 25) { 
-						$resultsPerPage = 25;
-					} elseif( $_SESSION['resultsPerPage'] == 50) {
-						$resultsPerPage = 50;
+				    <?php if( $_SESSION['resultsPerPage'] == '15') { 
+						$resultsPerPage = '15';
+					} elseif( $_SESSION['resultsPerPage'] == '25') { 
+						$resultsPerPage = '25';
+					} elseif( $_SESSION['resultsPerPage'] == '50') {
+						$resultsPerPage = '50';
 				    } else {
-				    	$resultsPerPage = 15;
+				    	$resultsPerPage = '15';
 			    	}?>
 					
 					<?php 
@@ -481,20 +479,18 @@ Template Name: Search Availability Page
 
 
 <div class="search-availability-results property-list-container">
-<div class="search-results-container">
 	<h3>Search Results</h3>	
-	<div class="search-inner-form">
+	<form id="resultFilters" method="POST"> 
 	<strong>Results Per Page:</strong>
-	<select name="resultsPerPage" class="resultsPerPageForm">
-		<option class="filter" name="resultsPerPage" value="...">...</option>
+	<select name="resultsPerPage" onchange="change()">
 		<option class="filter" name="resultsPerPage" value="15">15</option>
 		<option class="filter" name="resultsPerPage" value="25">25</option>
 		<option class="filter" name="resultsPerPage" value="50">50</option>
 	</select>
-	</div>
-	<div class="search-inner-form">
+	</form>
+	<form id="resultFilters" method="POST"> 
 	<strong>Order By:</strong>
-	<select name="orderResults" class="orderResultsForm">
+	<select name="orderResults" onchange="change()">
 		<option class="filter" name="orderResults" value="ASC">Property (A-Z)</option>
 		<option class="filter" name="orderResults" value="sqfootage">Square Footage</option>
 		<option class="filter" name="orderResults" value="acreage">Acreage</option>
@@ -502,11 +498,70 @@ Template Name: Search Availability Page
 		<option class="filter" name="orderResults" value="priceLow">Price (Lowest-Highest)</option>
 		<option class="filter" name="orderResults" value="priceHigh">Price (Highest-Lowest)</option>
 	</select>
-	</div>
-	</div>
+	</form>
+	<?php var_dump($resultsPerPage) ; ?>
+	<script>
+function change(){
+    document.getElementById("resultFilters").submit();
+}
+</script>
 	<hr>
 
 	<?php 
+	$args = array(
+		'post_type'		=> 'properties',
+		'meta_query'	=> array(
+			'relation'		=> 'AND',
+			array(
+				'key'		=> 'property_type',
+				'value'		=> $value,
+				'compare'	=> 'LIKE'
+				),
+			array(
+				'key'		=> 'activate_property',
+				'value'		=> 'This property is active',
+				'compare'	=> 'LIKE'
+				),
+			array(
+				'key'		=> $region,
+				'value'		=> $_SESSION['metroarea'],
+				'compare'	=> 'LIKE'
+				),
+			array(
+				'key'		=> 'transaction_type',
+				'value'		=>  $transaction_value,
+				'compare'	=> 'LIKE'
+				),
+			array(
+				'key'		=> 'residential_type',
+				'value'		=>  $_SESSION['residentialType'],
+				'compare'	=> 'LIKE'
+				),
+			array(
+				'key'		=> 'community',
+				'value'		=>  $_SESSION['community'],
+				'compare'	=> 'LIKE'
+				),
+			array(
+				'key'		=> 'total_square_feet',
+				'value'		=>  $sqValue,
+				'type'		=> 'numeric',
+				'compare'	=> 'BETWEEN'
+				),
+			array(
+				'key'		=> 'lot_size_max_acres',
+				'value'		=>  $lotValue,
+				'type'		=> 'numeric',
+				'compare'	=> 'BETWEEN'
+				),
+			array(
+				'key'		=> 'lot_price_min',
+				'value'		=>  $lotPrice,
+				'type'		=> 'numeric',
+				'compare'	=> 'BETWEEN'
+				),
+			),
+		);
 					// query
 	$the_query = new WP_Query( $mapposts );
 	?>
@@ -602,12 +657,7 @@ if($mapposts->max_num_pages>1){?>
 </div>
 <script type="text/javascript">
 	(function($) {
-		$(".resultsPerPageForm").change(function(){
-			$('.search-availability-button').click();
-		});
-		$(".orderResultsForm").change(function(){
-			$('.search-availability-button').click();
-		});
+
 	// change
 	$('#archive-filters').on('change', 'select', function(){
 		// vars

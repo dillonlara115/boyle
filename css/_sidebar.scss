@@ -28,7 +28,7 @@ img.logo {
 
 //sidebars
 .services-sidebar-container, .about-sidebar-container, .contact-sidebar-container, .properties-sidebar-container {
-	@media (min-width: 48em) {
+	@media (min-width: 960px) {
 		float: left;
 		text-align: left;
 		width: 20%;
@@ -41,7 +41,7 @@ img.logo {
 		color: #355c88;
 
 		&:before {
-			@media (min-width: 48em){
+			@media (min-width: 960px){
 				content: '\00BB';
 				display: inline-block;
 				padding-right: .5em;
@@ -65,7 +65,7 @@ img.logo {
 				display: none;
 			}
 		}
-		@media (max-width: 48em) {
+		@media (max-width: 960px) {
 			color: #fff;
 			height: 47px;
 			box-sizing: border-box;
@@ -92,7 +92,7 @@ img.logo {
 			padding: 1em;
 			font-family: Tahoma, Arial;
 			display: block;
-			@media (min-width: 48em) {
+			@media (min-width: 960px) {
 				color: #355c88;
 				line-height: initial;
 				padding-left: initial;

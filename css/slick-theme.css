@@ -116,6 +116,12 @@
 {
     margin-bottom: 30px;
 }
+@media (max-width: 960px) {
+    .slick-slider
+    {
+        margin-bottom: 0;
+    }
+}
 
 .slick-dots
 {

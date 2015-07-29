@@ -47,6 +47,9 @@
 
 .news-sidebar {
 	width: 28%;
+	@media (max-width: 960px) {
+		display: none;
+	}
 }
 
 .news-page .news-container {
@@ -55,5 +58,8 @@
 	border-left: none;
 	.search-availability-content ul li {
 		padding: .5em 13px!important;
+	}
+	@media (max-width: 960px) {
+		width: 99%;
 	}
 }

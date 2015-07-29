@@ -6,7 +6,7 @@
 	width: 100%;
 	margin: 1.5em 0;
 	clear: both;
-	@media (max-width: 48em) {
+	@media (max-width: 960px) {
 		display: none;
 		.search-availability-container & {
 			display: block;
@@ -26,11 +26,14 @@
 		padding: 5px;
 		float: left;
   		margin: 0 10px;
-  		@media (max-width: 48em) {
+  		@media (max-width: 960px) {
   			width: 43%;
   			margin: .5em;
   			display: inline-block;
   			float: none;
+  		}
+  		@media (max-width: 400px) {
+  			width: 94%;
   		}
 	}
 	.bucket {
@@ -70,7 +73,7 @@
 }
 
 
-#menu-search-availability-menu, #menu-availability-report-all-regions-menu, #menu-availability-report-greater-memphis-menu, #menu-availability-report-greater-nashville-menu, #menu-availability-report-other-regions-menu, #menu-property-portfolio-all-regions-menu, #menu-property-portfolio-memphis-menu, #menu-property-portfolio-nashville-menu, #menu-property-portfolio-other-regions-menu, #menu-news-all-regions-menu {
+#menu-search-availability-menu, #menu-availability-report-all-regions-menu, #menu-availability-report-greater-memphis-menu, #menu-availability-report-greater-nashville-menu, #menu-availability-report-other-regions-menu, #menu-property-portfolio-all-regions-menu, #menu-property-portfolio-memphis-menu, #menu-property-portfolio-nashville-menu, #menu-property-portfolio-other-regions-menu, #menu-news-all-regions-menu, #menu-news-memphis-menu, #menu-news-nashville-menu, #menu-news-other-regions-menu {
 	position: relative;
 	li {
 		display: inline-block;
@@ -89,7 +92,7 @@
 		vertical-align: bottom;
 		position: relative;
 		bottom: -1px;
-		@media (max-width: 48em) {
+		@media (max-width: 960px) {
 			display: block;
 			border-radius: 0;
 			bottom: 0;
@@ -139,8 +142,33 @@
 		background: url(../../uploads/2015/06/Background-Gradient-LightBlue.gif);
 	}
 }
+
+#post-1913, #post-1894, #post-1897, #post-1990, #post-1899, #post-1901, #post-1903, #post-1905, #post-1907, #post-1910 {
+	.menu-item-1970 a {
+		background: url(../../uploads/2015/06/Background-Gradient-LightBlue.gif);
+	}
+}
+
+#post-1914, #post-1917, #post-1919, #post-1921, #post-1922, #post-2019, #post-1926, #post-1928, #post-1931 {
+	.menu-item-1971 a {
+		background: url(../../uploads/2015/06/Background-Gradient-LightBlue.gif);
+	}
+}
+
+#post-1933, #post-1935, #post-1934, #post-1937, #post-2024, #post-1942, #post-1944, #post-1947, #post-1949 {
+	.menu-item-1972 a {
+		background: url(../../uploads/2015/06/Background-Gradient-LightBlue.gif);
+	}
+}
+
+#post-1952, #post-1953, #post-2017, #post-1957, #post-1960, #post-1961, #post-1964, #post-1965, #post-1968 {
+	.menu-item-1973 a {
+		background: url(../../uploads/2015/06/Background-Gradient-LightBlue.gif);
+	}
+}
+
 //property portfolio all regions
-#post-1512, #post-1524, #post-1522, #post-1526, #post-1514, #post-1516, #post-1520, #post-1518, #post-1504 {
+#post-1933, #post-1524, #post-1522, #post-1526, #post-1514, #post-1516, #post-1520, #post-1518, #post-1504 {
 	.menu-item-1629 a {
 		background: url(../../uploads/2015/06/Background-Gradient-LightBlue.gif);
 	}
@@ -197,12 +225,18 @@
 		font-size: 8pt!important;
 	}
 }
-
+p.navrechts {
+    text-align: right;
+}
 
 .left-content {
 	float: left;
 	width: 50%;
 	margin-right: 1em;
+	@media (max-width: 960px) {
+		float: none;
+		width: 99%;
+	}
 }
 .search-filters {
 	display: inline-block;
@@ -213,6 +247,10 @@
 	}
 	strong {
 		vertical-align: top;
+		line-height: 1.8;
+	}
+	span {
+		font-size: 11px;
 	}
 }
 
@@ -220,4 +258,33 @@
 	clear: both;
 
 }
+.page-result {
+	.SubTitle-Blue {
+		font-weight: bold;
 
+	}
+}
+.search-availability-results.property-list-container {
+	h3 {
+		float: left;
+		width: 32%;
+	}
+	hr {
+		float: none;
+		clear: both;
+	}
+}
+.search-results-container {
+	padding-top: 10px;
+    display: inline-block;
+    width: 100%;
+}
+.search-inner-form {
+	float: left;
+	display: block;
+	width: 33%;
+	strong {
+		color: #000!important;
+		font-size: 12px!important;
+	}
+}

@@ -153,6 +153,7 @@ function products_first($hits) {
     $types['post'] = array();
     $types['staff-directory'] = array();
     $types['page'] = array();
+    $types['news'] = array();
  
     // Split the post types in array $types
     if (!empty($hits)) {
@@ -163,7 +164,7 @@ function products_first($hits) {
     }
  
     // Merge back to $hits in the desired order
-    $hits[0] = array_merge($types['properties'], $types['post'], $types['staff-directory'], $types['page']);
+    $hits[0] = array_merge($types['properties'], $types['post'], $types['staff-directory'], $types['page'], $types['news']);
     return $hits;
 }
 
@@ -180,6 +181,19 @@ $GLOBALS['my_transaction_filters'] = array(
     'Buy'   => 'Buy',
     'Lease'   => 'Lease',
 );
+
+
+
+//search results 
+add_filter('posts_orderby', 'group_by_post_type', 10, 2);
+function group_by_post_type($orderby, $query) {
+global $wpdb;
+if ($query->is_search) {
+    return $wpdb->posts . '.post_type DESC';
+}
+// provide a default fallback return if the above condition is not true
+return $orderby;
+}
 
 
 // action

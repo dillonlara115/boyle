@@ -187,7 +187,7 @@
 		        <table width="100%" cellpadding="0" cellspacing="0" border="0">
 			    <tbody><tr>
 			        <td class="Text-Black" style="height: 20px; text-align: center; vertical-align: middle; font-weight: bold;">Lot#</td>
-			        <td class="Text-Black" style="text-align: center; vertical-align: middle; font-weight: bold;">Feet</td>
+			        <td class="Text-Black" style="text-align: center; vertical-align: middle; font-weight: bold;">Sq. Ft.</td>
 			        <td class="Text-Black" style="text-align: center; vertical-align: middle; font-weight: bold;">Price</td>
 			    </tr>   
 			<?php
@@ -307,7 +307,7 @@
 			</div>
 		<?php } ?>
 		<!-- main info -->
-		<div class="inner-container home-container">
+		<div class="inner-container home-container single-propery-container">
 		<?php if(get_field('description')) { ?>
 			<p><?php echo the_field('description'); ?></p>
 		<?php } ?>
@@ -331,7 +331,7 @@
 			<p><strong>Tenants: </strong><?php echo the_field('major_tenants'); ?></p>
 		<?php } ?>
 		<?php if(get_field('total_square_feet')) { ?>
-			<p><strong>Total Square Feet: </strong><?php echo the_field('total_square_feet'); ?></p>
+			<p><strong>Total Square Feet: </strong><?php echo number_format(get_field('total_square_feet')); ?></p>
 		<?php } ?>
 		<?php if(get_field('property_type')) { ?>
 			<p><strong>Property Type: </strong><?php echo implode(', ', get_field('property_type')); ?> 
@@ -367,7 +367,8 @@
 				<?php echo the_field('lot_size_min_feet'); ?></p>
 		<?php } ?>
 		<?php if(get_field('lot_size_max_acres')) { ?>
-			<p><strong>Lot Size(acres): </strong><?php echo the_field('lot_size_min_acres'); ?> - <?php echo the_field('lot_size_max_acres'); ?></p>
+			<p><strong>Lot Size(acres): </strong><?php if(get_field('lot_size_min_acres')) { ?>
+			<?php echo the_field('lot_size_min_acres'); ?> - <?php } ?><?php echo the_field('lot_size_max_acres'); ?></p>
 		<?php } ?>
 		<?php if(get_field('notes')) { ?>
 			<p><strong>Notes: </strong><?php echo the_field('notes'); ?></p>

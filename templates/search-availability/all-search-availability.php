@@ -4,10 +4,22 @@
 			$metro_area = $_GET['metroarea']; 
 	?>
 	
-	<?php if (strstr($_SERVER['REQUEST_URI'], "memphis_metro_area")){ ?>
+	<?php if (strstr($_SERVER['REQUEST_URI'], "memphis_metro_area")){ 
+			$metro_key = 'memphis_metro_area';
+		} elseif (strstr($_SERVER['REQUEST_URI'], "other")){
+			$metro_key = 'other';
+		} elseif (strstr($_SERVER['REQUEST_URI'], "nashville_metro_area")){
+			$metro_key = 'nashville_metro_area';
+		} 
+	?>
 	<?php 
+	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 	$args = array(
 		'post_type'		=> 'properties',
+		'orderby'	=> 'title',
+		'order'		=> 'ASC',
+		'posts_per_page'	=> 15,
+		'paged'		=> $paged,
 		'meta_query'	=> array(
 			'relation'		=> 'AND',
 			array(
@@ -26,7 +38,7 @@
 				'compare'	=> 'LIKE'
 				),
 			array(
-				'key'		=> 'memphis_metro_area',
+				'key'		=> $metro_key,
 				'value'		=> $metro_area,
 				'compare'	=> 'LIKE'
 				)
@@ -79,7 +91,7 @@
 							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
 							    <tbody><tr class="Header">
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
-							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Acres</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Sq. Ft.</td>
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
 							    </tr>
 									    
@@ -104,205 +116,22 @@
 	<?php endif; ?>
 	<?php wp_reset_query();	 // Restore global post data stomped by the_post(). ?>
 	
-	<?php } elseif (strstr($_SERVER['REQUEST_URI'], "other")){ ?>
-	<?php 
-	$args = array(
-		'post_type'		=> 'properties',
-		'meta_query'	=> array(
-			'relation'		=> 'AND',
-			array(
-				'key'		=> 'property_type',
-				'value'		=> array('Residential', 'Hotels', 'Land', 'Mixed-Use', 'Industrial', 'Retail', 'Office'),
-				'compare'	=> 'LIKE'
-				),
-			array(
-				'key'		=> 'activate_property',
-				'value'		=> 'This property is active',
-				'compare'	=> 'LIKE'
-				),
-			array(
-				'key'		=> 'region_name',
-				'value'		=> 'Other',
-				'compare'	=> 'LIKE'
-				),
-			array(
-				'key'		=> 'other',
-				'value'		=> $metro_area,
-				'compare'	=> 'LIKE'
-				)
-			)
-		);
-					// query
-	$the_query = new WP_Query( $args );
-	?>
-	<?php if( $the_query->have_posts() ): ?>
-		<ul>
-			<?php while ( $the_query->have_posts() ) : $the_query->the_post(); 
-			$images = get_field('property_gallery');
-			$image_1 = $images[0];  
-			$agents = get_field('agent');	
-			?>
-			<li>
-				<img src="<?php echo $image_1['sizes']['thumbnail']; ?>" alt="<?php echo $image_1['alt']; ?>" class="availability-report-image"/>
-				<strong><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></strong>
-				<?php if($agents) { ?>
-				<?php foreach($agents as $agent): ?>
-					<strong class="pull-right"><a href="mailto:<?php echo the_field('email', $agent->ID); ?>">Contact <?php echo get_the_title( $agent->ID ); ?></a></strong>
-				<?php endforeach; ?>
-				<?php } ?>
-				<p><?php echo the_field('description'); ?></p>
-<?php
-						// check if the repeater field has rows of data
-						if( have_rows('suite_information_acres') ): ?>
-							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
-							    <tbody><tr class="Header">
-							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
-							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Acres</td>
-							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
-							    </tr>
-									    
-						  <?php  while ( have_rows('suite_information_acres') ) : the_row();
-								$attachment = get_sub_field('lot_file'); ?>
-
-						         <tr class="Item">
-							        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
-							        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size'); ?></td>
-							        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
-							    </tr> 
-
-						 <?php  endwhile; ?>
-										
-						</tbody></table>
-
-						<?php elseif( have_rows('suite_information_feet') ): ?>
-							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
-							    <tbody><tr class="Header">
-							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
-							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Acres</td>
-							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
-							    </tr>
-									    
-						  <?php  while ( have_rows('suite_information_feet') ) : the_row();
-								$attachment = get_sub_field('lot_file'); ?>
-
-						         <tr class="Item">
-							        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
-							        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size'); ?></td>
-							        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
-							    </tr> 
-
-						 <?php  endwhile; ?>
-										
-						</tbody></table>
-						<?php else :
-							// no rows found
-						endif; ?>
-				</li>
-			<?php endwhile; ?>
-		</ul>
-	<?php endif; ?>
-	<?php wp_reset_query();	 // Restore global post data stomped by the_post(). ?>
 	
-	<?php } elseif (strstr($_SERVER['REQUEST_URI'], "nashville_metro_area")){ ?>
-	<?php 
-	$args = array(
-		'post_type'		=> 'properties',
-		'meta_query'	=> array(
-			'relation'		=> 'AND',
-			array(
-				'key'		=> 'property_type',
-				'value'		=> array('Residential', 'Hotels', 'Land', 'Mixed-Use', 'Industrial', 'Retail', 'Office'),
-				'compare'	=> 'LIKE'
-				),
-			array(
-				'key'		=> 'activate_property',
-				'value'		=> 'This property is active',
-				'compare'	=> 'LIKE'
-				),
-			array(
-				'key'		=> 'region_name',
-				'value'		=> 'Greater Nashville',
-				'compare'	=> 'LIKE'
-				),
-			array(
-				'key'		=> 'nashville_metro_area',
-				'value'		=> $metro_area,
-				'compare'	=> 'LIKE'
-				)
-			)
-		);
-					// query
-	$the_query = new WP_Query( $args );
-	?>
-	<?php if( $the_query->have_posts() ): ?>
-		<ul>
-			<?php while ( $the_query->have_posts() ) : $the_query->the_post(); 
-			$images = get_field('property_gallery');
-			$image_1 = $images[0];  
-			$agents = get_field('agent');	
-			?>
-			<li>
-				<img src="<?php echo $image_1['sizes']['thumbnail']; ?>" alt="<?php echo $image_1['alt']; ?>" class="availability-report-image"/>
-				<strong><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></strong>
-				<?php if($agents) { ?>
-				<?php foreach($agents as $agent): ?>
-					<strong class="pull-right"><a href="mailto:<?php echo the_field('email', $agent->ID); ?>">Contact <?php echo get_the_title( $agent->ID ); ?></a></strong>
-				<?php endforeach; ?>
-				<?php } ?>
-				<p><?php echo the_field('description'); ?></p>
-
-							<?php
-						// check if the repeater field has rows of data
-						if( have_rows('suite_information_acres') ): ?>
-							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
-							    <tbody><tr class="Header">
-							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
-							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Acres</td>
-							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
-							    </tr>
-									    
-						  <?php  while ( have_rows('suite_information_acres') ) : the_row();
-								$attachment = get_sub_field('lot_file'); ?>
-
-						         <tr class="Item">
-							        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
-							        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size'); ?></td>
-							        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
-							    </tr> 
-
-						 <?php  endwhile; ?>
-										
-						</tbody></table>
-
-						<?php elseif( have_rows('suite_information_feet') ): ?>
-							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
-							    <tbody><tr class="Header">
-							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
-							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Acres</td>
-							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
-							    </tr>
-									    
-						  <?php  while ( have_rows('suite_information_feet') ) : the_row();
-								$attachment = get_sub_field('lot_file'); ?>
-
-						         <tr class="Item">
-							        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
-							        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size'); ?></td>
-							        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
-							    </tr> 
-
-						 <?php  endwhile; ?>
-										
-						</tbody></table>
-						<?php else :
-							// no rows found
-						endif; ?>
-				</li>
-			<?php endwhile; ?>
-		</ul>
-	<?php endif; ?>
-	<?php wp_reset_query();	 // Restore global post data stomped by the_post(). ?>
-	<?php } ?>
-	
+	<?php
+if($the_query->max_num_pages>1){?>
+    <p class="navrechts">
+    <?php
+      if ($paged > 1) { ?>
+        <a href="<?php echo '?paged=' . ($paged -1); //prev link ?>"><</a>
+                        <?php }
+    for($i=1;$i<=$the_query->max_num_pages;$i++){?>
+        <a href="<?php echo '?paged=' . $i; ?>" <?php echo ($paged==$i)? 'class="selected"':'';?>><?php echo $i;?></a>
+        <?php
+    }
+    if($paged < $the_query->max_num_pages){?>
+        <a href="<?php echo '?paged=' . ($paged + 1); //next link ?>">></a>
+    <?php } ?>
+    </p>
+<?php } ?>
 </div>
 </div>
