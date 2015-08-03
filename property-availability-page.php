@@ -49,6 +49,24 @@ Template Name: Availability Report Page
 
 	
 </div>
+<script type="text/javascript">
+(function($) {
 
+var found = {};
+
+$("[data-title]").each(function(){
+    var $this = $(this);
+    var rel = $this.attr("data-title");
+
+    if(found[rel]){
+        $this.hide();
+    }else{
+        found[rel] = true;
+    }
+});
+
+
+})(jQuery);
+</script>
 
 <?php get_footer(); ?>

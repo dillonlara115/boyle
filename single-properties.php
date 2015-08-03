@@ -362,7 +362,7 @@
 			<p><strong>Lot Size(feet): </strong>
 				<?php echo the_field('lot_size_min_feet'); ?> - <?php echo the_field('lot_size_max_feet'); ?></p>
 		<?php } elseif(get_field('lot_size_max_feet') && get_field('lot_size_max_feet') === get_field('lot_size_min_feet')) { ?>
-		else if ran
+		
 			<p><strong>Lot Size(feet): </strong>
 				<?php echo the_field('lot_size_min_feet'); ?></p>
 		<?php } ?>

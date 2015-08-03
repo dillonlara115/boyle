@@ -15,8 +15,9 @@ Template Name: Search Availability Page
 	<div id="post-<?php the_ID(); ?>" class="search-availability-container" >
 		<?php 	$region = $_GET['region']; 
 				$metro_area = $_GET['metroarea']; 
-				$transaction = $$_GET['transaction']; 
-
+				$transaction = $_GET['transaction']; 
+				$designatedUses = $_GET['designatedUses']; 
+				$industrialType = $_GET['industrialType']; 
 		?>
 		<div class="search-availability-content">
 			<?php wp_nav_menu( array('menu' => 'Search Availability Menu' )); ?>
@@ -119,6 +120,63 @@ Template Name: Search Availability Page
 								</div>
 						<br>
 						<?php } ?>
+						<?php if (is_page(306) || is_page(308) || is_page(310) || is_page(314) || is_page(316) || is_page(318)){ ?>  
+							<?php
+							$propertyPosts = new WP_Query( array( 
+							'post_type' 	=> 'properties',
+							'orderby' => 'title',
+							'order'   => 'ASC',
+							'meta_query'	=> array(
+								'relation'	=> 'AND',
+								array(
+									'key'		=> 'property_type',
+									'value'		=> $value,
+									'compare'	=> 'LIKE'
+									),
+								array(
+									'key'		=> 'activate_property',
+									'value'		=> 'This property is active',
+									'compare'	=> 'LIKE'
+									),
+								array(
+									'key'		=> 'region_name',
+									'value'		=> $regionName,
+									'compare'	=> 'LIKE'
+									),
+								array(
+									'key'		=> $region,
+									'value'		=> $_SESSION['metroarea'],
+									'compare'	=> 'LIKE'
+									),
+								$residentialTypeQuery,
+								$transactionQuery,
+								$squareFeetQuery,
+								$lotSizeQuery,
+								$lotPriceQuery,
+								$designatedUsesQuery,
+								$landLotSizeQuery,
+								$landLotPriceQuery,
+								$numberOfRoomsQuery,
+								$industrialTypeQuery,
+								$homePriceQuery,
+								$lotNumberQuery,
+								$lotAddressQuery
+								),
+							) 
+						);?>
+							<div class="search-filters">
+								<strong>Property:</strong>
+								<select class="property-select">
+								<?php $the_query = new WP_Query( $propertyPosts ); ?>
+									<?php if( $propertyPosts->have_posts() ): ?>
+										<?php while ( $propertyPosts->have_posts() ) : $propertyPosts->the_post(); ?>
+											<option data-permalink="<?php the_permalink(); ?>"><?php the_title(); ?> </option>
+										<?php endwhile; ?>
+									<?php endif; ?>
+								</select>
+							</div>
+							<br>
+						<?php } ?>
 						<div class="search-filters">
 							<strong>Transaction:</strong>
 							<?php 
@@ -139,6 +197,28 @@ Template Name: Search Availability Page
 							} ?>
 						</div>
 						<br>
+						<?php if (is_page(314) ){ ?> 
+						<div class="search-filters">
+							<strong>Type: </strong>
+							<?php 
+							/*
+							*  Get a field object and create a select form element
+							*/
+
+							$field_key = "field_55491012e5753";
+							$field = get_field_object($field_key);
+
+							if( $field ) {
+								
+								foreach( $field['choices'] as $k => $v )
+								{
+									echo '<input type="checkbox" name="industrialType[' . $k . ']"  class="filter" data-filter="' . $k . '"  value="' . $k . '"/><small>' . $v . '</small>';
+								}
+									
+							} ?>
+							</div>
+							<br>
+						<?php } ?>
 						<?php if (is_page(312) ){ ?>
 								
 							<div class="search-filters">
@@ -209,6 +289,8 @@ Template Name: Search Availability Page
 								</select>
 							</div>
 							<br>
+						<?php } ?>
+						<?php if ( is_page(308) || is_page(310)) { ?>
 							<div class="search-filters">
 							<strong>Lot Size: </strong>
 								<select name="lotSize">
@@ -221,6 +303,7 @@ Template Name: Search Availability Page
 								</select>
 								<span>(Acres)</span>
 							</div>
+							<br>
 						<?php } ?>
 						<?php if ( is_page(312)) { ?> 
 							<div class="search-filters">
@@ -246,7 +329,102 @@ Template Name: Search Availability Page
 								</select>
 								<span>(Acres)</span>
 							</div>
+							<br>
 						<?php }?>
+						<?php if ( is_page(316)) { ?> 
+							<div class="search-filters">
+								<strong># Rooms: </strong>
+								<select name="numberOfRooms">
+									<option class="filter" name="numberOfRooms" data-filter=""  value="...">...</option>
+									<option class="filter" name="numberOfRooms" data-filter=""  value="100 - 150">100 - 150</option>
+									<option class="filter" name="numberOfRooms" data-filter=""  value="150 - 250">150 - 250</option>
+									<option class="filter" name="numberOfRooms" data-filter=""  value="Greater than 250">Greater than 250</option>
+								</select>
+							</div>
+							<br>
+							
+						<?php }?>
+						<?php if ( is_page(318)) { ?> 
+							<div class="search-filters">
+								<strong>Designated Uses: </strong>
+								<?php 
+								/*
+								*  Get a field object and create a select form element
+								*/
+
+								$field_key = "field_55490ee27d602";
+								$field = get_field_object($field_key);
+
+								if( $field ) {
+									
+									foreach( $field['choices'] as $k => $v )
+									{
+										echo '<input type="checkbox" name="designatedUses[' . $k . ']"  class="filter" data-filter="' . $k . '"  value="' . $k . '"/><small>' . $v . '</small>';
+									}
+										
+								} ?>
+							</div>
+							<div class="search-filters">
+								<strong>Lot Price: </strong>
+								<select name="landLotPrice">
+									<option class="filter" name="landLotPrice" data-filter=""  value="...">...</option>
+									<option class="filter" name="landLotPrice" data-filter=""  value="less than $5,000">less than $5,000</option>
+									<option class="filter" name="landLotPrice" data-filter=""  value="$5,000 - 10,000">$5,000 - $10,000</option>
+									<option class="filter" name="landLotPrice" data-filter=""  value="10,000 - 15,000">$10,000 - $15,000</option>
+									<option class="filter" name="landLotPrice" data-filter=""  value="15,000 - 20,000">$15,000 - $20,000</option>
+									<option class="filter" name="landLotPrice" data-filter=""  value="20,000 - 25,000">$20,000 - $25,000</option>
+									<option class="filter" name="landLotPrice" data-filter=""  value="Greater than 25,000">Greater than $25,000</option>
+								</select>
+							</div>
+							<br>
+							
+						<?php }?>
+						<?php if ( is_page(316) || is_page(318) || is_page(314)) { ?> 
+
+							<div class="search-filters">
+							<strong>Lot Size: </strong>
+								<select name="landLotSize">
+									<option class="filter" name="landLotSize" data-filter=""  value="...">...</option>
+									<option class="filter" name="landLotSize" data-filter=""  value="100000 or less">100,000 or less</option>
+									<option class="filter" name="landLotSize" data-filter=""  value="100000 - 500000">100,000 - 500,000</option>
+									<option class="filter" name="landLotSize" data-filter=""  value="500000 - 1000000">500,000 - 1,000,000</option>
+									<option class="filter" name="landLotSize" data-filter=""  value="1000000 - 2000000">1,000,000 - 2,000,000</option>
+									<option class="filter" name="landLotSize" data-filter=""  value="greater than 2000000">greater than 2,000,000</option>
+								</select>
+								<span>(Sq. Ft.)</span>
+							</div>
+							<br>
+						<?php } ?>
+						<?php if ( is_page(312)) { ?> 
+							<div class="search-filters">
+							<strong>Lot Number: </strong>
+								<input type="text" name="lotNumberInput" />
+							</div>
+							<br>
+							<div class="search-filters">
+							<strong>Lot Address: </strong>
+								<input type="text" name="lotAddressInput" />
+							</div>
+							<br>
+							<div class="search-filters">
+							<strong>Home Price: </strong>
+								<select name="homePrice">
+									<option class="filter" name="homePrice" data-filter=""  value="Any">Any</option>
+									<option class="filter" name="homePrice" data-filter=""  value="less than 250000">less than $250,000</option>
+									<option class="filter" name="homePrice" data-filter=""  value="250000 - 500000">$250,000 - $500,000</option>
+									<option class="filter" name="homePrice" data-filter=""  value="500000 - 1000000">$500,000 - $1,000,000</option>
+									<option class="filter" name="homePrice" data-filter=""  value="greater than 1000000">greater than $1,000,000</option>
+								</select>
+							</div>
+							<br>
+							<div class="search-filters">
+							<strong>MLS #: </strong>
+								<input type="text" name="mlsInput" />
+							</div>
+							<br>
+						<?php } ?>
+
+
 						<hr>
 						<input type="submit" name="submit" class="search-availability-button" value="search">	
 					
@@ -256,7 +434,7 @@ Template Name: Search Availability Page
 					 // starting the session
 					 session_start();
 					 	
-				 	 // $_SESSION = array();
+				 	  $_SESSION = array();
 					 if (isset($_POST['submit'])) { 
 					 	 $_SESSION['search-form'] = $_POST;
 						 $_SESSION['metroarea'] = $_POST['metroarea'];
@@ -266,25 +444,18 @@ Template Name: Search Availability Page
 						 $_SESSION['squareFeet'] = $_POST['squareFeet'];
 						 $_SESSION['lotSize'] = $_POST['lotSize'];
 						 $_SESSION['lotPrice'] = $_POST['lotPrice'];
+						 $_SESSION['landLotSize'] = $_POST['landLotSize'];
+						 $_SESSION['landLotPrice'] = $_POST['landLotPrice'];
 						 $_SESSION['orderResults'] = $_POST['orderResults'];
 						 $_SESSION['resultsPerPage'] = $_POST['resultsPerPage'];
-						 
+						 $_SESSION['designatedUses'] = $_POST['designatedUses'];
+						 $_SESSION['numberOfRooms'] = $_POST['numberOfRooms'];
+						 $_SESSION['industrialType'] = $_POST['industrialType'];
+						 $_SESSION['homePrice'] = $_POST['homePrice'];
+						 $_SESSION['lotNumberInput'] = $_POST['lotNumberInput'];
+						 $_SESSION['lotAddressInput'] = $_POST['lotAddressInput'];
 					 } 
 					?> 
-
-					<strong>region: <?php echo $region; ?></strong>
-					<strong>metro area: <?php echo $_SESSION['metroarea'];?></strong>
-					<strong>session transaction: 
-						<?php 
-							foreach ($_SESSION['transaction'] as $key => $transaction_value) {
-						 	 echo $transaction_value;
-						 }?>
-						 
-					 </strong>
-					<strong> community: <?php echo $_SESSION['community']; ?></strong>
-					<strong> Lot Size: <?php echo $_SESSION['lotSize']; ?></strong>
-					<strong> Square Feet: <?php echo $_SESSION['squareFeet']; ?></strong>
-					<strong> order results: <?php echo $_SESSION['orderResults']; ?></strong>
 
 					<?php if ( is_page( 1059) ) {  
 						$value = array('Residential', 'Hotels', 'Land', 'Mixed-Use', 'Industrial', 'Retail', 'Office');
@@ -342,6 +513,50 @@ Template Name: Search Availability Page
 						$lotPrice = array(300000, 3000000000);
 				    } ?>
 
+				    <?php if( $_SESSION['landLotSize'] == '100000 or less') { 
+						$landLotSize = array(0, 100000);
+					} elseif( $_SESSION['landLotSize'] == '100000 - 500000') { 
+						$landLotSize = array(100000, 500000);
+					} elseif( $_SESSION['landLotSize'] == '500000 - 1000000') {
+						$landLotSize = array(500000, 1000000);
+					} elseif( $_SESSION['landLotSize'] == '1000000 - 2000000') { 
+						$landLotSize = array(1000000, 2000000);
+				    } elseif( $_SESSION['landLotSize'] == 'greater than 2000000') { 
+						$landLotSize = array(2000000, 25000000);
+				    } ?>
+
+			    	<?php if( $_SESSION['landLotPrice'] == 'less than $5,000') { 
+						$landLotPrice = array(0, 5000);
+					} elseif( $_SESSION['landLotPrice'] == '5,000 - 10,000') { 
+						$landLotPrice = array(5000, 10000);
+					} elseif( $_SESSION['landLotPrice'] == '10,000 - 15,000') {
+						$landLotPrice = array(10000, 15000);
+					} elseif( $_SESSION['landLotPrice'] == '15,000 - 20,000') {
+						$landLotPrice = array(15000, 20000);
+					} elseif( $_SESSION['landLotPrice'] == '20,000 - 25,000') {
+						$landLotPrice = array(20000, 25000);
+					} elseif( $_SESSION['landLotPrice'] == 'Greater than 25,000') { 
+						$landLotPrice = array(25000, 3000000000);
+				    } ?>
+
+				    <?php if( $_SESSION['numberOfRooms'] == '100 - 150') { 
+						$numberOfRooms = array(100, 150);
+					} elseif( $_SESSION['numberOfRooms'] == '150 - 250') { 
+						$numberOfRooms = array(150, 250);
+					} elseif( $_SESSION['numberOfRooms'] == 'Greater than 250') { 
+						$numberOfRooms = array(250, 3000000000);
+				    } ?>
+
+				     <?php if( $_SESSION['homePrice'] == 'less than 250000') { 
+						$homePrice = array(0, 250000);
+					} elseif( $_SESSION['homePrice'] == '250000 - 500000') { 
+						$homePrice = array(250000, 500000);
+					} elseif( $_SESSION['homePrice'] == '500000 - 1000000') { 
+						$homePrice = array(500000, 1000000);
+					} elseif( $_SESSION['homePrice'] == 'greater than 1000000') { 
+						$homePrice = array(1000000, 30000000000);
+				    } ?>
+
 
 				    <?php if( $_SESSION['orderResults'] == 'ASC') { 
 						$orderResults = 'title';
@@ -355,6 +570,8 @@ Template Name: Search Availability Page
 						$orderResults = 'lot_price_min';
 				    } elseif( $_SESSION['orderResults'] == 'priceHigh') { 
 						$orderResults = 'lot_price_max';
+				    } else {
+				    	$orderResults = 'title';
 				    } ?>
 
 
@@ -406,9 +623,44 @@ Template Name: Search Availability Page
 								'compare'	=> 'BETWEEN'
 							);
 						};
+						$landLotSizeQuery = array();
+						if(isset($landLotValue)){
+							$landLotSizeQuery[] = array(
+								'key'		=> 'lot_size_max_feet',
+								'value'		=>  $landLotValue,
+								'type'		=> 'numeric',
+								'compare'	=> 'BETWEEN'
+							);
+						};
+						$landLotPriceQuery = array();
+						if(isset($landLotPrice)){
+							$landLotPriceQuery[] = array(
+								'key'		=> 'lot_price_min',
+								'value'		=>  $landLotPrice,
+								'type'		=> 'numeric',
+								'compare'	=> 'BETWEEN'
+							);
+						};
+						$numberOfRoomsQuery = array();
+						if(isset($numberOfRooms)){
+							$numberOfRoomsQuery[] = array(
+								'key'		=> 'rooms/units',
+								'value'		=>  $numberOfRooms,
+								'type'		=> 'numeric',
+								'compare'	=> 'BETWEEN'
+							);
+						};
+						$homePriceQuery = array();
+						if(isset($homePrice)){
+							$homePriceQuery[] = array(
+								'key'		=> 'home_price_max',
+								'value'		=>  $homePrice,
+								'type'		=> 'numeric',
+								'compare'	=> 'BETWEEN'
+							);
+						};
 						$residentialTypeQuery = array();
 						if(isset($_SESSION['residentialType'])){
-							echo 'residential type has been set';
 							$residentialTypeQuery[] = array(
 								'key'		=> 'residential_type',
 								'value'		=>  $_SESSION['residentialType'],
@@ -416,6 +668,38 @@ Template Name: Search Availability Page
 							);
 						};
 
+						$designatedUsesQuery = array();
+						if(isset($designatedUses)){
+							$designatedUsesQuery[] = array(
+								'key'		=> 'property_type',
+								'value'		=>  $designatedUses,
+								'compare'	=> 'LIKE'
+							);
+						};
+						$industrialTypeQuery = array();
+						if(isset($industrialType)){
+							$industrialTypeQuery[] = array(
+								'key'		=> 'industrial_type',
+								'value'		=>  $industrialType,
+								'compare'	=> 'LIKE'
+							);
+						};
+						$lotNumberQuery = array();
+						if(isset($_SESSION['lotNumberInput'])){
+							$lotNumberQuery[] = array(
+								'key'		=> 'total_lots',
+								'value'		=>  $_SESSION['lotNumberInput'],
+								'compare'	=> 'LIKE'
+							);
+						};
+						$lotAddressQuery = array();
+						if(isset($_SESSION['lotAddressInput'])){
+							$lotAddressQuery[] = array(
+								'key'		=> 'address',
+								'value'		=>  $_SESSION['lotAddresInput'],
+								'compare'	=> 'LIKE'
+							);
+						};
 
 
 						$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
@@ -452,7 +736,14 @@ Template Name: Search Availability Page
 								$squareFeetQuery,
 								$lotSizeQuery,
 								$lotPriceQuery,
-
+								$designatedUsesQuery,
+								$landLotSizeQuery,
+								$landLotPriceQuery,
+								$numberOfRoomsQuery,
+								$industrialTypeQuery,
+								$homePriceQuery,
+								$lotNumberQuery,
+								$lotAddressQuery
 								),
 							) 
 						);
@@ -608,6 +899,17 @@ if($mapposts->max_num_pages>1){?>
 		$(".orderResultsForm").change(function(){
 			$('.search-availability-button').click();
 		});
+
+
+
+		var $property = $(".property-select");
+
+		$property.change(function(){
+			console.log($(".property-select option:selected").attr('data-permalink'));
+			var $link = $(".property-select option:selected").attr('data-permalink')
+			window.location = $link;
+		});
+
 	// change
 	$('#archive-filters').on('change', 'select', function(){
 		// vars

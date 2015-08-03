@@ -22,7 +22,8 @@
 		$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 		$args = array(
 			'post_type'		=> 'properties',
-			'orderby'	=> 'title',
+			'meta_key'	=> 'zip_code',
+			'orderby'	=> 'meta_value_num title',
 			'order'		=> 'ASC',
 			'posts_per_page'	=> 15,
 			'paged'		=> $paged,
@@ -56,6 +57,8 @@
 				$image_1 = $images[0];  
 				$agents = get_field('agent');	
 			?>
+			<li data-title="<?php the_field('city'); ?>" class="city-label"><h3><?php the_field('city'); ?></h3></li>
+				
 				<li>
 				<img src="<?php echo $image_1['sizes']['thumbnail']; ?>" alt="<?php echo $image_1['alt']; ?>" class="availability-report-image"/>
 					<strong><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></strong>
