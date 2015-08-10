@@ -35,7 +35,10 @@
 		$agents = get_field('agent');	
 	?>
 	<li>
-		<img src="<?php echo $image_1['sizes']['thumbnail']; ?>" alt="<?php echo $image_1['alt']; ?>" class="availability-report-image"/>
+		<div class="pull-left">
+			<img src="<?php echo $image_1['sizes']['thumbnail']; ?>" alt="<?php echo $image_1['alt']; ?>" class="availability-report-image"/>
+		</div>
+		<div class="result-content">
 		<strong class="pull-left"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></strong>
 		<?php if($agents) { ?>
 		<?php foreach($agents as $agent): ?>
@@ -66,6 +69,7 @@
 		<?php else :
 			// no rows found
 		endif; ?>
+		</div>
 	</li>
 <?php endif; ?>
 

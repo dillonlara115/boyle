@@ -25,7 +25,24 @@
 	<div class="BottomNav copy-nav">&copy;&nbsp;2015 <a href="#" style="font-size: 7pt;">Boyle Investment Company</a>. All Rights Reserved. </div>
 	<div ><a href="#" target="_blank">Boyle FTP Site</a></div>
               
+         <?php if ( !is_front_page()) {  ?> 
+            <div style="padding-top: 15px;">
+                <a href="http://www.facebook.com/?ref=logo#!/pages/Memphis-TN/Boyle-Investment-Company/73372158561" target="_blank" >
+                    <img src="<?php bloginfo('template_directory'); ?>/Media/Images/Icons/Icon-Facebook-Small.png" alt="Follow Us on Facebook" title="Follow Us on Facebook" style="border-width: 0px; width: 22px; height: 22px;">
+                </a>
+                <input type="image" name="ctl00$ImageButtonTwitter" id="ctl00_ImageButtonTwitter" src="<?php bloginfo('template_directory'); ?>/Media/Images/Icons/Icon-Twitter-Small.png" style="border-width:0px;margin-left: 11px;" />
+                <a href="http://blog.boyle.com/" style="text-decoration:none; margin-left: 11px;" target="_blank">
+                    <img src="<?php bloginfo('template_directory'); ?>/Media/Images/Icons/Icon-Wordpress-Small.png" alt="Read our Blog" style="border:0; width:22px; height:22px;" title="Read our Blog" />
+                </a>
+                <a href="https://plus.google.com/118331241103122481499?prsrc=3" style="text-decoration:none; margin-left: 11px;" target="_blank">
+                    <img src="<?php bloginfo('template_directory'); ?>/Media/Images/Icons/Icon-GooglePlus-Small.png" alt="Follow us on Google+" style="border:0; width:22px; height:22px;" title="Follow us on Google+" />
+                </a>
+            </div>
+        <?php } ?>
+
 	</div>
+   
+
 </div>
 
 <?php wp_footer(); ?>

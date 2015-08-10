@@ -13,7 +13,7 @@ Template Name: Availability Report Page
 		<?php the_content(); ?>
 		<div class="pull-left">
 			<img src="http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/05/Icon-Report.png" alt="Availability Report" title="Availability Report" class="header-image">
-			<h1 class="contact-page-title">Availability Report</h1>
+			<h1 class="contact-page-title">Availability Report:</h1>
 			<p class="contact-page-text">Select the tab of the property type for which you are interested in seeing properties.</p>
 		</div>
 		<a href="javascript:window.print()" class="single-property-print pull-right"><img src="<?php bloginfo('url'); ?>/wp-content/uploads/2015/06/Icon-Print.gif"></a>
@@ -59,7 +59,7 @@ $("[data-title]").each(function(){
     var rel = $this.attr("data-title");
 
     if(found[rel]){
-        $this.hide();
+        $this.remove();
     }else{
         found[rel] = true;
     }

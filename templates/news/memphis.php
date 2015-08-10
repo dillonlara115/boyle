@@ -24,8 +24,9 @@
 		// args for residential property types
 		$args = array(
 			'post_type'		=> 'news',
-			'orderby'		=> 'date',
-			'order'			=> 'ASC',
+			'meta_key'	=> 'date',
+			'orderby'		=> 'meta_value_num title',
+			'order'			=> 'DESC',
 			'posts_per_page'	=> 10,
 			'paged'		=> $paged,
 			'meta_query'	=> array(

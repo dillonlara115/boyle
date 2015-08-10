@@ -33,8 +33,9 @@ Template Name: Main Property Portfolio Page
 		<div  class="search-availability-container" >
 	<?php } ?>
 	
-		
-		<?php the_content(); ?>
+		<div class="Text-Blue">
+			<?php the_content(); ?>
+		</div>
 		<div class="search-availability-content">
 			<?php if ( is_page( 1512 ) || is_page(1524) || is_page(1522) || is_page(1526) || is_page(1514) || is_page(1516)|| is_page(1520) || is_page(1518) || is_page(1504) ) {     ?>
 
@@ -65,10 +66,10 @@ Template Name: Main Property Portfolio Page
 			$image_1 = $images[0]; 
 	    ?>
 	        <?php setup_postdata($post); ?>
-	        <p>
+	        <p class="featured-property">
 	            <a href="<?php the_permalink(); ?>">
 		            <img src="<?php echo $image_1['url']; ?>" alt="<?php echo $image_1['alt']; ?>" class="featured-property-image" />
-		            <?php the_title(); ?>
+		            <strong><?php the_title(); ?></strong>
 	            </a>
 	            <?php the_field('address'); ?>
             </p>
@@ -100,7 +101,7 @@ Template Name: Main Property Portfolio Page
 	width: 100%;
 	height: 300px;
 	border: #ccc solid 1px;
-	margin-bottom: 2em;
+	margin-bottom: .5em;
 }
 
 </style>
@@ -130,7 +131,7 @@ function render_map( $el ) {
 	var args = {
 		zoom		: 16,
 		center		: new google.maps.LatLng(0, 0),
-		mapTypeId	: google.maps.MapTypeId.ROADMAP
+		mapTypeId	: google.maps.MapTypeId.HYBRID
 	};
  
 	// create map	        	
@@ -168,27 +169,15 @@ function render_map( $el ) {
 function add_marker( $marker, map ) {
  
 	var latlng = new google.maps.LatLng( $marker.attr('data-lat'), $marker.attr('data-lng') );
-	var color = '#466989';
-	var pincolor = '#466989';
+	var color = $marker.attr('data-col');
 
-	// if(color === "YOUR_ACF_VARIABLE") { var pincolor = 'teal'; }
-	// else if(color === "YOUR_ACF_VARIABLE") { var pincolor = 'red'; }
-
-	function pinSymbol(color) {
-		return {
-			path: 'm56.9631,0.75c-31.05667,0 -56.2131,25.16236 -56.2131,56.20168c0,31.05099 56.2131,135.79832 56.2131,135.79832s56.19011,-104.74733 56.19011,-135.79832c0,-31.03931 -25.15656,-56.20168 -56.19011,-56.20168zm0,83.06174c-14.84224,0 -26.87169,-12.01827 -26.87169,-26.86006s12.02945,-26.85426 26.87169,-26.85426s26.84848,12.02344 26.84848,26.85426s-12.0293,26.86006 -26.84848,26.86006z',
-			fillColor: color,
-			fillOpacity: 1,
-			strokeColor: '#000',
-			strokeWeight: 1,
-			scale: .2,
-			};
-		}
+	 if(color === "available") { var $icon = 'http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/08/GoogleMaps-Marker-GreenDot.png'; }
+	 else { var $icon = 'http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/08/GoogleMaps-Marker-RedDot.png'; }
 
 	var marker = new google.maps.Marker({
 		position: latlng,
 		map: map,
-		icon: pinSymbol(pincolor)
+		icon: $icon
 		});
  
 	// add to array

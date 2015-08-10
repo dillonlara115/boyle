@@ -24,8 +24,9 @@
 		// args for residential property types
 		$args = array(
 			'post_type'		=> 'news',
-			'orderby'		=> 'date',
-			'order'			=> 'ASC',
+			'meta_key'	=> 'date',
+			'orderby'		=> 'meta_value_num title',
+			'order'			=> 'DESC',
 			'posts_per_page'	=> 10,
 			'paged'		=> $paged,
 			'meta_query'	=> array(
@@ -54,6 +55,7 @@
 				<li>
 					<h3><a class="Title-Blue" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 						<strong class="news-date"><?php echo the_field('date'); ?></strong>
+				
 						<p><?php echo the_field('abstract'); ?></p>
 						<p><a href="<?php the_permalink(); ?>">» Read More</a></p>
 						<hr>

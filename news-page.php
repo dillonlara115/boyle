@@ -7,7 +7,7 @@ Template Name: News Page
 <?php get_header(); ?>
 	<div class="news-header">
 			<img src="http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/06/Icon-Radio.png" alt="Boyle News" title="Boyle News" class="header-image">
-			<h1 class="contact-page-title">Boyle News</h1>
+			<h1 class="contact-page-title">Boyle News:</h1>
 			<p class="contact-page-text">Browse the many articles below to learn more about Boyle.</p>
 		</div>
 	<div id="post-<?php the_ID(); ?>" class="property-sub-navigation portfolio-sub-navigation">

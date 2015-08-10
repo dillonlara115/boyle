@@ -304,13 +304,23 @@ em {
 	}	
 }
 	  
-
+.post-11 {
+	.entry-title {
+		font-weight: bold;
+		margin: 10px;
+	}
+	.entry-content {
+		min-height: 300px;
+	}
+}
 .search-page-container {
 	.entry-title {
 		display: inline-block;
 		margin-bottom: .5em;
 	}
 }
+
+
 //homepage
 .homepage-sub {
 	margin-top: 1em;
@@ -320,7 +330,7 @@ em {
 		position: relative;
 		z-index: 999;
 		text-align: center;
-		display: inline-block;
+		display: block;
 		clear: both;
 		width: 94%;
 	}
@@ -549,9 +559,14 @@ $primary-dark: darken(#355c88, 25%);
 		display: none;
 	}
 }
+.contact-sidebar-container {
+	h4 {
+		font-family: Century Gothic, Tahoma, Arial!important;
+	}
+}
 
 .contact-sidebar-content {
-	padding-left: 1em;
+	padding-top: .5em;
 	p, strong {
 		font-size: .8em;
 	}
@@ -645,7 +660,7 @@ $primary-dark: darken(#355c88, 25%);
 }
 .nav-logo {
 	display: inline-block;
-	padding-left: 0.5em;
+	padding-left: 0.7em;
 }
 //header logo
 .header-logo {
@@ -656,10 +671,11 @@ $primary-dark: darken(#355c88, 25%);
 .header-image {
 	text-align: left;
 	vertical-align: top;
-	width: 35px;
+	width: 26px;
 	padding-top: 7px;
 	float: left;
 	padding-right: 0.3em;
+	margin-bottom: 1em;
 }
 .contact-page-title {
 	font-family: Century Gothic, Tahoma, Arial;
@@ -696,6 +712,7 @@ $primary-dark: darken(#355c88, 25%);
 
 p.search-description {
 	margin-top: 1.75em;
+	clear: both;
 }
 
 
@@ -718,6 +735,7 @@ p.search-description {
 
 .hp-ss {
 	position: relative;
+	top: -3px;
 	.tp-simpleresponsive >ul li {
 		border: 1px solid #000;
 	}

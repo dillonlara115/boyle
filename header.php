@@ -43,20 +43,20 @@
     	<?php } ?>
     
 	    <div class="Text-Gray header-nav-subsection">
-	        <div style="padding-bottom: 5px;">
-	        	<a href="http://www.facebook.com/?ref=logo#!/pages/Memphis-TN/Boyle-Investment-Company/73372158561" target="_blank" style="margin-left: 5px;">
+	        <div style="padding-bottom: 5px; float: left; padding-left: 17px;">
+	        	<a href="http://www.facebook.com/?ref=logo#!/pages/Memphis-TN/Boyle-Investment-Company/73372158561" target="_blank" >
 	        		<img src="<?php bloginfo('template_directory'); ?>/Media/Images/Icons/Icon-Facebook-Small.png" alt="Follow Us on Facebook" title="Follow Us on Facebook" style="border-width: 0px; width: 22px; height: 22px;">
 	        	</a>
-	        	<input type="image" name="ctl00$ImageButtonTwitter" id="ctl00_ImageButtonTwitter" src="<?php bloginfo('template_directory'); ?>/Media/Images/Icons/Icon-Twitter-Small.png" style="border-width:0px;margin-left: 10px;" />
-	        	<a href="http://blog.boyle.com/" style="text-decoration:none; margin-left: 10px;" target="_blank">
+	        	<input type="image" name="ctl00$ImageButtonTwitter" id="ctl00_ImageButtonTwitter" src="<?php bloginfo('template_directory'); ?>/Media/Images/Icons/Icon-Twitter-Small.png" style="border-width:0px;margin-left: 11px;" />
+	        	<a href="http://blog.boyle.com/" style="text-decoration:none; margin-left: 11px;" target="_blank">
 	        		<img src="<?php bloginfo('template_directory'); ?>/Media/Images/Icons/Icon-Wordpress-Small.png" alt="Read our Blog" style="border:0; width:22px; height:22px;" title="Read our Blog" />
 	        	</a>
-	        	<a href="https://plus.google.com/118331241103122481499?prsrc=3" style="text-decoration:none; margin-left: 10px;" target="_blank">
+	        	<a href="https://plus.google.com/118331241103122481499?prsrc=3" style="text-decoration:none; margin-left: 11px;" target="_blank">
 	        		<img src="<?php bloginfo('template_directory'); ?>/Media/Images/Icons/Icon-GooglePlus-Small.png" alt="Follow us on Google+" style="border:0; width:22px; height:22px;" title="Follow us on Google+" />
 	    		</a>
 	    	</div>
 	        <div class="header-search-container">
-				<?php get_search_form( true ); ?>&nbsp;
+				<?php get_search_form( true ); ?>
 			</div>
 		</div>  
     </div>

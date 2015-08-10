@@ -38,7 +38,28 @@
 		}
 	}
 }
-
+.pin-drop-text {
+	img {
+		max-height: 20px;
+	}
+	span {
+		font-weight: bold;
+		font-size: 12px;
+		vertical-align: super;
+	}
+	.green {
+		color: #009900;
+		
+	}
+	.red {
+		color: #cc0000;
+	}
+	.pin-drop-inner-content {
+		display: inline-block;
+		width: 49%;
+		text-align: center;
+	}
+}
 .city-label {
 
     background-color: transparent!important;
@@ -53,7 +74,7 @@
 	position: relative;
 	h2 {
 		position: absolute;
-		top: .7em;
+		top: .5em;
 		left: 1em;
 		font-size: 2em;
 		font-family: Georgia, "Times New Roman";
@@ -149,8 +170,20 @@ tr.Header {
 		text-align: center;
 	}
 }
-
-
+.Text-Blue {
+	p, em {
+		color: #355c88!important;
+	}
+	em {
+		font-weight: normal!important;
+	}
+}
+.featured-property {
+	color: #000;
+	strong {
+		display: block;
+	}
+}
 .single-property-sub-navigation {
 	position: relative;
 	background: url(../../uploads/2015/06/Background-Community-Navigation.png);
@@ -161,8 +194,8 @@ tr.Header {
 	@media (max-width: 960px) {
 		display: none;
 	}
-	& div:nth-child(2) {
-		margin-left: 195px;
+	& .has-logo {
+		margin-left: 195px!important;
 	}
 	& div:last-child {
 		margin-right: 0;
@@ -428,6 +461,10 @@ tr.Header {
 			}
 		}
 	}
+	.pull-left {
+	    margin: 0 1em 1em 0;
+	    width: 18%;
+	}
 }
 
 .home-container {
@@ -443,7 +480,14 @@ tr.Header {
 		}
 	}
 }
+.search-availability-link {
+	font-weight: bold;
+	text-align: left;
+}
 
+.availability-report-link {
+	float: right;
+}
 .property-portfolio-title {
   margin-bottom: 1em;
   font-weight: bold;
@@ -458,13 +502,9 @@ tr.Header {
 }
 
 .availability-report-image {
-	float: left;
+	width: 100%;
 	margin: 0 1em 1em 0;
 	border: 1px solid #000;
-	@media (max-width: 32em) {
-		float: none;
-		width: 100%;
-	}
 }
 
 .side-property-inner-container {
@@ -473,6 +513,8 @@ tr.Header {
 
 .single-property-agent-container {
 	margin-top: 2em;
+	display: inline-block;
+	width: 100%;
 	img {
 		float: left;
 		padding-right: .5em;

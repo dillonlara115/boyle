@@ -41,6 +41,13 @@ register_sidebar( array (
 'after_title' => '</h3>',
 ) );
 }
+
+
+@ini_set( 'upload_max_size' , '64M' );
+@ini_set( 'post_max_size', '64M');
+@ini_set( 'max_execution_time', '300' );
+
+
 add_action( 'init', 'blankslate_theme_widgets_init' );
 
 add_action( 'widgets_init', 'services_widget_init' );

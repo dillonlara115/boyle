@@ -10,7 +10,7 @@ Template Name: Search Availability Page
 	<?php the_post(); ?>
 	<img src="http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/04/Icon-MagnifyingGlass.gif" alt="Search Availability" title="Search Availability" class="header-image">
 
-	<h1 class="contact-page-title">Search Availability</h1>
+	<h1 class="contact-page-title">Search Availability:</h1>
 	<p class="contact-page-text">Select the tab of the property type you are interested in searching. Then use the fields to specify your search criteria. Enter more search criteria for a smaller list of results.</p>
 	<div id="post-<?php the_ID(); ?>" class="search-availability-container" >
 		<?php 	$region = $_GET['region']; 
@@ -750,7 +750,7 @@ Template Name: Search Availability Page
 					?>
 					
 					<div class="acf-map">
-
+					<?php if( $mapposts->have_posts() ): ?>
 						<?php while ( $mapposts->have_posts() ) : $mapposts->the_post(); ?>
 						<?php
 							$location = get_field('location');
@@ -758,12 +758,13 @@ Template Name: Search Availability Page
 							$coord = explode (',', implode($gtemp));
 						?>
 
-							<div class="marker" data-lat="<?php echo $location[lat]; ?>" data-lng="<?php echo $location[lng]; ?>">
+							<div class="marker" data-lat="<?php echo $location[lat]; ?>" data-lng="<?php echo $location[lng]; ?>" data-col="available">
 								<p class="address"><?php the_title(); ?></p>		
 							</div>
 
 									
 						<?php endwhile; ?>
+					<?php endif; ?>
 					
 					</div><!-- .acf-map -->
 				</div>
@@ -773,7 +774,7 @@ Template Name: Search Availability Page
 
 <div class="search-availability-results property-list-container">
 <div class="search-results-container">
-	<h3>Search Results</h3>	
+	<h3 class="Title-Blue">Search Results:</h3>	
 	<div class="search-inner-form">
 	<strong>Results Per Page:</strong>
 	<select name="resultsPerPage" class="resultsPerPageForm">
@@ -795,6 +796,7 @@ Template Name: Search Availability Page
 	</select>
 	</div>
 	</div>
+	</form>
 	<hr>
 
 	<?php 
@@ -802,7 +804,24 @@ Template Name: Search Availability Page
 	$the_query = new WP_Query( $mapposts );
 	?>
 	<?php if( $mapposts->have_posts() ): ?>
-		<p>Found <strong><?php echo $mapposts->found_posts ?></strong> property(s) matching your search criteria.</p>
+		<p class="pull-left">Found <strong><?php echo $mapposts->found_posts ?></strong> property(s) matching your search criteria.</p>
+		<?php
+			if($mapposts->max_num_pages>1){?>
+		    <p class="navrechts pull-right">
+		    Page 1 of <?php echo $mapposts->max_num_pages; ?>: 
+		    <?php
+		      if ($paged > 1) { ?>
+		        <a href="<?php echo '?paged=' . ($paged -1); //prev link ?>"><</a>
+		                        <?php }
+		    for($i=1;$i<=$mapposts->max_num_pages;$i++){?>
+		        <a href="<?php echo '?paged=' . $i; ?>" <?php echo ($paged==$i)? 'class="selected"':'';?>><?php echo $i;?></a>
+		        <?php
+		    }
+		    if($paged < $mapposts->max_num_pages){?>
+		        <a href="<?php echo '?paged=' . ($paged + 1); //next link ?>">></a>
+		    <?php } ?>
+		    </p>
+		<?php } ?>
 		<ul>
 			<?php while ( $mapposts->have_posts() ) : $mapposts->the_post(); 
 			$images = get_field('property_gallery');
@@ -810,7 +829,10 @@ Template Name: Search Availability Page
 			$agents = get_field('agent');	
 			?>
 			<li>
-				<img src="<?php echo $image_1['sizes']['thumbnail']; ?>" alt="<?php echo $image_1['alt']; ?>" class="availability-report-image"/>
+				<div class="pull-left">
+					<img src="<?php echo $image_1['sizes']['thumbnail']; ?>" alt="<?php echo $image_1['alt']; ?>" class="availability-report-image"/>
+				</div>	
+				<div class="result-content">
 				<strong><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></strong>
 				<?php if($agents) { ?>
 				<?php foreach($agents as $agent): ?>
@@ -865,6 +887,7 @@ Template Name: Search Availability Page
 						<?php else :
 							// no rows found
 						endif; ?>
+					</div>
 				</li>
 			<?php endwhile; ?>
 		</ul>
@@ -873,9 +896,10 @@ Template Name: Search Availability Page
 	 endif; ?>
 	<?php wp_reset_query();	 // Restore global post data stomped by the_post(). ?>
 	<hr>
-	<?php
+<?php
 if($mapposts->max_num_pages>1){?>
     <p class="navrechts">
+    Page 1 of <?php echo $mapposts->max_num_pages; ?>: 
     <?php
       if ($paged > 1) { ?>
         <a href="<?php echo '?paged=' . ($paged -1); //prev link ?>"><</a>
@@ -890,6 +914,9 @@ if($mapposts->max_num_pages>1){?>
     </p>
 <?php } ?>
 	
+</div>
+</div>
+</form>
 </div>
 <script type="text/javascript">
 	(function($) {
@@ -987,7 +1014,7 @@ function render_map( $el ) {
 	var args = {
 		zoom		: 16,
 		center		: new google.maps.LatLng(0, 0),
-		mapTypeId	: google.maps.MapTypeId.ROADMAP
+		mapTypeId	: google.maps.MapTypeId.HYBRID
 	};
  
 	// create map	        	
@@ -1025,27 +1052,15 @@ function render_map( $el ) {
 function add_marker( $marker, map ) {
  
 	var latlng = new google.maps.LatLng( $marker.attr('data-lat'), $marker.attr('data-lng') );
-	var color = '#466989';
-	var pincolor = '#466989';
+	var color = $marker.attr('data-col');
 
-	// if(color === "YOUR_ACF_VARIABLE") { var pincolor = 'teal'; }
-	// else if(color === "YOUR_ACF_VARIABLE") { var pincolor = 'red'; }
-
-	function pinSymbol(color) {
-		return {
-			path: 'm56.9631,0.75c-31.05667,0 -56.2131,25.16236 -56.2131,56.20168c0,31.05099 56.2131,135.79832 56.2131,135.79832s56.19011,-104.74733 56.19011,-135.79832c0,-31.03931 -25.15656,-56.20168 -56.19011,-56.20168zm0,83.06174c-14.84224,0 -26.87169,-12.01827 -26.87169,-26.86006s12.02945,-26.85426 26.87169,-26.85426s26.84848,12.02344 26.84848,26.85426s-12.0293,26.86006 -26.84848,26.86006z',
-			fillColor: color,
-			fillOpacity: 1,
-			strokeColor: '#000',
-			strokeWeight: 1,
-			scale: .2,
-			};
-		}
+	 if(color === "available") { var $icon = 'http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/08/GoogleMaps-Marker-RedDot.png'; }
+	 else if(color === "not-available") { var $icon = 'http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/08/GoogleMaps-Marker-GreenDot.png'; }
 
 	var marker = new google.maps.Marker({
 		position: latlng,
 		map: map,
-		icon: pinSymbol(pincolor)
+		icon: $icon
 		});
  
 	// add to array

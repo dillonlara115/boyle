@@ -17,14 +17,17 @@
 			}
 		}
 	}
+	ul {
+		text-align: center!important;
+		position: relative;
+	}
 	li {
 		width: 191px;
 		height: 37px;
 		border: solid 1px #cccccc;
 		background-color: #ffffff;
-		display: block;
+		display: inline-block;
 		padding: 5px;
-		float: left;
   		margin: 0 10px;
   		@media (max-width: 960px) {
   			width: 43%;
@@ -34,6 +37,24 @@
   		}
   		@media (max-width: 400px) {
   			width: 94%;
+  		}
+  		&:first-child {
+  			position: absolute;
+  			left: 0;
+  			margin-left: 0!important;
+  			@media (max-width: 960px) {
+  				position: initial;
+  				margin: .5em;
+  			}
+  		}
+  		&:last-child {
+  			position: absolute;
+  			right: 0;
+  			margin-right: 0!important;
+  			@media (max-width: 960px) {
+  				position: initial;
+  				margin: .5em;
+  			}
   		}
 	}
 	.bucket {
@@ -77,7 +98,7 @@
 	position: relative;
 	li {
 		display: inline-block;
-		padding: 0.5em 35px;
+		padding: 0.2em 35.2px;
 		border-top-right-radius: 5px;
 		border-top-left-radius: 5px;
 		background: #fbfbfb;
@@ -92,6 +113,14 @@
 		vertical-align: bottom;
 		position: relative;
 		bottom: -1px;
+		a {
+			color: #999999;
+			&:hover {
+				color: #6699cc;
+   				text-decoration: none;
+
+			}
+		}
 		@media (max-width: 960px) {
 			display: block;
 			border-radius: 0;
@@ -100,20 +129,41 @@
 			padding-top: 1em;
 			padding-bottom: 1em;
 		}
+		&:last-child {
+			position: absolute;
+			right: 0;
+			@media (max-width: 960px) {
+				position: initial;
+				
+			}
+		}
 		&.current-menu-item  {
 			background: #fbfbfb;
-			background: -moz-linear-gradient(top,  #fbfbfb 0%, #bec9d5 33%);
-			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fbfbfb), color-stop(33%,#bec9d5));
-			background: -webkit-linear-gradient(top,  #fbfbfb 0%,#bec9d5 33%);
-			background: -o-linear-gradient(top,  #fbfbfb 0%,#bec9d5 33%);
-			background: -ms-linear-gradient(top,  #fbfbfb 0%,#bec9d5 33%);
-			background: linear-gradient(to bottom,  #fbfbfb 0%,#bec9d5 33%);
-			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbfbfb', endColorstr='#bec9d5',GradientType=0 );
+			background: -moz-linear-gradient(top,  #fbfbfb 0%, #CAD3DE 33%);
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fbfbfb), color-stop(33%,#CAD3DE));
+			background: -webkit-linear-gradient(top,  #fbfbfb 0%,#CAD3DE 33%);
+			background: -o-linear-gradient(top,  #fbfbfb 0%,#CAD3DE 33%);
+			background: -ms-linear-gradient(top,  #fbfbfb 0%,#CAD3DE 33%);
+			background: linear-gradient(to bottom,  #fbfbfb 0%,#CAD3DE 33%);
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbfbfb', endColorstr='#CAD3DE',GradientType=0 );
 			line-height: 1.5;
 			position: relative;
 			border-bottom: 0;
+			a {
+				color: #355c88;
+				text-decoration: none;
+				&:hover {
+					color: #6699cc;
+				    text-decoration: none;
+
+				}
+			}
 		}
 	}
+}
+.result-content {
+	float: left;
+	width: 80%;
 }
 
 .portfolio-container .search-availability-content ul li {
@@ -122,7 +172,7 @@
 
 #menu-property-portfolio-regions-menu {
 	li {
-		margin: 0 .1em;
+		margin: 0;
 		width: 164px;
 		a {
 			line-height: 2.6;
@@ -168,7 +218,7 @@
 }
 
 //property portfolio all regions
-#post-1933, #post-1524, #post-1522, #post-1526, #post-1514, #post-1516, #post-1520, #post-1518, #post-1504 {
+#post-1933, #post-1524, #post-1522, #post-1526, #post-1514, #post-1516, #post-1520, #post-1518, #post-1504, #post-1512 {
 	.menu-item-1629 a {
 		background: url(../../uploads/2015/06/Background-Gradient-LightBlue.gif);
 	}
@@ -215,7 +265,7 @@
 	}
 }
 .property-type-list-content {
-	background: #bec9d5;
+	background: #CAD3DE;
 	border: 1px solid #666;
 	clear: both;
 	padding: 1em;
@@ -228,7 +278,29 @@
 		font-family: Tahoma, Arial!important;
 		font-size: 8pt!important;
 	}
+	&.community-search-filters {
+		border-top-width: 0;
+		background-color: #CAD3DE;
+	}
+	
 }
+
+.TabUpMiddle {
+	height: 25px;
+	background-image: url(../../uploads/2015/08/active-background.gif);
+	font-family: Verdana, Arial;
+	font-size: 8pt;
+	background-repeat: repeat-x;
+	border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border: 1px solid;
+    border-bottom-width: 0;
+    line-height: 2;
+    padding: 0 10px;
+    border-top-width: 0;
+
+}
+
 p.navrechts {
     text-align: right;
 }
@@ -295,3 +367,10 @@ p.navrechts {
 		font-size: 12px!important;
 	}
 }
+
+
+.navrechts {
+	color: #000;
+}
+
+

@@ -28,7 +28,8 @@
 			<img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
 		</div>
 	<?php endif; ?>
-	<div class="single-property-bucket-container">
+
+	<div class="single-property-bucket-container has-logo">
 		<div class="bucket bucket-availability"><a href="#"><span>A</span>vailability <span>R</span>eport</a></div>
 	</div>
 	<div class="single-property-bucket-container bucket-gallery-container">
@@ -44,7 +45,10 @@
 <?php } ?>
 <div id="content" class="static-container single-properties-container">
 	<?php if( in_array('This property is a community', get_field('community_property'))) { ?>
-	<div class="properties-sidebar-container">
+		<?php if( empty($image) ): 
+			$logo = 'single-sidebar-container';
+		 endif; ?>
+	<div class="properties-sidebar-container <?php echo $logo; ?>">
 	<?php } else { ?>
 		<div class="properties-sidebar-container single-sidebar-container">
 		<?php if( !empty($image) ): ?>
@@ -353,10 +357,20 @@
 			</p>
 		<?php } ?>
 		<?php if(get_field('home_price_max')) { ?>
-			<p><strong>Home Price Range: </strong>$<?php echo the_field('home_price_min'); ?> - $<?php echo the_field('home_price_max'); ?></p>
+			<?php 	$minhomePrice = get_field('home_price_min');
+					$maxhomePrice = get_field('home_price_max'); 
+					$minhomeFormat = number_format($minhomePrice);	
+					$maxhomeFormat = number_format($maxhomePrice);		
+			?>
+			<p><strong>Home Price Range: </strong>$<?php echo $minhomeFormat ?> - $<?php echo $maxhomeFormat?></p>
 		<?php } ?>
 		<?php if(get_field('lot_price_max')) { ?>
-			<p><strong>Lot Price Range: </strong>$<?php echo the_field('lot_price_min'); ?> - $<?php echo the_field('lot_price_max'); ?></p>
+			<?php 	$minLotPrice = get_field('lot_price_min');
+					$maxLotPrice = get_field('lot_price_max'); 
+					$minLotFormat = number_format($minLotPrice);	
+					$maxLotFormat = number_format($maxLotPrice);		
+			?>
+			<p><strong>Lot Price Range: </strong>$<?php echo $minLotFormat; ?> - $<?php echo $maxLotFormat; ?></p>
 		<?php } ?>
 		<?php if(get_field('lot_size_max_feet') != get_field('lot_size_min_feet')) { ?>
 			<p><strong>Lot Size(feet): </strong>
@@ -404,8 +418,55 @@
 			<?php } ?>
 		<?php } ?>
 		</div>
-
 		
+	
+		<?php if( in_array('This property is a community', get_field('community_property'))) { ?>
+			<?php
+				$propertyPosts = new WP_Query( array( 
+				'post_type' 	=> 'properties',
+				'orderby' => 'title',
+				'order'   => 'ASC',
+				'meta_query'	=> array(
+					'relation'	=> 'AND',
+					
+					array(
+						'key'		=> 'activate_property',
+						'value'		=> 'This property is active',
+						'compare'	=> 'LIKE'
+						),
+					array(
+						'key'		=> 'community',
+						'value' => '"' . get_the_ID() . '"',
+						'compare'	=> 'LIKE'
+						),
+					
+					),
+				) 
+			);?>
+			<br><br>
+			<div>
+				<div class="TabUpMiddle">
+					<div class="SubTitle-Blue">Select a Property Within This Community</div>
+				</div>
+				<div class="property-type-list-content property-list-container community-search-filters">
+					
+						<div class="search-filters">
+							<strong>Property:</strong>
+							<select class="property-select">
+								<option>...</option>
+							<?php $the_query = new WP_Query( $propertyPosts ); ?>
+								<?php if( $propertyPosts->have_posts() ): ?>
+									<?php while ( $propertyPosts->have_posts() ) : $propertyPosts->the_post(); ?>
+										<option data-permalink="<?php the_permalink(); ?>"><?php the_title(); ?> </option>
+									<?php endwhile; ?>
+								<?php endif; ?>
+							</select>
+						</div>
+					
+				</div>
+			</div>
+
+		<?php } ?>
 
 
 	</div>
@@ -458,6 +519,15 @@
 <script type="text/javascript">
 (function($) {
 
+
+	var $property = $(".property-select");
+
+		$property.change(function(){
+			console.log($(".property-select option:selected").attr('data-permalink'));
+			var $link = $(".property-select option:selected").attr('data-permalink')
+			window.location = $link;
+		});
+
 /*
 *  render_map
 *
@@ -480,7 +550,7 @@ function render_map( $el ) {
 	var args = {
 		zoom		: 16,
 		center		: new google.maps.LatLng(0, 0),
-		mapTypeId	: google.maps.MapTypeId.ROADMAP
+		mapTypeId	: google.maps.MapTypeId.HYBRID
 	};
 
 	// create map	        	
