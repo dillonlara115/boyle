@@ -17,6 +17,7 @@ Author URI: http://www.ventamarketing.com/
 @import 'css/property-search';
 @import 'css/properties';
 @import 'css/news';
+@import 'css/landingpage';
 
 //DEFAULT styles
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,acronym,address,big,cite,code,del,
@@ -29,7 +30,7 @@ hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{
 	margin:0;
 	vertical-align:baseline;
 	font-weight: 100;
-}
+} 
 
 @-ms-viewport{
   width: device-width;
@@ -42,7 +43,7 @@ body{
 a {
 	text-decoration: none;
 }
-
+ 
 ol,ul{
 	list-style:none;
 } 
@@ -694,6 +695,11 @@ $primary-dark: darken(#355c88, 25%);
 
 .search-availability-button {
 	width: 100px;
+	@media (max-width: 960px) {
+		margin-bottom: 1em;
+		position: relative;
+		top: -10px;
+	}
 }
 
 //footer

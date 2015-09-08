@@ -13,7 +13,7 @@ Template Name: Home
 		<?php putRevSlider("home-page","homepage") ?>
 	</div>
     <div class="bucket-container">
-            <div class="homepage-sub">
+        <div class="homepage-sub">
            
         <div class="homepage-sub-section" >
             <div class="homepage-sub-section-image">
@@ -22,15 +22,16 @@ Template Name: Home
                 </a>
             </div>
             <div class="Text-Black-Small homepage-sub-section-content">
-                <div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">G</span>REATER <span style="font-size: 9pt;">M</span>EMPHIS:</div>
-                <div>
-                    <input type="hidden" name="ctl00$ContentPlaceHolderDefault$HiddenFieldAvailabilityReportContentCategoryId" id="ctl00_ContentPlaceHolderDefault_HiddenFieldAvailabilityReportContentCategoryId" value="981" />
-                    <div class="homepage-sub-section-content-text">Here is some placeholder text.</div>
-                </div>
-                <a href="#" class="Text-Blue-Small bucket-cta">&raquo&nbsp;Click here to read</a>
+                <a href="<?php echo get_permalink( 2580 ); ?>">
+                    <div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">G</span>REATER <span style="font-size: 9pt;">M</span>EMPHIS:</div>
+                    <div>
+                        <div class="homepage-sub-section-content-text">View our Memphis properties.</div>
+                    </div>
+                </a>
+                <a href="<?php echo get_permalink( 2580 ); ?>" class="Text-Blue-Small bucket-cta">&raquo&nbsp;Click here to read</a>
                 
             </div> 
-            <i class="mobile-icon"></i>               
+            <a href="<?php echo get_permalink( 2580 ); ?>"><i class="mobile-icon"></i>   </a>            
         </div>
                 
         <div class="homepage-sub-section" >
@@ -41,16 +42,13 @@ Template Name: Home
                 </a>
             </div>
             <div class="Text-Black-Small homepage-sub-section-content">
-                <div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">G</span>REATER <span style="font-size: 9pt;">N</span>ASHVILLE:</div>
-                <input type="hidden" name="ctl00$ContentPlaceHolderDefault$HiddenFieldCompanyHistoryContentCategoryId" id="ctl00_ContentPlaceHolderDefault_HiddenFieldCompanyHistoryContentCategoryId" value="30" />
-                <div class="homepage-sub-section-content-text">Here is some placeholder text.<br />
-                    
-                     
-                </div>
-                <a href="#" class="Text-Blue-Small bucket-cta">&raquo&nbsp;Click here to read</a>
+                <a href="<?php echo get_permalink( 2583 ); ?>"><div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">G</span>REATER <span style="font-size: 9pt;">N</span>ASHVILLE:</div>
+                <div class="homepage-sub-section-content-text">View our Nashville Properties.<br />
+                </div></a>
+                <a href="<?php echo get_permalink( 2583 ); ?>" class="Text-Blue-Small bucket-cta">&raquo&nbsp;Click here to read</a>
                                     
             </div>  
-          <i class="mobile-icon"></i> 
+          <a href="<?php echo get_permalink( 2583 ); ?>"><i class="mobile-icon"></i> </a>
         </div>
         <div class="homepage-sub-section" >
             <div class="homepage-sub-section-image">
@@ -59,16 +57,13 @@ Template Name: Home
                 </a>
             </div>
             <div class="Text-Black-Small homepage-sub-section-content">
-                <div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">A</span>VAILABILITY <span style="font-size: 9pt;">R</span>EPORT:</div>
-                <input type="hidden" name="ctl00$ContentPlaceHolderDefault$HiddenFieldCompanyHistoryContentCategoryId" id="ctl00_ContentPlaceHolderDefault_HiddenFieldCompanyHistoryContentCategoryId" value="30" />
-                <div class="homepage-sub-section-content-text">Here is some placeholder text.<br />
-                    
-                     
-                </div>  
-                <a href="#" class="Text-Blue-Small bucket-cta">&raquo&nbsp;Click here to read</a>
+                <a href="<?php echo get_permalink( 985 ); ?>"><div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">A</span>VAILABILITY <span style="font-size: 9pt;">R</span>EPORT:</div>
+                <div class="homepage-sub-section-content-text">View our availability report.<br />   
+                </div>  </a>
+                <a href="<?php echo get_permalink( 985 ); ?>" class="Text-Blue-Small bucket-cta">&raquo&nbsp;Click here to read</a>
                                   
             </div>
-            <i class="mobile-icon"></i>  
+            <a href="<?php echo get_permalink( 985 ); ?>"><i class="mobile-icon"></i>  </a>
         </div>
     </div>    
               

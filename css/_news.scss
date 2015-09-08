@@ -3,7 +3,7 @@
 	display: inline-block;
 	width: 100%;
 }
-
+ 
 .news-list-container {
 	li {
 		.Title-Blue {
@@ -19,7 +19,7 @@
 			margin-bottom: 1em;
 		}
 	}
-}
+} 
 
 .news-container {
 	.Title-Blue {
@@ -88,7 +88,7 @@
 	padding: 0;
 	border-left: none;
 	.search-availability-content ul li {
-		padding: .5em 13px!important;
+		padding: .5em 0!important;
 	}
 	@media (max-width: 960px) {
 		width: 99%;

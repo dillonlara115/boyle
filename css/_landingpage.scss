@@ -1,0 +1,47 @@
+.landing-page-content {
+	position: relative;
+	top: -2em;
+	h3 {
+		padding: 10px 0;
+		font-size: 18px;
+		font-family: Georgia, Times New Roman;
+	}
+}
+
+.landing-page-bucket-container {
+	text-align: center;
+}
+
+.bucket {
+	padding: 20px;
+    display: inline-block;
+    margin: 5px;
+    text-align: center;
+    width: 200px;
+    height: 100px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    vertical-align: top;
+    background-image: url(images/Background-Box.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    -o-background-size: 100% 100%, auto;
+    -moz-background-size: 100% 100%, auto;
+    -webkit-background-size: 100% 100%, auto;
+    background-size: 100% 100%, auto;
+    a.Title-Blue-Small {
+    	font-size: 12px;
+    	line-height: 1.5;
+    }
+    h4 {
+    	text-align: center;
+    	font-size: 14px;
+    	font-family: Georgia, Times New Roman;
+    }
+}
+
+.landing-page-sub-section {
+	.Text-Black-Small {
+		padding: 20px;
+	}
+}

@@ -3,7 +3,33 @@
 Template Name: Search Availability Page
 */
 ?>
+<?php 
 
+	 // starting the session
+	 session_start();
+	 	
+ 	  $_SESSION = array();
+	 if (isset($_POST['submit'])) { 
+	 	 $_SESSION['search-form'] = $_POST;
+		 $_SESSION['metroarea'] = $_POST['metroarea'];
+		 $_SESSION['transaction'] = $_POST['transaction'];
+		 $_SESSION['residentialType'] = $_POST['residentialType'];
+		 $_SESSION['community'] = $_POST['community'];
+		 $_SESSION['squareFeet'] = $_POST['squareFeet'];
+		 $_SESSION['lotSize'] = $_POST['lotSize'];
+		 $_SESSION['lotPrice'] = $_POST['lotPrice'];
+		 $_SESSION['landLotSize'] = $_POST['landLotSize'];
+		 $_SESSION['landLotPrice'] = $_POST['landLotPrice'];
+		 $_SESSION['orderResults'] = $_POST['orderResults'];
+		 $_SESSION['resultsPerPage'] = $_POST['resultsPerPage'];
+		 $_SESSION['designatedUses'] = $_POST['designatedUses'];
+		 $_SESSION['numberOfRooms'] = $_POST['numberOfRooms'];
+		 $_SESSION['industrialType'] = $_POST['industrialType'];
+		 $_SESSION['homePrice'] = $_POST['homePrice'];
+		 $_SESSION['lotNumberInput'] = $_POST['lotNumberInput'];
+		 $_SESSION['lotAddressInput'] = $_POST['lotAddressInput'];
+	 } 
+?> 
 <?php get_header(); ?>
 
 <div id="content" class="static-container static-contact-container" >
@@ -18,17 +44,34 @@ Template Name: Search Availability Page
 				$transaction = $_GET['transaction']; 
 				$designatedUses = $_GET['designatedUses']; 
 				$industrialType = $_GET['industrialType']; 
+				
 		?>
+
 		<div class="search-availability-content">
-			<?php wp_nav_menu( array('menu' => 'Search Availability Menu' )); ?>
+			<?php wp_nav_menu( array('menu' => 'Search Availability Menu', 'container_class' => 'hidden-mobile' )); ?>
+			
+
 			<form class='search-availability-form' name="searchform" action="" method="post">
 			<div class="property-type-list-content" id="search-houses">
 				<div class="left-content">
-				
+					<div class="visible-mobile">
+						<strong>Property Type: </strong>
+						<?php
+					    	wp_nav_menu( array(
+						    	'menu' => 'Search Availability Menu',
+						        'theme_location' => 'mobile-nav',
+						        'items_wrap'     => '<select id="drop-nav"><option value="">Select a page...</option>%3$s</select>',
+						        'walker'  => new Walker_Nav_Menu_Dropdown())
+					        );
+						?>
+					</div><br>
+					
 					<div id="archive-filters" class="search-filters">
-						<strong>Region</strong>
+						<strong>Region: </strong>
 						<select>
-							<?php foreach( $GLOBALS['my_query_filters'] as $key => $name ): 	
+							<?php 
+
+							foreach( $GLOBALS['my_query_filters'] as $key => $name ): 	
 								// get the field's settings without attempting to load a value
 								$field = get_field_object($key, false, false);
 
@@ -38,7 +81,7 @@ Template Name: Search Availability Page
 								}
 								// create filter
 								?>
-								<option class="filter" name="region" data-filter="<?php echo $name; ?>" value="<?php echo $name; ?>"><?php echo $key; ?></option>
+								<option class="filter" name="region" data-filter="<?php echo $name; ?>" value="<?php echo $name; ?>" <?php if ($name == $_GET['region']) print 'selected'; ?>><?php echo $key; ?></option>
 							<?php endforeach; ?>
 						</select>
 					</div>
@@ -49,6 +92,7 @@ Template Name: Search Availability Page
 							?>
 						<div class="metro-filters search-filters">
 						<strong>Metro Area</strong>
+						
 							<?php 
 							/*
 							*  Get a field object and create a select form element
@@ -57,14 +101,17 @@ Template Name: Search Availability Page
 							$field_key = "field_55929f284c5fd";
 							$field = get_field_object($field_key);
 
+							
+
 							if( $field ) {
-								echo '<select size="5" name="metroarea">';
+								echo '<select size="5" name="metroarea"><option name="metroarea" value="All Regions" >All Regions</option>';
 									foreach( $field['choices'] as $k => $v )
-									{
-										echo '<option class="filter" name="metroarea" data-filter="' . $k . '"  value="' . $k . '">' . $v . '</option>';
-									}
-								echo '</select>';
-							} ?>
+									{ ?>
+										<option class="filter" name="metroarea" data-filter="<?php echo $k ?>"  value="<?php echo $k ?>" <?php if ($k == $_SESSION['metroarea']) print 'selected'; ?>> <?php echo $v ?> </option>
+									<?php } ?>
+								</select>
+
+							<?php } ?>
 							</div>
 						<br>
 						<?php } elseif (strstr($_SERVER['REQUEST_URI'], 'nashville_metro_area')){ 
@@ -81,16 +128,15 @@ Template Name: Search Availability Page
 								$field_key = "field_55929e4b4c5fc";
 								$field = get_field_object($field_key);
 
-								if( $field )
-								{
-									echo '<select size="5" name="metroarea">';
+								if( $field ) {
+								echo '<select size="5" name="metroarea"><option name="metroarea" value="All Regions" >All Regions</option>';
 									foreach( $field['choices'] as $k => $v )
-									{
-										echo '<option name="metroarea" value="' . $k . '">' . $v . '</option>';
-									}
-									echo '</select>';
-								}
-								?>
+									{ ?>
+										<option class="filter" name="metroarea" data-filter="<?php echo $k ?>"  value="<?php echo $k ?>" <?php if ($k == $_SESSION['metroarea']) print 'selected'; ?>> <?php echo $v ?> </option>
+									<?php } ?>
+								</select>
+
+							<?php } ?>
 								</div>
 						<br>
 						<?php } elseif (strstr($_SESSION['metroarea'], 'other')){ 
@@ -107,16 +153,15 @@ Template Name: Search Availability Page
 								$field_key = "field_55929fc74c5fe";
 								$field = get_field_object($field_key);
 
-								if( $field )
-								{
-									echo '<select size="5" name="metroarea">';
+								if( $field ) {
+								echo '<select size="5" name="metroarea"><option name="metroarea" value="All Regions" >All Regions</option>';
 									foreach( $field['choices'] as $k => $v )
-									{
-										echo '<option name="metroarea" value="' . $k . '">' . $v . '</option>';
-									}
-									echo '</select>';
-								}
-								?>
+									{ ?>
+										<option class="filter" name="metroarea" data-filter="<?php echo $k ?>"  value="<?php echo $k ?>" <?php if ($k == $_SESSION['metroarea']) print 'selected'; ?>> <?php echo $v ?> </option>
+									<?php } ?>
+								</select>
+
+							<?php } ?>
 								</div>
 						<br>
 						<?php } ?>
@@ -143,11 +188,7 @@ Template Name: Search Availability Page
 									'value'		=> $regionName,
 									'compare'	=> 'LIKE'
 									),
-								array(
-									'key'		=> $region,
-									'value'		=> $_SESSION['metroarea'],
-									'compare'	=> 'LIKE'
-									),
+								$metroTypeQuery,
 								$residentialTypeQuery,
 								$transactionQuery,
 								$squareFeetQuery,
@@ -167,6 +208,7 @@ Template Name: Search Availability Page
 							<div class="search-filters">
 								<strong>Property:</strong>
 								<select class="property-select">
+								<option name="property" value="..." >...</option>
 								<?php $the_query = new WP_Query( $propertyPosts ); ?>
 									<?php if( $propertyPosts->have_posts() ): ?>
 										<?php while ( $propertyPosts->have_posts() ) : $propertyPosts->the_post(); ?>
@@ -179,6 +221,7 @@ Template Name: Search Availability Page
 						<?php } ?>
 						<div class="search-filters">
 							<strong>Transaction:</strong>
+							
 							<?php 
 							/*
 							*  Get a field object and create a select form element
@@ -245,7 +288,7 @@ Template Name: Search Availability Page
 								<select name="community">
 									<option name="community" value="...">...</option>
 									<?php	while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
-										<option name="community" value="<?php echo the_title(); ?>"><?php echo the_title(); ?></option>
+										<option name="community" value="<?php echo the_title(); ?>" <?php if (get_the_title() == $_SESSION['community']) print 'selected'; ?>><?php echo the_title(); ?></option>
 									<?php endwhile;?>
 								</select>
 							<?php endif;?>
@@ -266,9 +309,9 @@ Template Name: Search Availability Page
 									echo '<select name="residentialType">';
 									echo '<option name="residentialType" value="...">...</option>';
 									foreach( $field['choices'] as $k => $v )
-									{
-										echo '<option name="residentialType" value="' . $k . '">' . $v . '</option>';
-									}
+									{?>
+										<option name="residentialType" value="<?php echo $k ?>" <?php if ($k == $_SESSION['residentialType']) print 'selected'; ?>><?php echo $v ?></option>
+									<?php }
 									echo '</select>';
 								}
 								?>
@@ -424,39 +467,13 @@ Template Name: Search Availability Page
 							<br>
 						<?php } ?>
 
-
-						<hr>
+							
+						<hr class="hidden-mobile">
 						<input type="submit" name="submit" class="search-availability-button" value="search">	
 					
 					</div>
-					<?php 
-
-					 // starting the session
-					 session_start();
-					 	
-				 	  $_SESSION = array();
-					 if (isset($_POST['submit'])) { 
-					 	 $_SESSION['search-form'] = $_POST;
-						 $_SESSION['metroarea'] = $_POST['metroarea'];
-						 $_SESSION['transaction'] = $_POST['transaction'];
-						 $_SESSION['residentialType'] = $_POST['residentialType'];
-						 $_SESSION['community'] = $_POST['community'];
-						 $_SESSION['squareFeet'] = $_POST['squareFeet'];
-						 $_SESSION['lotSize'] = $_POST['lotSize'];
-						 $_SESSION['lotPrice'] = $_POST['lotPrice'];
-						 $_SESSION['landLotSize'] = $_POST['landLotSize'];
-						 $_SESSION['landLotPrice'] = $_POST['landLotPrice'];
-						 $_SESSION['orderResults'] = $_POST['orderResults'];
-						 $_SESSION['resultsPerPage'] = $_POST['resultsPerPage'];
-						 $_SESSION['designatedUses'] = $_POST['designatedUses'];
-						 $_SESSION['numberOfRooms'] = $_POST['numberOfRooms'];
-						 $_SESSION['industrialType'] = $_POST['industrialType'];
-						 $_SESSION['homePrice'] = $_POST['homePrice'];
-						 $_SESSION['lotNumberInput'] = $_POST['lotNumberInput'];
-						 $_SESSION['lotAddressInput'] = $_POST['lotAddressInput'];
-					 } 
-					?> 
-
+					
+					
 					<?php if ( is_page( 1059) ) {  
 						$value = array('Residential', 'Hotels', 'Land', 'Mixed-Use', 'Industrial', 'Retail', 'Office');
 					} elseif ( is_page( 316) ) { 
@@ -585,7 +602,13 @@ Template Name: Search Availability Page
 				    } else {
 				    	$resultsPerPage = 15;
 			    	}?>
-					
+
+			    	<?php if( $_SESSION['metroarea'] == 'All Regions') { 
+						$metro = '';
+					} else { 
+						$metro = $_SESSION['metroarea'];
+				 	} ?>
+
 					<?php 
 
 						$transactionQuery = array();
@@ -668,6 +691,17 @@ Template Name: Search Availability Page
 							);
 						};
 
+						$metroTypeQuery = array();
+						if(isset($_SESSION['metroarea'])){
+							$residentialTypeQuery[] = array(
+								'key'		=> $region,
+								'value'		=> $metro,
+								'compare'	=> 'LIKE'
+								
+							);
+						};
+
+
 						$designatedUsesQuery = array();
 						if(isset($designatedUses)){
 							$designatedUsesQuery[] = array(
@@ -726,11 +760,7 @@ Template Name: Search Availability Page
 									'value'		=> $regionName,
 									'compare'	=> 'LIKE'
 									),
-								array(
-									'key'		=> $region,
-									'value'		=> $_SESSION['metroarea'],
-									'compare'	=> 'LIKE'
-									),
+								$metroTypeQuery,
 								$residentialTypeQuery,
 								$transactionQuery,
 								$squareFeetQuery,
@@ -756,10 +786,16 @@ Template Name: Search Availability Page
 							$location = get_field('location');
 							$gtemp = explode (',',  implode($location));
 							$coord = explode (',', implode($gtemp));
+							$images = get_field('property_gallery');
+							$image_1 = $images[0]; 
 						?>
 
-							<div class="marker" data-lat="<?php echo $location[lat]; ?>" data-lng="<?php echo $location[lng]; ?>" data-col="available">
-								<p class="address"><?php the_title(); ?></p>		
+							<div class="marker" style="display: none;" data-lat="<?php echo $location[lat]; ?>" data-lng="<?php echo $location[lng]; ?>" data-col="available">
+								<a href="<?php the_permalink(); ?>" class="map-image">
+									<img src="<?php echo $image_1['sizes']['thumbnail']; ?>" alt="<?php echo $image_1['alt']; ?>" class="availability-report-image"/>
+								</a>
+								<p class="address map-text"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></p>
+								<p class="map-text black-text"><?php the_field('address'); ?>, <?php the_field('city'); ?>, <?php the_field('zip_code'); ?></p>		
 							</div>
 
 									
@@ -804,7 +840,8 @@ Template Name: Search Availability Page
 	$the_query = new WP_Query( $mapposts );
 	?>
 	<?php if( $mapposts->have_posts() ): ?>
-		<p class="pull-left">Found <strong><?php echo $mapposts->found_posts ?></strong> property(s) matching your search criteria.</p>
+		<div class="search-results-container">
+		<p class="pull-left result-summary">Found <strong><?php echo $mapposts->found_posts ?></strong> property(s) matching your search criteria.</p>
 		<?php
 			if($mapposts->max_num_pages>1){?>
 		    <p class="navrechts pull-right">
@@ -822,23 +859,31 @@ Template Name: Search Availability Page
 		    <?php } ?>
 		    </p>
 		<?php } ?>
+		</div>
 		<ul>
 			<?php while ( $mapposts->have_posts() ) : $mapposts->the_post(); 
 			$images = get_field('property_gallery');
 			$image_1 = $images[0];  
 			$agents = get_field('agent');	
 			?>
-			<li>
+			<li class="result-item">
 				<div class="pull-left">
-					<img src="<?php echo $image_1['sizes']['thumbnail']; ?>" alt="<?php echo $image_1['alt']; ?>" class="availability-report-image"/>
+					<a href="<?php the_permalink(); ?>">
+						<img src="<?php echo $image_1['sizes']['thumbnail']; ?>" alt="<?php echo $image_1['alt']; ?>" class="availability-report-image"/>
+					</a>
+					<?php if($agents) { ?>
+					<?php foreach($agents as $agent): ?>
+						<p class="result-item-agent-info">
+							<strong class="result-item-agent"><a href="<?php echo the_field('agent_property_page', $agent->ID); ?>"><?php echo get_the_title( $agent->ID ); ?></a></strong><br>
+							<?php echo the_field('phone_number', $agent->ID); ?><br>
+							<a href="mailto:<?php echo the_field('email', $agent->ID); ?>"><?php echo the_field('email', $agent->ID); ?></a>
+						</p>
+					<?php endforeach; ?>
+					<?php } ?>
 				</div>	
 				<div class="result-content">
 				<strong><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></strong>
-				<?php if($agents) { ?>
-				<?php foreach($agents as $agent): ?>
-					<strong class="pull-right"><a href="mailto:<?php echo the_field('email', $agent->ID); ?>">Contact <?php echo get_the_title( $agent->ID ); ?></a></strong>
-				<?php endforeach; ?>
-				<?php } ?>
+				
 				<p><?php echo the_field('description'); ?></p>
 
 							<?php
@@ -868,7 +913,7 @@ Template Name: Search Availability Page
 							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
 							    <tbody><tr class="Header">
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
-							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Acres</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Sq. Feet</td>
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
 							    </tr>
 									    
@@ -932,7 +977,7 @@ if($mapposts->max_num_pages>1){?>
 		var $property = $(".property-select");
 
 		$property.change(function(){
-			console.log($(".property-select option:selected").attr('data-permalink'));
+		
 			var $link = $(".property-select option:selected").attr('data-permalink')
 			window.location = $link;
 		});
@@ -1006,20 +1051,20 @@ if($mapposts->max_num_pages>1){?>
 */
  
 function render_map( $el ) {
- 
+ 	
 	// var
 	var $markers = $el.find('.marker');
- 
+
 	// vars
 	var args = {
-		zoom		: 16,
+		zoom		: 8,
 		center		: new google.maps.LatLng(0, 0),
 		mapTypeId	: google.maps.MapTypeId.HYBRID
 	};
- 
+ 	
 	// create map	        	
 	var map = new google.maps.Map( $el[0], args);
- 
+ 	
 	// add a markers reference
 	map.markers = [];
  
@@ -1035,6 +1080,12 @@ function render_map( $el ) {
  
 }
  
+// create info window outside of each - then tell that singular infowindow to swap content based on click
+var infowindow = new google.maps.InfoWindow({
+	content		: '' 
+});
+
+
 /*
 *  add_marker
 *
@@ -1053,7 +1104,6 @@ function add_marker( $marker, map ) {
  
 	var latlng = new google.maps.LatLng( $marker.attr('data-lat'), $marker.attr('data-lng') );
 	var color = $marker.attr('data-col');
-
 	 if(color === "available") { var $icon = 'http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/08/GoogleMaps-Marker-RedDot.png'; }
 	 else if(color === "not-available") { var $icon = 'http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/08/GoogleMaps-Marker-GreenDot.png'; }
 
@@ -1069,17 +1119,21 @@ function add_marker( $marker, map ) {
 	// if marker contains HTML, add it to an infoWindow
 	if( $marker.html() )
 	{
-		// create info window
-		var infowindow = new google.maps.InfoWindow({
-			content		: $marker.html()
-		});
- 
-		// show info window when marker is clicked
-		google.maps.event.addListener(marker, 'click', function() {
- 
-			infowindow.open( map, marker );
- 
-		});
+// show info window when marker is clicked & close other markers
+	google.maps.event.addListener(marker, 'click', function() {
+		//swap content of that singular infowindow
+				infowindow.setContent($marker.html());
+		        infowindow.open(map, marker);
+	});
+	
+	// close info window when map is clicked
+	     google.maps.event.addListener(map, 'click', function(event) {
+	        if (infowindow) {
+	            infowindow.close(); }
+			}); 
+
+
+		
 	}
  
 }
@@ -1110,22 +1164,31 @@ function center_map( map ) {
 		bounds.extend( latlng );
  
 	});
- 
+ 	if( map.markers.length == 0 )
+	{
+		map.setCenter({lat: 35.496456, lng: -89.165039});
+		map.setZoom(5);
+	}
 	// only 1 marker?
-	if( map.markers.length == 1 )
+	else if( map.markers.length == 1 )
 	{
 		// set center of map
 	    map.setCenter( bounds.getCenter() );
-	    map.setZoom( 14 );
+	    map.setZoom( 8 );
 	}
 	else
-	{
+	{	
 		// fit to bounds
 		map.fitBounds( bounds );
 	}
  
 }
  
+
+
+
+
+
 /*
 *  document ready
 *
