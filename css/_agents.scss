@@ -91,10 +91,17 @@
 .news-col-sidebar {
 	float: right;
 	width: 25%;
+	.news-date {
+		font-size: 12px;
+	}
+	a {
+		font-size: 12px;
+		display: block;
+	}
 }
 
 .agent-property-page-agent-container {
 	vertical-align: top;
 	display: inline-block;
-	width: 300px;
+	width: 300px!important;
 }

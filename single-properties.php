@@ -3,7 +3,7 @@
 		<div class="static-header-image-container">
 			<?php 
 				$images = get_field('property_gallery');
-				if( $images ): ?>
+				if( $images ) { ?>
 				    <ul class="portfolio-header-gallery">
 				        <?php foreach( $images as $image ): ?>
 				            <li>
@@ -11,9 +11,13 @@
 				            </li>
 				        <?php endforeach; ?>
 				    </ul>
-			<?php endif; ?> 
+				<?php } else { ?>
+					<?php echo get_the_post_thumbnail( $page->ID, 'large', array( 'class'	=> "static-header-image") ); ?>
+				<?php 	} ?> 
 		</div> 
-		<h2><?php echo the_title(); ?></h2>
+		<?php if( in_array('This property is a community', get_field('community_property'))) { ?>
+			<h2><?php echo the_title(); ?></h2>
+		<?php } ?>
 	</div>
 
 <?php the_post(); ?>
@@ -44,6 +48,11 @@
 </div>
 <?php } ?>
 <div id="content" class="static-container single-properties-container">
+	<?php if( !in_array('This property is a community', get_field('community_property'))) { ?>
+		<div class="child-title-block">
+			<span>Property Division ::</span> <?php echo implode(', ', get_field('property_type')); ?>
+		</div>
+	<?php } ?>
 	<?php if( in_array('This property is a community', get_field('community_property'))) { ?>
 		<?php if( empty($image) ): 
 			$logo = 'single-sidebar-container';
@@ -66,8 +75,8 @@
 						<strong><a href="mailto:<?php echo the_field('email', $agent->ID); ?>">Email <?php echo get_the_title( $agent->ID ); ?></a></strong>
 						<span><?php echo the_field('phone_number', $agent->ID ); ?></span>
 						<ul>
-							<li><a href="<?php echo get_permalink( $agent->ID ); ?>"><?php echo get_the_title( $agent->ID ); ?>'s Biography</a></li>
-							<li><a href="#"><?php echo get_the_title( $agent->ID ); ?>'s Properties</a></li>
+							<li><a href="<?php echo get_permalink( $agent->ID ); ?>">Biography</a></li>
+							<li><a href="<?php echo the_field('agent_property_page', $agent->ID); ?>">Properties</a></li>
 						</ul>
 					</div>
 				<?php endforeach; ?>
@@ -130,6 +139,7 @@
 							$images = get_field('property_gallery', $property->ID);
 							$image_1 = $images[0]; 
 
+
 						?>
 						<p>
 							<a href="<?php echo get_permalink( $property->ID ); ?>">
@@ -143,7 +153,7 @@
 								<?php foreach($agents as $agent): 
 								$image = get_field('picture', $agent->ID); ?>
 									<div class="single-property-agent-container">
-										<strong><a href="#"><?php echo get_the_title( $agent->ID ); ?></a></strong>
+										<strong><a href="<?php echo the_field('agent_property_page', $agent->ID); ?>"><?php echo get_the_title( $agent->ID ); ?></a></strong>
 										<small><?php echo the_field('phone_number', $agent->ID); ?></small>
 										<p><a href="mailto:<?php echo the_field('email', $agent->ID); ?>"><?php echo the_field('email', $agent->ID); ?></a>
 										</p>
@@ -286,9 +296,14 @@
 		<?php } ?>
 		
 	</div>
+	<?php if( !in_array('This property is a community', get_field('community_property'))) { ?>
+		<div class="child-property-container">
+	<?php } ?>
 	<div class="services-container">
-
-		<p class="bread-crumbs"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a> <?php if(in_array('This property is a community', get_field('community_property'))){ echo '/ Community'; } ?> / <a href="<?php echo the_permalink(); ?>"><?php the_title();?></a></p>
+		<?php if( !in_array('This property is a community', get_field('community_property'))) { ?>
+			<h2 class="single-child-property-title"><?php echo the_title(); ?></h2>
+		<?php } ?>
+		<p class="bread-crumbs"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a> <?php if(in_array('This property is a community', get_field('community_property'))){ ?> / <a href="<?php echo get_permalink( 2866 ); ?>">Community</a> <?php } else { ?> / <?php echo implode(', ', get_field('property_type')); ?> <?php } ?> / <a href="<?php echo the_permalink(); ?>"><?php the_title();?></a></p>
 		<?php if( in_array('This property is a community', get_field('community_property'))) { ?>
 			<!-- availability report -->
 			<div class="report-container inner-container is-hidden">
@@ -411,7 +426,7 @@
 						<strong><a href="mailto:<?php echo the_field('email', $agent->ID); ?>">Contact <?php echo get_the_title( $agent->ID ); ?></a></strong>
 						<ul>
 							<li><a href="<?php echo get_permalink( $agent->ID ); ?>"><?php echo get_the_title( $agent->ID ); ?>'s Biography</a></li>
-							<li><a href="#"><?php echo get_the_title( $agent->ID ); ?>'s Properties</a></li>
+							<li><a href="<?php echo the_field('agent_property_page', $agent->ID); ?>"><?php echo get_the_title( $agent->ID ); ?>'s Properties</a></li>
 						</ul>
 					</div>
 				<?php endforeach; ?>
@@ -470,19 +485,29 @@
 
 
 	</div>
+	
 
 		<div class="properties-sidebar-container property-map-sidebar">
 			<a href="javascript:window.print()" class="single-property-print"><img src="<?php bloginfo('url'); ?>/wp-content/uploads/2015/06/Icon-Print.gif"></a>
 			<?php if( !in_array('This property is a community', get_field('community_property'))) { ?>
 			<?php 
-				$images = get_field('property_gallery');
+				$images = get_field('sidebar_gallery');
 				if( $images ): ?>
-				    <div class="portfolio-sidebar-gallery">
-				        <?php foreach( $images as $image ): ?>
-				            <span>
-				                <img src="<?php echo $image['sizes']['large']; ?>" alt="<?php echo $image['alt']; ?>" data-swap="<?php echo $image['sizes']['large']; ?>" class="static-sidebar-image"/>
-				            </span>
-				        <?php endforeach; ?>
+					<div class="sidebar-gallery-container">
+					    <div class="portfolio-sidebar-gallery">
+					        <?php foreach( $images as $image ): ?>
+					            <span>
+					                <img src="<?php echo $image['sizes']['large']; ?>" alt="<?php echo $image['alt']; ?>" data-swap="<?php echo $image['sizes']['large']; ?>" class="static-sidebar-image"/>
+					            </span>
+					        <?php endforeach; ?>
+					    </div>
+					    <div class="slider-nav">
+					        <?php foreach( $images as $image ): ?>
+					            <span>
+					                <img src="<?php echo $image['sizes']['large']; ?>" alt="<?php echo $image['alt']; ?>" data-swap="<?php echo $image['sizes']['large']; ?>" class="static-sidebar-image"/>
+					            </span>
+					        <?php endforeach; ?>
+					    </div>
 				    </div>
 			<?php endif; ?> 
 			<?php } ?>
@@ -490,13 +515,100 @@
 
 			<?php $location = get_field('location');
 			if( !empty($location) ): ?>
-				<div class="acf-map">
+
+				<?php if ( is_single( 430 ) ||  is_single( 2604 ) || is_single( 719 ) || is_single( 721 ) || is_single( 817 ) || is_single( 726 ) || is_single( 699 ) || is_single( 1742 ) || is_single( 712 ) || is_single( 560 )) {  
+					$hidden = 'hidden';
+				 } ?>
+				<div class="Title2-Gray" style="text-align: left; padding-bottom: 5px; margin-top: 10px;">P<span style="font-size: 8pt;">ROPERTY</span> M<span style="font-size: 8pt;">AP</span></div>
+				<div class="acf-map side-map <?php echo $hidden; ?>">
 					<div class="marker" data-lat="<?php echo $location['lat']; ?>" data-lng="<?php echo $location['lng']; ?>"></div>
 				</div>
-				<p><?php echo the_field('address'); ?></p>
-			<?php endif; ?>
+				
+		
+
+<?php if ( is_single( 430 ) ) {     ?>
+ <object type="application/x-shockwave-flash" 
+  data="http://maxtestdomain.com/boyle/wp-content/themes/boyle/InteractiveMaps/Avilla.swf" 
+  width="260" height="300" class="interactive-map">
+  <param name="movie" value="http://maxtestdomain.com/boyle/wp-content/themes/boyle/InteractiveMaps/Avilla.swf" />
+  <param name="quality" value="high"/>
+</object>
+<?php } elseif (is_single( 2604 )){ ?>
+	 <object type="application/x-shockwave-flash" 
+	  data="http://maxtestdomain.com/boyle/wp-content/themes/boyle/InteractiveMaps/BerryFarms.swf" 
+	  width="100%" height="300" class="interactive-map">
+	  <param name="movie" value="http://maxtestdomain.com/boyle/wp-content/themes/boyle/InteractiveMaps/BerryFarms.swf" />
+	  <param name="quality" value="high"/>
+	</object>
+<?php } elseif (is_single( 719 )){ ?>
+	 <object type="application/x-shockwave-flash" 
+	  data="http://maxtestdomain.com/boyle/wp-content/themes/boyle/InteractiveMaps/RidgewayCenter.swf" 
+	  width="100%" height="300" class="interactive-map">
+	  <param name="movie" value="http://maxtestdomain.com/boyle/wp-content/themes/boyle/InteractiveMaps/RidgewayCenter.swf" />
+	  <param name="quality" value="high"/>
+	</object>
+<?php } elseif (is_single( 721 )){ ?>
+	 <object type="application/x-shockwave-flash" 
+	  data="http://maxtestdomain.com/boyle/wp-content/themes/boyle/InteractiveMaps/SchillingFarmsCommunity.swf" 
+	  width="100%" height="300" class="interactive-map">
+	  <param name="movie" value="http://maxtestdomain.com/boyle/wp-content/themes/boyle/InteractiveMaps/SchillingFarmsCommunity.swf" />
+	  <param name="quality" value="high"/>
+	</object>
+<?php } elseif (is_single( 817 )){ ?>
+	 <object type="application/x-shockwave-flash" 
+	  data="http://maxtestdomain.com/boyle/wp-content/themes/boyle/InteractiveMaps/MeridianCoolSprings.swf" 
+	  width="100%" height="300" class="interactive-map">
+	  <param name="movie" value="http://maxtestdomain.com/boyle/wp-content/themes/boyle/InteractiveMaps/MeridianCoolSprings.swf" />
+	  <param name="quality" value="high"/>
+	</object>
+<?php } elseif (is_single( 726 )){ ?>
+	 <object type="application/x-shockwave-flash" 
+	  data="http://maxtestdomain.com/boyle/wp-content/themes/boyle/InteractiveMaps/SpringCreekRanch.swf" 
+	  width="100%" height="300" class="interactive-map">
+	  <param name="movie" value="http://maxtestdomain.com/boyle/wp-content/themes/boyle/InteractiveMaps/SpringCreekRanch.swf" />
+	  <param name="quality" value="high"/>
+	</object>
+<?php } elseif (is_single( 699 )){ ?>
+	 <object type="application/x-shockwave-flash" 
+	  data="http://maxtestdomain.com/boyle/wp-content/themes/boyle/InteractiveMaps/ChadwellatBerryFarms.swf" 
+	  width="100%" height="300" class="interactive-map">
+	  <param name="movie" value="http://maxtestdomain.com/boyle/wp-content/themes/boyle/InteractiveMaps/ChadwellatBerryFarms.swf" />
+	  <param name="quality" value="high"/>
+	</object>
+<?php } elseif (is_single( 1742 )){ ?>
+	 <object type="application/x-shockwave-flash" 
+	  data="http://maxtestdomain.com/boyle/wp-content/themes/boyle/InteractiveMaps/CityParkBrentwood.swf" 
+	  width="100%" height="300" class="interactive-map">
+	  <param name="movie" value="http://maxtestdomain.com/boyle/wp-content/themes/boyle/InteractiveMaps/CityParkBrentwood.swf" />
+	  <param name="quality" value="high"/>
+	</object>
+<?php } elseif (is_single( 712 )){ ?>
+	 <object type="application/x-shockwave-flash" 
+	  data="http://maxtestdomain.com/boyle/wp-content/themes/boyle/InteractiveMaps/HumphreysCenter.swf" 
+	  width="100%" height="300" class="interactive-map">
+	  <param name="movie" value="http://maxtestdomain.com/boyle/wp-content/themes/boyle/InteractiveMaps/HumphreysCenter.swf" />
+	  <param name="quality" value="high"/>
+	</object>
+<?php } elseif (is_single( 560 )){ ?>
+	 <object type="application/x-shockwave-flash" 
+	  data="http://maxtestdomain.com/boyle/wp-content/themes/boyle/InteractiveMaps/TownCenteratBerryFarms.swf" 
+	  width="100%" height="300" class="interactive-map">
+	  <param name="movie" value="http://maxtestdomain.com/boyle/wp-content/themes/boyle/InteractiveMaps/TownCenteratBerryFarms.swf" />
+	  <param name="quality" value="high"/>
+	</object>
+<?php } ?>	
+
+<p><?php echo the_field('address'); ?></p>
+<?php endif; ?>
+<?php if( in_array('This property is a community', get_field('community_property'))) { ?>
+	<span class="map-toggle1">Switch to Street View</span>		
+	<span class="map-toggle2" style="display:none;">Switch to Map View</span>	
+<?php } ?>		
 		</div>
-	
+
+	<?php if( !in_array('This property is a community', get_field('community_property'))) { ?>
+		</div>
+	<?php } ?>
 
 </div>
 <div style="clear: both;"></div>
@@ -511,14 +623,25 @@
 	width: 100%;
 	height: 300px;
 	border: #ccc solid 1px;
-	margin: 20px 0 10px;
+	margin: 0 0 10px;
 }
 
 </style>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script type="text/javascript">
 (function($) {
-
+	$('.map-toggle1').on('click', function(){
+		$('.interactive-map').toggle();
+		$('.side-map').toggle();
+		$(this).hide();
+		$('.map-toggle2').show();
+	});
+	$('.map-toggle2').on('click', function(){
+		$('.interactive-map').toggle();
+		$('.side-map').toggle();
+		$(this).hide();
+		$('.map-toggle1').show();
+	});
 
 	var $property = $(".property-select");
 
@@ -548,9 +671,9 @@ function render_map( $el ) {
 
 	// vars
 	var args = {
-		zoom		: 16,
+		zoom		: 15,
 		center		: new google.maps.LatLng(0, 0),
-		mapTypeId	: google.maps.MapTypeId.HYBRID
+		mapTypeId	: google.maps.MapTypeId.ROADMAP
 	};
 
 	// create map	        	

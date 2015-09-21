@@ -34,6 +34,8 @@ $image = get_field('picture'); ?>
 	// args for residential property types
 	$args = array(
 		'post_type'		=> 'properties',
+		'orderby'	=> 'title',
+		'order'		=> 'ASC',
 		'meta_query'	=> array(
 			'relation'		=> 'AND',
 			array(
@@ -79,17 +81,27 @@ Properties
 				$image_1 = $images[0];  
 				$agents = get_field('agent');	
 			?>
-				<li>
-				<img src="<?php echo $image_1['sizes']['thumbnail']; ?>" alt="<?php echo $image_1['alt']; ?>" class="availability-report-image"/>
-					<strong><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></strong>
-						<?php if($agents) { ?>
-							<?php foreach($agents as $agent): ?>
-								<strong class="pull-right"><a href="mailto:<?php echo the_field('email', $agent->ID); ?>">Contact <?php echo get_the_title( $agent->ID ); ?></a></strong>
-							<?php endforeach; ?>
-						<?php } ?>
-						<p><?php echo the_field('description'); ?></p>
+				<li class="result-item">
+				<div class="pull-left">
+					<a href="<?php the_permalink(); ?>">
+						<img src="<?php echo $image_1['sizes']['thumbnail']; ?>" alt="<?php echo $image_1['alt']; ?>" class="availability-report-image"/>
+					</a>
+					<?php if($agents) { ?>
+					<?php foreach($agents as $agent): ?>
+						<p class="result-item-agent-info">
+							<strong class="result-item-agent"><a href="<?php echo the_field('agent_property_page', $agent->ID); ?>"><?php echo get_the_title( $agent->ID ); ?></a></strong><br>
+							<?php echo the_field('phone_number', $agent->ID); ?><br>
+							<a href="mailto:<?php echo the_field('email', $agent->ID); ?>"><?php echo the_field('email', $agent->ID); ?></a>
+						</p>
+					<?php endforeach; ?>
+					<?php } ?>
+				</div>	
+				<div class="result-content">
+				<strong><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></strong>
+				
+				<p><?php echo the_field('description'); ?></p>
 
-						<?php
+							<?php
 						// check if the repeater field has rows of data
 						if( have_rows('suite_information_acres') ): ?>
 							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
@@ -116,7 +128,7 @@ Properties
 							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
 							    <tbody><tr class="Header">
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
-							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Acres</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Sq. Feet</td>
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
 							    </tr>
 									    
@@ -135,6 +147,7 @@ Properties
 						<?php else :
 							// no rows found
 						endif; ?>
+					</div>
 				</li>
 			<?php endwhile; ?>
 			</ul>

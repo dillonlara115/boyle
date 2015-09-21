@@ -129,6 +129,27 @@ function properties_init() {
 add_action( 'init', 'properties_init' );
 
 
+// Creates videos custom post type
+function videos_init() {
+    $args = array(
+      'label' => 'Videos',
+        'public' => true,
+        'show_ui' => true,
+        'capability_type' => 'post',
+        'hierarchical' => false,
+        'rewrite' => array('slug' => 'videos'),
+        'query_var' => true,
+        'menu_icon' => 'dashicons-video-alt3',
+        'supports' => array(
+            'title',
+            'editor',
+            'thumbnail',
+            'page-attributes',)
+        );
+    register_post_type( 'videos', $args );
+}
+add_action( 'init', 'videos_init' );
+
 // Creates news custom post type
 function news_init() {
     $args = array(

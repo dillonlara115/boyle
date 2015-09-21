@@ -538,6 +538,21 @@ $primary-dark: darken(#355c88, 25%);
 		display: none;
 	}
 }
+
+.visible-mobile { 
+	display: none;
+	@media (max-width: 590px) {
+		display: inline-block; 
+	}
+}
+
+.hidden-mobile { 
+	display: none;
+	@media (min-width: 590px) {
+		display: inline-block; 
+	}
+}
+
 .mobile-icon {
 	font-size: 3em;
 	position: absolute;
@@ -758,3 +773,18 @@ p.search-description {
 	}
 
 }
+
+
+.video-container {
+	display: inline-block;
+	padding: 5px 0;
+	width: 100%;
+	strong {
+		display: block;
+		padding: 5px 0 10px;
+	}	
+	.embed-container {
+		padding-right: 10px;  
+	}
+}
+

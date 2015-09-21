@@ -68,7 +68,11 @@ Template Name: Main Property Portfolio Page
 	        <?php setup_postdata($post); ?>
 	        <p class="featured-property">
 	            <a href="<?php the_permalink(); ?>">
-		            <img src="<?php echo $image_1['url']; ?>" alt="<?php echo $image_1['alt']; ?>" class="featured-property-image" />
+	            	<?php if( $images ) { ?>
+    		            <img src="<?php echo $image_1['url']; ?>" alt="<?php echo $image_1['alt']; ?>" class="featured-property-image" />
+					<?php } else { ?>
+						<?php echo get_the_post_thumbnail( $page->ID, 'thumbnail', array( 'class'	=> "featured-property-image") ); ?>
+					<?php 	} ?> 
 		            <strong><?php the_title(); ?></strong>
 	            </a>
 	            <?php the_field('address'); ?>

@@ -27,7 +27,7 @@ img.logo {
 }
 
 //sidebars
-.services-sidebar-container, .about-sidebar-container, .contact-sidebar-container, .properties-sidebar-container {
+.services-sidebar-container, .about-sidebar-container, .contact-sidebar-container {
 	@media (min-width: 960px) {
 		float: left;
 		text-align: left;
@@ -109,7 +109,9 @@ img.logo {
 	}
 
 }
-
+.properties-sidebar-container {
+	width: 23%;
+}
 
 .contact-sidebar-container {
 	width: 25%;

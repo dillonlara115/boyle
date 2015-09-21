@@ -45,7 +45,8 @@ $('.portfolio-header-gallery').slick({
 	autoplaySpeed: 2000,
 	speed: 500,
 	fade: true,
-	cssEase: 'linear'
+	cssEase: 'linear',
+	pauseOnHover: false
 });
 
 $('.portfolio-sidebar-gallery').slick({
@@ -53,8 +54,20 @@ $('.portfolio-sidebar-gallery').slick({
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 2000,
-  dots: true,
-  
+  dots: false,
+  fade: true,
+  speed: 1000,
+  arrows: false,
+  pauseOnHover: false,
+  asNavFor: '.slider-nav'
+});
+$('.slider-nav').slick({
+  slidesToShow: 2,
+  slidesToScroll: 1,
+  asNavFor: '.portfolio-sidebar-gallery',
+  dots: false,
+  centerMode: true,
+  focusOnSelect: true
 });
 
 function toggleViews() {

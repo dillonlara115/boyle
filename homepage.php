@@ -22,7 +22,13 @@ Template Name: Home
                 </a>
             </div>
             <div class="Text-Black-Small homepage-sub-section-content">
-                <a href="<?php echo get_permalink( 2580 ); ?>">
+                <div class="hidden-mobile">
+                    <div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">G</span>REATER <span style="font-size: 9pt;">M</span>EMPHIS:</div>
+                    <div>
+                        <div class="homepage-sub-section-content-text">View our Memphis properties.</div>
+                    </div>
+                </div>
+                <a href="<?php echo get_permalink( 2580 ); ?>" class="visible-mobile">
                     <div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">G</span>REATER <span style="font-size: 9pt;">M</span>EMPHIS:</div>
                     <div>
                         <div class="homepage-sub-section-content-text">View our Memphis properties.</div>
@@ -42,9 +48,20 @@ Template Name: Home
                 </a>
             </div>
             <div class="Text-Black-Small homepage-sub-section-content">
-                <a href="<?php echo get_permalink( 2583 ); ?>"><div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">G</span>REATER <span style="font-size: 9pt;">N</span>ASHVILLE:</div>
-                <div class="homepage-sub-section-content-text">View our Nashville Properties.<br />
-                </div></a>
+                <div class="hidden-mobile">
+                    <div class="Title-Blue-Small homepage-sub-section-content-title">
+                        <span style="font-size: 9pt;">G</span>REATER <span style="font-size: 9pt;">N</span>ASHVILLE:
+                    </div>
+                    <div class="homepage-sub-section-content-text">View our Nashville Properties.<br />
+                    </div>
+                </div>
+                <a href="<?php echo get_permalink( 2583 ); ?>"  class="visible-mobile">
+                    <div class="Title-Blue-Small homepage-sub-section-content-title">
+                        <span style="font-size: 9pt;">G</span>REATER <span style="font-size: 9pt;">N</span>ASHVILLE:
+                    </div>
+                    <div class="homepage-sub-section-content-text">View our Nashville Properties.<br />
+                    </div>
+                </a>
                 <a href="<?php echo get_permalink( 2583 ); ?>" class="Text-Blue-Small bucket-cta">&raquo&nbsp;Click here to read</a>
                                     
             </div>  
@@ -57,9 +74,16 @@ Template Name: Home
                 </a>
             </div>
             <div class="Text-Black-Small homepage-sub-section-content">
-                <a href="<?php echo get_permalink( 985 ); ?>"><div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">A</span>VAILABILITY <span style="font-size: 9pt;">R</span>EPORT:</div>
-                <div class="homepage-sub-section-content-text">View our availability report.<br />   
-                </div>  </a>
+                <div class="hidden-mobile">
+                     <div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">A</span>VAILABILITY <span style="font-size: 9pt;">R</span>EPORT:</div>
+                    <div class="homepage-sub-section-content-text">View our availability report.<br />   
+                    </div>  
+                </div>
+                <a href="<?php echo get_permalink( 985 ); ?>"  class="visible-mobile">
+                    <div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">A</span>VAILABILITY <span style="font-size: 9pt;">R</span>EPORT:</div>
+                    <div class="homepage-sub-section-content-text">View our availability report.<br />   
+                    </div>  
+                </a>
                 <a href="<?php echo get_permalink( 985 ); ?>" class="Text-Blue-Small bucket-cta">&raquo&nbsp;Click here to read</a>
                                   
             </div>

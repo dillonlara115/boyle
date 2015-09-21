@@ -52,12 +52,35 @@
 		);
 		// query
 		$the_query = new WP_Query( $args );
+
+		$mapargs = array(
+			'post_type'		=> 'properties',
+			'orderby'	=> 'title',
+			'order'		=> 'ASC',
+			'posts_per_page'	=> -1,
+			'meta_query'	=> array(
+				'relation'		=> 'AND',
+				array(
+					'key'		=> 'property_type',
+					'value'		=> $value,
+					'compare'	=> 'LIKE'
+				),
+				array(
+					'key'		=> 'region_name',
+					'value'		=> 'Greater Memphis',
+					'compare'	=> 'LIKE'
+				)
+			)
+		);
+		// query
+		$mapquery = new WP_Query( $mapargs );
 		?>
-		<?php if( $the_query->have_posts() ): ?>
-			<a href="http://maxtestdomain.com/availability/greater-memphis/<?php echo $url; ?>">Availability Report</a>
+		<?php if( $mapquery->have_posts() ): ?>
+			<a href="http://maxtestdomain.com/boyle/search-availability/<?php echo $url; ?>" class="search-availability-link">Search Available Properties</a>
+			<a href="http://maxtestdomain.com/boyle/availability/all-regions/<?php echo $url; ?>" class="availability-report-link">Availability Report</a>
 			<hr />
 			<div class="acf-map">
-				<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+				<?php while ( $mapquery->have_posts() ) : $mapquery->the_post(); ?>
 					<?php
 						$location = get_field('location');
 						$gtemp = explode (',',  implode($location));
@@ -67,7 +90,8 @@
 						$field = get_field_object('availability');
 						$value = get_field('availability');
 						$label = $field['choices'][ $value ];
-						
+						$images = get_field('property_gallery');
+						$image_1 = $images[0];  
 						if($label == 'Not Available' ) {
 							$status = 'not_available';
 						} else {
@@ -75,9 +99,19 @@
 						}
 					?>
 					<div class="marker" data-lat="<?php echo $location[lat]; ?>" data-lng="<?php echo $location[lng]; ?>" data-col="<?php echo $status; ?>">
-						<p class="address"><?php the_title(); ?></p>		
+						<div class="pull-left">
+							<?php if( $images ) { ?>
+    		            		<img src="<?php echo $image_1['sizes']['thumbnail']; ?>" alt="<?php echo $image_1['alt']; ?>" class="availability-report-image"/>
+							<?php } else { ?>
+								<?php echo get_the_post_thumbnail( $page->ID, 'thumbnail', array( 'class'	=> "availability-report-image") ); ?>
+							<?php 	} ?> 
+							
+						</div>
+						<p class="address"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></p>
+						<p><?php echo the_field('address'); ?></p>		
 					</div>		
 				<?php endwhile; ?>
+				
 			</div>
 			<div class="pin-drop-text">
 				<div class="pin-drop-inner-content"><img src="http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/08/GoogleMaps-Marker-GreenDot.png"><span class="green">Property Is Available</span> </div>
@@ -91,20 +125,31 @@
 				$image_1 = $images[0];  
 				$agents = get_field('agent');	
 			?>
-				<li>
+				<li class="result-item">
 				<div class="pull-left">
-				<img src="<?php echo $image_1['sizes']['thumbnail']; ?>" alt="<?php echo $image_1['alt']; ?>" class="availability-report-image"/>
+					<a href="<?php the_permalink(); ?>">
+						<?php if( $images ) { ?>
+		            		<img src="<?php echo $image_1['sizes']['thumbnail']; ?>" alt="<?php echo $image_1['alt']; ?>" class="availability-report-image"/>
+						<?php } else { ?>
+							<?php echo get_the_post_thumbnail( $page->ID, 'thumbnail', array( 'class'	=> "availability-report-image") ); ?>
+						<?php 	} ?> 
+					</a>
+					<?php if($agents) { ?>
+					<?php foreach($agents as $agent): ?>
+						<p class="result-item-agent-info">
+							<strong class="result-item-agent"><a href="<?php echo the_field('agent_property_page', $agent->ID); ?>"><?php echo get_the_title( $agent->ID ); ?></a></strong><br>
+							<?php echo the_field('phone_number', $agent->ID); ?><br>
+							<a href="mailto:<?php echo the_field('email', $agent->ID); ?>"><?php echo the_field('email', $agent->ID); ?></a>
+						</p>
+					<?php endforeach; ?>
+					<?php } ?>
 				</div>	
 				<div class="result-content">
-					<strong><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></strong>
-						<?php if($agents) { ?>
-							<?php foreach($agents as $agent): ?>
-								<strong class="pull-right"><a href="mailto:<?php echo the_field('email', $agent->ID); ?>">Contact <?php echo get_the_title( $agent->ID ); ?></a></strong>
-							<?php endforeach; ?>
-						<?php } ?>
-						<p><?php echo the_field('description'); ?></p>
+				<strong><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></strong>
+				
+				<p><?php echo the_field('description'); ?></p>
 
-						<?php
+							<?php
 						// check if the repeater field has rows of data
 						if( have_rows('suite_information_acres') ): ?>
 							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
@@ -118,7 +163,7 @@
 								$attachment = get_sub_field('lot_file'); ?>
 
 						         <tr class="Item">
-							        <td style="text-align: center; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
+							        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
 							        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size'); ?></td>
 							        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
 							    </tr> 
@@ -130,8 +175,8 @@
 						<?php elseif( have_rows('suite_information_feet') ): ?>
 							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
 							    <tbody><tr class="Header">
-							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
-							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Sq. Ft.</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Suite</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Sq. Feet</td>
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
 							    </tr>
 									    
@@ -139,7 +184,7 @@
 								$attachment = get_sub_field('lot_file'); ?>
 
 						         <tr class="Item">
-							        <td style="text-align: center; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
+							        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
 							        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size'); ?></td>
 							        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
 							    </tr> 
@@ -150,7 +195,7 @@
 						<?php else :
 							// no rows found
 						endif; ?>
-						</div>
+					</div>
 				</li>
 			<?php endwhile; ?>
 			</ul>

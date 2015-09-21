@@ -93,12 +93,6 @@ Template Name: Memphis Landing Page
 
 		<hr>
 
-		<h3><?php echo the_title(); ?> History</h3>
-		<div class="Text-Blue">
-			<?php the_field('history'); ?>
-		</div>
-
-		<hr>
 
 		<h3><?php echo the_title(); ?> News</h3>
 				<?php 

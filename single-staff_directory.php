@@ -63,12 +63,13 @@ $image = get_field('picture'); ?>
 		<ul>
 		<?php foreach( $news as $item ): ?>
 			<li>
-				<a href="<?php echo get_permalink( $item->ID ); ?>">
-					<?php echo get_the_title( $item->ID ); ?>
-				</a>
 				<?php if(get_field('date', $item->ID)) { ?>
 					<strong class="news-date"><?php the_field('date', $item->ID); ?></strong>
 				<?php } ?>
+				<a href="<?php echo get_permalink( $item->ID ); ?>">
+					<?php echo get_the_title( $item->ID ); ?>
+				</a>
+				
 				<hr>
 			</li>
 		<?php endforeach; ?>

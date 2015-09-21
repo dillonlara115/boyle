@@ -56,7 +56,11 @@
 			?>
 			<li>
 				<div class="pull-left">
-					<img src="<?php echo $image_1['sizes']['thumbnail']; ?>" alt="<?php echo $image_1['alt']; ?>" class="availability-report-image"/>
+					<?php if( $images ) { ?>
+            		<img src="<?php echo $image_1['sizes']['thumbnail']; ?>" alt="<?php echo $image_1['alt']; ?>" class="availability-report-image"/>
+				<?php } else { ?>
+					<?php echo get_the_post_thumbnail( $page->ID, 'thumbnail', array( 'class'	=> "availability-report-image") ); ?>
+				<?php 	} ?> 
 				</div>	
 				<div class="result-content">
 				<strong><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></strong>

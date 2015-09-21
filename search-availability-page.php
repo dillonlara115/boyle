@@ -4,7 +4,7 @@ Template Name: Search Availability Page
 */
 ?>
 <?php 
-
+	
 	 // starting the session
 	 session_start();
 	 	
@@ -28,9 +28,14 @@ Template Name: Search Availability Page
 		 $_SESSION['homePrice'] = $_POST['homePrice'];
 		 $_SESSION['lotNumberInput'] = $_POST['lotNumberInput'];
 		 $_SESSION['lotAddressInput'] = $_POST['lotAddressInput'];
+
 	 } 
+	
 ?> 
+
 <?php get_header(); ?>
+
+<?php $subjects_array = explode("_", $_GET["transaction"]); ?>
 
 <div id="content" class="static-container static-contact-container" >
 	<?php the_post(); ?>
@@ -43,8 +48,6 @@ Template Name: Search Availability Page
 				$metro_area = $_GET['metroarea']; 
 				$transaction = $_GET['transaction']; 
 				$designatedUses = $_GET['designatedUses']; 
-				$industrialType = $_GET['industrialType']; 
-				
 		?>
 
 		<div class="search-availability-content">
@@ -233,14 +236,17 @@ Template Name: Search Availability Page
 							if( $field ) {
 								
 								foreach( $field['choices'] as $k => $v )
-								{
-									echo '<input type="checkbox" name="transaction[' . $k . ']"  class="filter" data-filter="' . $k . '"  value="' . $k . '"/><small>' . $v . '</small>';
-								}
+								{ ?>
+									<input type="checkbox" name="transaction['<?php echo $k ?>']"  class="filter" data-filter="<?php echo $k ?>"  value="<?php echo $k ?>" <?php if (in_array($k, $_SESSION['transaction'])) {print 'checked';}  ?>/><small><?php echo $v ?></small>
+								<?php }
 									
 							} ?>
+							
 						</div>
 						<br>
+
 						<?php if (is_page(314) ){ ?> 
+						
 						<div class="search-filters">
 							<strong>Type: </strong>
 							<?php 
@@ -254,13 +260,20 @@ Template Name: Search Availability Page
 							if( $field ) {
 								
 								foreach( $field['choices'] as $k => $v )
-								{
-									echo '<input type="checkbox" name="industrialType[' . $k . ']"  class="filter" data-filter="' . $k . '"  value="' . $k . '"/><small>' . $v . '</small>';
+								{ ?>
+									<input type="checkbox" name="industrialType['<?php echo $k ?>']"  class="filter" data-filter="<?php echo $k ?>"  value="<?php echo $k ?>" <?php if (in_array($k, $_SESSION['industrialType'])) {print 'checked';}  ?>/><small> <?php echo $v ?></small>
+								
+									
+								<?php 
 								}
+
+								
 									
 							} ?>
+							
 							</div>
 							<br>
+							
 						<?php } ?>
 						<?php if (is_page(312) ){ ?>
 								
@@ -491,7 +504,8 @@ Template Name: Search Availability Page
 					} elseif ( is_page( 310) ) { 
 						$value = 'Retail';
 					} ?>
-
+					
+				
 					
 					<?php if( $_SESSION['squareFeet'] == '0 - 5000') { 
 						$sqValue = array(0, 5000);
@@ -612,11 +626,11 @@ Template Name: Search Availability Page
 					<?php 
 
 						$transactionQuery = array();
-						if(isset($transaction_value)){
+						if(isset($_SESSION['transaction'])){
 							$transactionQuery[] = array(
 								'key'		=> 'transaction_type',
-								'value'		=>  $transaction_value,
-								'compare'	=> 'LIKE'
+								'value'		=>  $subjects_array,
+								'compare'	=> 'IN'
 							);
 						};
 						$squareFeetQuery = array();
@@ -711,10 +725,10 @@ Template Name: Search Availability Page
 							);
 						};
 						$industrialTypeQuery = array();
-						if(isset($industrialType)){
+						if(isset($_SESSION['industrialType'])){
 							$industrialTypeQuery[] = array(
 								'key'		=> 'industrial_type',
-								'value'		=>  $industrialType,
+								'value'		=>  $_SESSION['industrialType'],
 								'compare'	=> 'LIKE'
 							);
 						};
@@ -777,11 +791,54 @@ Template Name: Search Availability Page
 								),
 							) 
 						);
+
+						$mapposts2 = new WP_Query( array( 
+							'post_type' 	=> 'properties',
+							'orderby' => $orderResults,
+							'posts_per_page'	=> -1,
+							'paged'		=> $paged,
+							'order'   => 'ASC',
+							'meta_query'	=> array(
+								'relation'	=> 'AND',
+								array(
+									'key'		=> 'property_type',
+									'value'		=> $value,
+									'compare'	=> 'LIKE'
+									),
+								array(
+									'key'		=> 'activate_property',
+									'value'		=> 'This property is active',
+									'compare'	=> 'LIKE'
+									),
+								array(
+									'key'		=> 'region_name',
+									'value'		=> $regionName,
+									'compare'	=> 'LIKE'
+									),
+								$metroTypeQuery,
+								$residentialTypeQuery,
+								$transactionQuery,
+								$squareFeetQuery,
+								$lotSizeQuery,
+								$lotPriceQuery,
+								$designatedUsesQuery,
+								$landLotSizeQuery,
+								$landLotPriceQuery,
+								$numberOfRoomsQuery,
+								$industrialTypeQuery,
+								$homePriceQuery,
+								$lotNumberQuery,
+								$lotAddressQuery
+								),
+							) 
+						);
+
 					?>
+
 					
 					<div class="acf-map">
-					<?php if( $mapposts->have_posts() ): ?>
-						<?php while ( $mapposts->have_posts() ) : $mapposts->the_post(); ?>
+					<?php if( $mapposts2->have_posts() ): ?>
+						<?php while ( $mapposts2->have_posts() ) : $mapposts2->the_post(); ?>
 						<?php
 							$location = get_field('location');
 							$gtemp = explode (',',  implode($location));
@@ -814,7 +871,6 @@ Template Name: Search Availability Page
 	<div class="search-inner-form">
 	<strong>Results Per Page:</strong>
 	<select name="resultsPerPage" class="resultsPerPageForm">
-		<option class="filter" name="resultsPerPage" value="...">...</option>
 		<option class="filter" name="resultsPerPage" value="15">15</option>
 		<option class="filter" name="resultsPerPage" value="25">25</option>
 		<option class="filter" name="resultsPerPage" value="50">50</option>
@@ -869,7 +925,11 @@ Template Name: Search Availability Page
 			<li class="result-item">
 				<div class="pull-left">
 					<a href="<?php the_permalink(); ?>">
-						<img src="<?php echo $image_1['sizes']['thumbnail']; ?>" alt="<?php echo $image_1['alt']; ?>" class="availability-report-image"/>
+						<?php if( $images ) { ?>
+		            		<img src="<?php echo $image_1['sizes']['thumbnail']; ?>" alt="<?php echo $image_1['alt']; ?>" class="availability-report-image"/>
+						<?php } else { ?>
+							<?php echo get_the_post_thumbnail( $page->ID, 'thumbnail', array( 'class'	=> "availability-report-image") ); ?>
+						<?php 	} ?> 
 					</a>
 					<?php if($agents) { ?>
 					<?php foreach($agents as $agent): ?>
@@ -912,7 +972,7 @@ Template Name: Search Availability Page
 						<?php elseif( have_rows('suite_information_feet') ): ?>
 							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
 							    <tbody><tr class="Header">
-							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Suite</td>
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Sq. Feet</td>
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
 							    </tr>
