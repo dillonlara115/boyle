@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-<div class="Title-Blue" style="text-align: left;margin: 10px 0 15px;">Search Boyle.com:</div>
+<div class="Title-Blue search-title" style="text-align: left;margin: 10px 0 15px;"><img src="http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/04/Icon-MagnifyingGlass.gif" alt="Search Properties">Search Boyle.com:</div>
 <div id="content" class="property-type-list-content property-list-container">
 	<?php if(have_posts()) : ?>
 

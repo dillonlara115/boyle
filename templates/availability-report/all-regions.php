@@ -1,4 +1,16 @@
-<?php wp_nav_menu( array('menu' => 'Availability Report All Regions Menu' )); ?>
+<?php wp_nav_menu( array('menu' => 'Availability Report All Regions Menu', 'container_class' => 'hidden-mobile' )); ?>
+<div class="visible-mobile">
+	<strong>Select a Property Type: </strong>
+	<?php
+    	wp_nav_menu( array(
+	    	'menu' => 'Availability Report All Regions Menu',
+	        'theme_location' => 'mobile-nav',
+	        'items_wrap'     => '<select id="drop-nav"><option value="">Select a page...</option>%3$s</select>',
+	        'walker'  => new Walker_Nav_Menu_Dropdown())
+        );
+	?>
+	<br>
+</div>
 <div class="property-type-list-content property-list-container">
 	<h2 class="property-p-title"><?php the_title(); ?></h2>
 
@@ -41,6 +53,11 @@
 					'key'		=> 'activate_property',
 					'value'		=> 'This property is active',
 					'compare'	=> 'LIKE'
+				),
+				array(
+					'key'		=> 'availability',
+					'value'		=> 'available',
+					'compare'	=> '='
 				),
 				array(	
 					'relation' => 'OR',
@@ -164,14 +181,14 @@ if($the_query->max_num_pages>1){?>
     <p class="navrechts">
     <?php
       if ($paged > 1) { ?>
-        <a href="<?php echo '?paged=' . ($paged -1); //prev link ?>"><</a>
+        <a href="<?php echo '?paged=' . ($paged -1); //prev link ?>">«</a>
                         <?php }
     for($i=1;$i<=$the_query->max_num_pages;$i++){?>
         <a href="<?php echo '?paged=' . $i; ?>" <?php echo ($paged==$i)? 'class="selected"':'';?>><?php echo $i;?></a>
         <?php
     }
     if($paged < $the_query->max_num_pages){?>
-        <a href="<?php echo '?paged=' . ($paged + 1); //next link ?>">></a>
+        <a href="<?php echo '?paged=' . ($paged + 1); //next link ?>">»</a>
     <?php } ?>
     </p>
 <?php } ?>

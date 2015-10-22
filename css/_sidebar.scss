@@ -115,7 +115,10 @@ img.logo {
 
 .contact-sidebar-container {
 	width: 25%;
-		.textwidget {
+	@media (max-width: 960px) {
+		width: 100%;
+	}
+	.textwidget {
 		font-size: 12px;
 		text-align: left;
 		padding: 0.5em;

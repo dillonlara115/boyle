@@ -21,16 +21,23 @@ Template Name: Insurance Page
 <ul class="static-expandable-content">
 
 				<li>
-					<h3 data-toggle-title="closed">Nashville Team</h3>
+					<h3 data-toggle-title="closed">Memphis Team</h3>
 					<div class="toggle-content is-hidden">	
-						<?php $query = new WP_Query( array( 'post_type' => 'staff_directory' ) );
+						<?php $query = new WP_Query( 
+							array( 
+								'post_type' => 'staff_directory', 
+								'meta_key'	=>	'last_name',
+								'orderby'	=>	'meta_value',
+								'order'		=>	'ASC' 
+								) 
+							);
 						if ( $query->have_posts() ) :
 							while ( $query->have_posts() ) : $query->the_post(); ?>
 						<div class="staff-container">
 							<?php
 							$values = get_field('general_tag');
 							if( in_array( "Insurance", get_field('general_tag')) )
-								{ if( get_field("office") == 'Boyle Nashville, LLC') {
+								{ 
 									$image = get_field('picture'); ?>
 									<div class="staff-item">
 										<div class="staff-item-image">
@@ -46,7 +53,7 @@ Template Name: Insurance Page
 											</div>
 										</div>
 									</div>
-									<?php } } ?>
+									<?php }  ?>
 								</div>
 							<?php endwhile; wp_reset_postdata(); ?>
 							<!-- show pagination here -->

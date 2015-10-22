@@ -19,7 +19,7 @@ hr
 	font-size: 7pt;
 	text-transform: uppercase;
 	width: auto;
-	padding: 1em 4em;
+	padding: 1em 10.3em;
 	text-align: center;
 	display: inline-block;
 	.lte9 & {
@@ -56,12 +56,24 @@ hr
 
 		}
 	}
+	&:first-child {
+		padding-left: 40px;
+	}
+	&:last-child {
+		padding-right: 0;
+	}
 
 }
 
 .header-nav-primary-sub {
 	.TopNav {
-		padding: 1em 2.7em;
+		padding: 1em 3.5em;
+		&:first-child {
+			padding-left: 0;
+		}
+		&:last-child {
+			padding-right: 0;
+		}
 	}
 }
 

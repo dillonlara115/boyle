@@ -15,6 +15,7 @@ Template Name: Memphis Landing Page
         <div class="homepage-sub">
            
         <div class="homepage-sub-section landing-page-sub-section" >
+        	<img src="http://maxtestdomain.com/boyle/wp-content/themes/boyle/images/Icons/Icon-Trees.png" alt="Company History" />
         	<div class="Text-Black-Small">
 	            <div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">S</span>EARCH <span style="font-size: 9pt;">M</span>EMPHIS:</div>
 	            <div>
@@ -26,6 +27,7 @@ Template Name: Memphis Landing Page
         </div>
                 
         <div class="homepage-sub-section landing-page-sub-section" >
+        	<img src="http://maxtestdomain.com/boyle/wp-content/themes/boyle/images/Icons/Icon-Trees.png" alt="Company History" />
             <div class="Text-Black-Small">
                 <div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">P</span>ROPERTY <span style="font-size: 9pt;">P</span>ORTFOLIO:</div>
                 <div class="homepage-sub-section-content-text">View our Memphis Properties.<br />
@@ -36,6 +38,7 @@ Template Name: Memphis Landing Page
           <i class="mobile-icon"></i> 
         </div>
         <div class="homepage-sub-section landing-page-sub-section" >
+        <img src="http://maxtestdomain.com/boyle/wp-content/themes/boyle/images/Icon-Book.png" alt="Company History" />
             <div class="Text-Black-Small">
                 <div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">M</span>EMPHIS <span style="font-size: 9pt;">T</span>EAM:</div>
                 <div class="homepage-sub-section-content-text">Meet our Memphis Team.<br />

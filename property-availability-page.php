@@ -11,7 +11,7 @@ Template Name: Availability Report Page
 	
 	<div id="post-<?php the_ID(); ?>" class="search-availability-container" >
 		<?php the_content(); ?>
-		<div class="pull-left">
+		<div class="availability-report pull-left">
 			<img src="http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/05/Icon-Report.png" alt="Availability Report" title="Availability Report" class="header-image">
 			<h1 class="contact-page-title">Availability Report:</h1>
 			<p class="contact-page-text">Select the tab of the property type for which you are interested in seeing properties.</p>
@@ -19,8 +19,20 @@ Template Name: Availability Report Page
 		<a href="javascript:window.print()" class="single-property-print pull-right"><img src="<?php bloginfo('url'); ?>/wp-content/uploads/2015/06/Icon-Print.gif"></a>
 		<div class="property-sub-navigation">
 
-			<?php wp_nav_menu( array('menu' => 'Availability Report Regions Menu' )); ?>
+			<?php wp_nav_menu( array('menu' => 'Availability Report Regions Menu', 'container_class' => 'hidden-mobile'  )); ?>
 
+		</div>
+		<div class="visible-mobile">
+			<strong>Select a Region: </strong>
+			<?php
+		    	wp_nav_menu( array(
+			    	'menu' => 'Availability Report Regions Menu',
+			        'theme_location' => 'mobile-nav',
+			        'items_wrap'     => '<select id="drop-nav"><option value="">Select a page...</option>%3$s</select>',
+			        'walker'  => new Walker_Nav_Menu_Dropdown())
+		        );
+			?>
+			<br>
 		</div>
 
 		<div class="search-availability-content">

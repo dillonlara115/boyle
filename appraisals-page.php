@@ -22,7 +22,14 @@ Template Name: Appraisals Page
 				<li>
 					<h3 data-toggle-title="closed">Memphis Team</h3>
 					<div class="toggle-content is-hidden">	
-						<?php $query = new WP_Query( array( 'post_type' => 'staff_directory', 'orderby'=>'title','order'=>'ASC' ) );
+						<?php $query = new WP_Query( 
+							array( 
+								'post_type' => 'staff_directory', 
+								'meta_key'	=>	'last_name',
+								'orderby'	=>	'meta_value',
+								'order'		=>	'ASC' 
+								) 
+							);
 						if ( $query->have_posts() ) :
 							while ( $query->have_posts() ) : $query->the_post(); ?>
 						<div class="staff-container">

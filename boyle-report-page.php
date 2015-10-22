@@ -20,6 +20,8 @@ Template Name: Boyle Report Page
 		// args for residential property types
 				$args = array(
 					'post_type'		=> 'news',
+					'order'                  => 'DESC',
+					'orderby'                => 'date',
 					'meta_key'		=> 'boyle_report',
 					'meta_value'	=> 'Yes'
 

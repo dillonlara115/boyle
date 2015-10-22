@@ -1,4 +1,15 @@
-<?php wp_nav_menu( array('menu' => 'Property Portfolio All Regions Menu' )); ?>
+<?php wp_nav_menu( array('menu' => 'Property Portfolio All Regions Menu', 'container_class' => 'hidden-mobile' )); ?>
+<div class="visible-mobile">
+	<strong>Select a Property Type: </strong>
+	<?php
+    	wp_nav_menu( array(
+	    	'menu' => 'Property Portfolio All Regions Menu',
+	        'theme_location' => 'mobile-nav',
+	        'items_wrap'     => '<select id="drop-nav"><option value="">Select a page...</option>%3$s</select>',
+	        'walker'  => new Walker_Nav_Menu_Dropdown())
+        );
+	?>
+</div>
 <div class="property-type-list-content property-list-container">
 	<?php if ( is_page(1512) ) {  
 		$value = array('Residential', 'Hotels', 'Land', 'Mixed-Use', 'Industrial', 'Retail', 'Office');
@@ -117,7 +128,7 @@
 						$label = $field['choices'][ $value ];
 						$images = get_field('property_gallery');
 						$image_1 = $images[0];  
-						if($label == 'Not Available' ) {
+						if($label == 'not_available' ) {
 							$status = 'not_available';
 						} else {
 							$status = 'available';
@@ -155,9 +166,11 @@
 					<a href="<?php the_permalink(); ?>">
 						<?php if( $images ) { ?>
 		            		<img src="<?php echo $image_1['sizes']['thumbnail']; ?>" alt="<?php echo $image_1['alt']; ?>" class="availability-report-image"/>
-						<?php } else { ?>
+						<?php } elseif (has_post_thumbnail()) { ?>
 							<?php echo get_the_post_thumbnail( $page->ID, 'thumbnail', array( 'class'	=> "availability-report-image") ); ?>
-						<?php 	} ?> 
+						<?php 	} else { ?>
+							<img src="http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/09/No-Photo-Available.gif" class="availability-report-image"/>
+						<?php } ?> 
 					</a>
 					<?php if($agents) { ?>
 					<?php foreach($agents as $agent): ?>
@@ -231,14 +244,14 @@ if($the_query->max_num_pages>1){?>
     <p class="navrechts">
     <?php
       if ($paged > 1) { ?>
-        <a href="<?php echo '?paged=' . ($paged -1); //prev link ?>"><</a>
+        <a href="<?php echo '?paged=' . ($paged -1); //prev link ?>">«</a>
                         <?php }
     for($i=1;$i<=$the_query->max_num_pages;$i++){?>
         <a href="<?php echo '?paged=' . $i; ?>" <?php echo ($paged==$i)? 'class="selected"':'';?>><?php echo $i;?></a>
         <?php
     }
     if($paged < $the_query->max_num_pages){?>
-        <a href="<?php echo '?paged=' . ($paged + 1); //next link ?>">></a>
+        <a href="<?php echo '?paged=' . ($paged + 1); //next link ?>">»</a>
     <?php } ?>
     </p>
 <?php } ?>

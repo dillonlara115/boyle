@@ -1,4 +1,16 @@
-<?php wp_nav_menu( array('menu' => 'News Nashville Menu' )); ?>
+<?php wp_nav_menu( array('menu' => 'News Nashville Menu', 'container_class' => 'hidden-mobile'  )); ?>
+<div class="visible-mobile">
+	<strong>Select a Property Type: </strong>
+	<?php
+    	wp_nav_menu( array(
+	    	'menu' => 'News Nashville Menu',
+	        'theme_location' => 'mobile-nav',
+	        'items_wrap'     => '<select id="drop-nav"><option value="">Select a page...</option>%3$s</select>',
+	        'walker'  => new Walker_Nav_Menu_Dropdown())
+        );
+	?>
+	<br>
+</div>
 <div class="property-type-list-content news-list-container">
 	<?php if ( is_page(1933) ) {  
 		$value = array('Residential', 'Hotels', 'Land', 'Mixed Use', 'Industrial', 'Retail', 'Office', 'Corporate');
@@ -72,14 +84,14 @@
 		    <p class="navrechts">
 		    <?php
 		      if ($paged > 1) { ?>
-		        <a href="<?php echo '?paged=' . ($paged -1); //prev link ?>"><</a>
+		        <a href="<?php echo '?paged=' . ($paged -1); //prev link ?>">«</a>
 		                        <?php }
 		    for($i=1;$i<=$the_query->max_num_pages;$i++){?>
 		        <a href="<?php echo '?paged=' . $i; ?>" <?php echo ($paged==$i)? 'class="selected"':'';?>><?php echo $i;?></a>
 		        <?php
 		    }
 		    if($paged < $the_query->max_num_pages){?>
-		        <a href="<?php echo '?paged=' . ($paged + 1); //next link ?>">></a>
+		        <a href="<?php echo '?paged=' . ($paged + 1); //next link ?>">»</a>
 		    <?php } ?>
 		    </p>
 		<?php } ?>

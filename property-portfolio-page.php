@@ -8,7 +8,18 @@ Template Name: Property Portfolio Page
 <div class="static-header-image-container">
 	<?php echo get_the_post_thumbnail( $page->ID, 'large', array( 'class'	=> "static-header-image") ); ?>
 </div>
-<?php wp_nav_menu( array('menu' => 'Property Location Menu' )); ?>
+<div class="visible-mobile">
+						<strong>Property Type: </strong>
+						<?php
+					    	wp_nav_menu( array(
+						    	'menu' => 'Property Location Menu',
+						        'theme_location' => 'mobile-nav',
+						        'items_wrap'     => '<select id="drop-nav"><option value="">Select a page...</option>%3$s</select>',
+						        'walker'  => new Walker_Nav_Menu_Dropdown())
+					        );
+						?>
+					</div><br>
+<?php wp_nav_menu( array('menu' => 'Property Location Menu' 'container_class' => 'hidden-mobile')); ?>
 
 <div id="content" class="static-container static-contact-container" >
 	<?php the_post(); ?>

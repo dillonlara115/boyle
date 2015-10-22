@@ -14,7 +14,7 @@ $posts = get_posts(array(
 	'meta_value'	=> 'Yes'
 ));
 
-if( $posts ) { ?>
+if( get_field('boyle_report') == 'Yes' ) { ?>
     <h1 class="Title-Blue"><?php the_title(); ?></h1>
     <div class="pull-left report-left">
     	<?php echo get_the_post_thumbnail( $page->ID, 'large', array( 'class'	=> "report-image") ); ?>

@@ -16,8 +16,15 @@ Template Name: Nashville Team Page
 
 		<div class="static-pages-content">
 			<?php the_content(); ?>
-			<?php	$query = new WP_Query( array( 'post_type' => 'staff_directory', 'orderby'=>'title','order'=>'ASC') );
-				if ( $query->have_posts() ) : ?>	
+			<?php $query = new WP_Query( 
+							array( 
+								'post_type' => 'staff_directory', 
+								'meta_key'	=>	'last_name',
+								'orderby'	=>	'meta_value',
+								'order'		=>	'ASC' 
+								) 
+							);
+						if ( $query->have_posts() ) :?>	
 			<ul class="static-expandable-content">
 				<li>
 					<h3 data-toggle-title="closed">Executive Management</h3>
@@ -51,7 +58,7 @@ Template Name: Nashville Team Page
 				<li>
 					<h3 data-toggle-title="closed">Office Division</h3>
 					<div class="toggle-content is-hidden">
-						<p class="content-left">Meet our Boyle Nashville office properties team. We believe that anyone can find space, but we take pride in finding the right space at the right time. In order to do this, we bring a strong portfolio of our own properties to the table, with a broad range of locations and price ranges to suit every need. Each client is treated with the same level of importance, from an elegant Class-A office building, or custom headquarters, to a 1,500-square-foot user with a specific need. Boyle combines world-class service with local knowledge and expertise in management and leasing, so make your next office lease as simple and seamless as possible by calling Jeff or Thomas.</p><img src="http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/04/Office-Team_Jeff-Haynes_Thomas-McDaniel.jpg" class="image-right" />
+						<p>Meet our Boyle Nashville office properties team. We believe that anyone can find space, but we take pride in finding the right space at the right time. In order to do this, we bring a strong portfolio of our own properties to the table, with a broad range of locations and price ranges to suit every need. Each client is treated with the same level of importance, from an elegant Class-A office building, or custom headquarters, to a 1,500-square-foot user with a specific need. Boyle combines world-class service with local knowledge and expertise in management and leasing, so make your next office lease as simple and seamless as possible by calling Jeff or Thomas.</p>
 						<div class="agent-container staff-container">
 													
 							<?php while ( $query->have_posts() ) : $query->the_post(); 

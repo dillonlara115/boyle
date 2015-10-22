@@ -1,6 +1,9 @@
 .landing-page-content {
 	position: relative;
 	top: -2em;
+    @media (max-width: 590px) {
+        top: 0;
+    }
 	h3 {
 		padding: 10px 0;
 		font-size: 18px;
@@ -41,7 +44,17 @@
 
 
 .landing-page-sub-section {
+    img {
+        float: left;
+        padding: 10px 10px 10px 0;
+        @media (max-width: 590px) {
+            display: none;
+        }
+    }
 	.Text-Black-Small {
 		padding: 20px;
+        @media (max-width: 590px) {
+            padding: 4px;
+        }
 	}
 }

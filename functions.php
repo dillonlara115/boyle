@@ -4,11 +4,7 @@ $locale = get_locale();
 $locale_file = get_template_directory() . "/languages/$locale.php";
 if ( is_readable($locale_file) )
 require_once($locale_file);
-function blankslate_get_page_number() {
-if (get_query_var('paged')) {
-print ' | ' . __( 'Page ' , 'blankslate') . get_query_var('paged');
-}
-}
+
 add_action( 'after_setup_theme', 'blankslate_theme_setup' );
 function blankslate_theme_setup() {
 add_theme_support( 'automatic-feed-links' );
@@ -171,6 +167,14 @@ function news_init() {
 }
 add_action( 'init', 'news_init' );
 
+function my_login_logo() { ?>
+    <style type="text/css">
+        .login h1 a {
+            background-image: url(http://www.maxtestdomain.com/boyle/wp-content/themes/boyle/images/boyle-blue-logo.gif);
+        }
+    </style>
+<?php }
+add_action( 'login_enqueue_scripts', 'my_login_logo' );
 
 //sort search results by post type
 add_filter('relevanssi_hits_filter', 'products_first');
@@ -199,17 +203,10 @@ function products_first($hits) {
 // array of filters (field key => field name)
 $GLOBALS['my_query_filters'] = array( 
     'Choose a Region...'   => 'region_name', 
-    'Nashville'   => 'nashville_metro_area',
-    'Memphis'   => 'memphis_metro_area',
+    'Greater Memphis'   => 'memphis_metro_area',
+    'Greater Nashville'   => 'nashville_metro_area',
     'Other Regions'   => 'other'
 );
-
-$GLOBALS['my_transaction_filters'] = array( 
-    'Build-to-Suit'   => 'Build-to-Suit', 
-    'Buy'   => 'Buy',
-    'Lease'   => 'Lease',
-);
-
 
 
 //search results 
@@ -322,6 +319,8 @@ class Walker_Nav_Menu_Dropdown extends Walker_Nav_Menu {
  
         // add spacing to the title based on the depth
         $item->title = str_repeat("&amp;nbsp;", $depth * 4) . $item->title;
+
+        $class_names = in_array("current_page_item",$item->classes) ? ' selected' : '';
  
         // Get the attributes.. Though we likely don't need them for this...
         $attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
@@ -330,7 +329,7 @@ class Walker_Nav_Menu_Dropdown extends Walker_Nav_Menu {
         $attributes .= ! empty( $item->url )        ? ' value="'   . esc_attr( $item->url        ) .'"' : '';
  
         // Add the html
-        $item_output .= '<option'. $attributes .'>';
+        $item_output .= '<option'. $attributes . $class_names .' >';
         $item_output .= apply_filters( 'the_title_attribute', $item->title );
  
         // Add this new item to the output string.

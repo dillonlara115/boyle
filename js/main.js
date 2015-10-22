@@ -33,7 +33,6 @@ $('.bucket-news').on('click', function(e){
 //gallery
 $('.thumb').on('click', function(){
 	var largeSrc = $(this).attr('data-swap');
-	console.log(largeSrc);
 	$('.main-image').attr('src', largeSrc);
 });
 
@@ -62,11 +61,11 @@ $('.portfolio-sidebar-gallery').slick({
   asNavFor: '.slider-nav'
 });
 $('.slider-nav').slick({
-  slidesToShow: 2,
+  slidesToShow: 4,
   slidesToScroll: 1,
   asNavFor: '.portfolio-sidebar-gallery',
   dots: false,
-  centerMode: true,
+  centerMode: false,
   focusOnSelect: true
 });
 
@@ -76,7 +75,10 @@ function toggleViews() {
 	$('.inner-container').addClass('is-hidden');
 }
 
+$( window ).load(function() { 
+	$('.map').fadeIn();
 
+});
 
 
 

@@ -16,7 +16,9 @@
 				text-align: center;
 			}
 		}
+
 	}
+
 	ul {
 		text-align: center!important;
 		position: relative;
@@ -87,9 +89,15 @@
 		font-family: Georgia, Times New Roman;
 		text-align: center;
 		vertical-align: middle;
-		line-height: 3;
+		line-height: 2.8;
 		font-size: 13px;
 		text-transform: uppercase;
+	}
+	.hidden-mobile {
+		display: block;
+		@media (max-width: 960px) {
+			display: none;
+		}
 	}
 }
 .search-availability-content {
@@ -107,27 +115,36 @@
 	@media (max-width: 960px) {
 		display: inline-block;
 		margin-bottom: 1em;
+		margin-left: 1em;
 	}
 	strong {
 		vertical-align: top;
-		line-height: 1.8;
-		display: inline-block;
-		width: 75px;
-		text-align: right;
+		line-height: 1.5;
+		display: block;
 		@media (max-width: 32em) {
 			width: 100%;
 			text-align: left;
 		}
 	}
+	select {
+		width: 200px;
+	}
 	.menu-search-availability-menu-container {
 		display: inline-block;
 	}
 }
-
+.search-availability-container {
+	.visible-mobile {
+		margin-left: 0;
+	}
+}
 .map-image {
 	float: left;
     width: 50px;
     margin: 0 15px 0 0;
+    img {
+    	height: auto;
+    }
 }
 
 .map-text {
@@ -238,19 +255,20 @@
 }
 .result-content {
 	float: left;
-	width: 80%;
+	width: 83%;
 	font-size: 11px;
 	font-family: Verdana, Arial;
 	color: #000;
 	@media (max-width: 625px) {
 		float: none;
+		clear: both;
 		width: 100%;
 	}
  }
 
-.property-type-list-content ul li {
-	padding: .5em 22px!important;
-}
+// .property-type-list-content ul li {
+// 	padding: .5em 22px!important;
+// }
 
 .property-select {
 	max-width: 250px;
@@ -368,7 +386,11 @@
 		border-top-width: 0;
 		background-color: #CAD3DE;
 	}
-	
+	.map {
+	    width: 400px;
+    	height: 400px;
+    	display: none;
+	}
 }
 
 .TabUpMiddle {
@@ -399,20 +421,22 @@ p.navrechts {
 		float: none;
 		width: 99%;
 	}
+	.visible-mobile {
+		margin-left: 0;
+	}
 }
 .search-filters {
 	display: inline-block;
-	margin-bottom: 1em;
+	margin-bottom: .7em;
 	small {
 		font-size: 12px;
 		margin-right: .5em;
+		display: inline-block;
 	}
 	strong {
 		vertical-align: top;
-		line-height: 1.8;
-		display: inline-block;
-	    width: 75px;
-	    text-align: right;
+		line-height: 1.5;
+		display: block;
 	    @media (max-width: 32em) {
 	    	text-align: left;
 	    }
@@ -420,8 +444,13 @@ p.navrechts {
 	span {
 		font-size: 11px;
 	}
+	select {
+		width: 200px;
+	}
 }
-
+.order-by {
+	text-align: right;
+}
 .search-availability-content {
 	clear: both;
 
@@ -448,16 +477,45 @@ p.navrechts {
 		float: none;
 		clear: both;
 	}
+	
+}
+
+
+.property-list-container {
+	.pull-left {
+		@media (max-width: 625px) {
+			width: 100%!important;
+			> a {
+				float: left;
+				width: 33%;
+				padding-right: 10px;
+				box-sizing: border-box;
+			}
+			.result-item-agent-info {
+				float: left;
+				width: 60%;
+			}
+		}
+	}
 }
 
 .result-item {
 	.result-item-agent-info {
 		line-height: 1.5;
+		font-size: 10px;
+		a {
+			overflow-wrap: break-word;
+			word-wrap: break-word;
+  		}
 	}
 	.result-item-agent {
 		display: inline;
 		margin-bottom: 0;
+		overflow-wrap: break-word;
+  		word-wrap: break-word;
+
 	}
+
 }
 
 
@@ -508,8 +566,2363 @@ p.navrechts {
 .property-search-results {
     color: #355c88!important;
     text-decoration: none;
-    font-family: Century Gothic, Tahoma, Arial!important;
+    font-family: 'mseaves', Tahoma, Arial!important;
     font-size: 12pt!important;
 }
+
+.search-title img {
+	padding-right: 5px;
+}
+
+
+// Colors
+$color: #7e7e7e;
+$color-bg: #32425a;
+$color-primary: #536a8e;
+$color-link: $color-primary;
+$color-box-header: #fff;
+$color-box-header-bg: $color-primary;
+$color-box-main: $color;
+$color-box-main-bg: #fff;
+$color-marker-bg: $color-primary;
+
+.map-marker.available a {
+	background-color: #B79091!important;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+// Map
+.search-map-container {
+  width: 394px;
+}
+
+.property-type-list-content .map {
+  position: relative;
+  @media (max-width: 430px) {
+  	width: 270px;
+  	height: 270px;
+  	margin-bottom: 20px;
+  		float: none;
+
+  	img { 
+  		width: 270px;
+  		height: 270px;
+
+  	}
+  }
+  &-markers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-marker {
+    position: absolute;
+    cursor: pointer;
+    padding: 0!important;
+    &:after { 
+      animation-duration: 5s;
+      animation-iteration-count: infinite;
+      animation-name: pop;
+      border-radius: 50%;
+      border: 1px solid $color-primary;
+      content: '';
+      height: 2em;
+      left: 16px;
+      margin: -.5em 0 0 -.5em;
+      opacity: 0;
+      position: absolute;
+      top: 1px;
+      width: 2em;
+    }
+    &:hover {
+
+      .map-marker-info {
+        display: block;
+      }
+      &:after {
+      	animation-name: pop;
+      }
+    }
+    a {
+      background-color: $color-marker-bg;
+      border-radius: 50%;
+      height: 1em;
+      display: block;
+      width: 1em;
+      color: transparent;
+      margin-left: 15px;
+      font-size: 12px;
+      position: relative;
+      z-index: 9;
+      border: 2px solid #fff;
+    }
+  }
+  &-marker-nashville {
+    left: 77%;
+    top: 29%;
+     &:after {
+      animation-delay: 4s;
+    }
+  }
+  &-marker-birmingham {
+    left: 77%;
+    top: 43%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-other {
+    left: 30%;
+    top: 54%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-memphis {
+    left: 63%;
+    top: 35%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-info {
+    display: none;
+    left: 78%;
+    position: absolute;
+    bottom: 0;
+    transform: translate(-50%, -2em);
+    width: auto;
+    z-index: 999;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 5px 10px 5px;
+    font-family: 'mseaves', serif;
+    text-align: center;
+    text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
+    h2 {
+      margin: 0;
+      font-weight: normal;
+      font-size: 15px;
+      white-space: nowrap;
+      color: #fff;
+      text-align: center;
+    }
+    main p {
+      font-size: 12px;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 0;
+    }
+    &:after {
+        border-left: .75em solid transparent;
+        border-right: .75em solid transparent;
+        border-top: 1em solid rgba(0, 0, 0, 0.75);
+        content: '';
+        height: 0;
+        left: 50%;
+        position: absolute;
+        top: 100%;
+        transform: translateX(-50%);
+        width: 0;
+    }
+  }
+}
+
+
+/* avilla map */
+
+.avilla-map .map {
+  position: relative;
+	width: 300px;
+	height: 300px;
+  &-markers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-marker {
+    position: absolute;
+    cursor: pointer;
+    padding: 0!important;
+    &:after { 
+      animation-duration: 3.5s;
+      animation-iteration-count: infinite;
+      animation-name: pop;
+      border-radius: 50%;
+      border: 1px solid $color-primary;
+      content: '';
+      height: 2em;
+      left: 16px;
+      margin: -.5em 0 0 -.5em;
+      opacity: 0;
+      position: absolute;
+      top: 1px;
+      width: 2em;
+    }
+    &:hover {
+
+      .map-marker-info {
+        display: block;
+      }
+      &:after {
+      	animation-name: pop 3s infinite;
+      }
+    }
+    a {
+      background-color: $color-marker-bg;
+      border-radius: 50%;
+      height: 1em;
+      display: block;
+      width: 1em;
+      color: transparent;
+      margin-left: 15px;
+      font-size: 12px;
+      position: relative;
+      z-index: 9;
+      animation: pulse 5s infinite;
+      border: 2px solid #fff;
+    }
+  }
+  &-marker-6 {
+    left: 33%;
+    top: 8%;
+     
+  }
+  &-marker-7 {
+    left: 47%;
+    top:14%;
+    
+  }
+  &-marker-5 {
+    left: 35%;
+    top: 19%;
+    
+  }
+  &-marker-8 {
+    left: 47%;
+    top: 31%;
+    
+  }
+  &-marker-9 {
+    left: 66%;
+    top: 24%;
+   
+  }
+  &-marker-4 {
+    left: 33%;
+    top: 34%;
+    
+  }
+  &-marker-12 {
+    left: 50%;
+    bottom: 50%;
+    
+  }
+  &-marker-10 {
+    left: 67%;
+    top: 37%;
+    
+  }
+  &-marker-11 {
+    left: 71%;
+    top: 44%;
+    
+  }
+  &-marker-3 {
+    left: 34%;
+    top: 45%;
+    
+  }
+  &-marker-13 {
+    left: 47%;
+    top: 57%;
+    
+  }
+  &-marker-2 {
+    left: 34%;
+    bottom: 26%;
+    
+  }
+  &-marker-1 {
+    left: 35%;
+    bottom: 13%;
+    
+  }
+  &-marker-15 {
+    left: 50%;
+    bottom: 12%;
+    
+  }
+  &-marker-14 {
+    left: 50%;
+    bottom: 25%;
+    
+  }
+ 
+  &-marker-info {
+    display: none;
+    left: 78%;
+    position: absolute;
+    bottom: 0;
+    transform: translate(-50%, -2em);
+    width: auto;
+    z-index: 999;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 5px 10px 5px;
+    font-family: 'mseaves', serif;
+    text-align: center;
+    text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
+    h2 {
+      margin: 0;
+      font-weight: normal;
+      font-size: 13px;
+      white-space: nowrap;
+      color: #fff;
+      text-align: center;
+    }
+    main p {
+      font-size: 12px;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 0;
+    }
+    &:after {
+        border-left: .75em solid transparent;
+        border-right: .75em solid transparent;
+        border-top: 1em solid rgba(0, 0, 0, 0.75);
+        content: '';
+        height: 0;
+        left: 50%;
+        position: absolute;
+        top: 100%;
+        transform: translateX(-50%);
+        width: 0;
+    }
+  }
+}
+
+
+
+/* berry farms map */
+
+.berryfarms-map .map {
+  position: relative;
+      width: 300px;
+    height: 300px;
+  &-markers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-marker {
+    position: absolute;
+    cursor: pointer;
+    padding: 0!important;
+    &:after { 
+      animation-duration: 5s;
+      animation-iteration-count: infinite;
+      animation-name: pop;
+      border-radius: 50%;
+      border: 1px solid $color-primary;
+      content: '';
+      height: 2em;
+      left: 16px;
+      margin: -.5em 0 0 -.5em;
+      opacity: 0;
+      position: absolute;
+      top: 1px;
+      width: 2em;
+    }
+    &:hover {
+
+      .map-marker-info {
+        display: block;
+      }
+      &:after {
+      	animation-name: pop 4s infinite;
+      }
+    }
+    a {
+      background-color: $color-marker-bg;
+      border-radius: 50%;
+      height: 1em;
+      display: block;
+      width: 1em;
+      color: transparent;
+      margin-left: 15px;
+      font-size: 12px;
+      position: relative;
+      z-index: 9;
+      border: 2px solid #fff;
+    }
+  }
+  &-marker-townCenter {
+    left: 28%;
+    top: 20%;
+     &:after {
+      animation-delay: 4s;
+    }
+  }
+  &-marker-chadwell {
+    left: 41%;
+    top: 44%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-reams {
+    left: 55%;
+    top: 64%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+ 
+  &-marker-info {
+    display: none;
+    left: 78%;
+    position: absolute;
+    bottom: 0;
+    transform: translate(-50%, -2em);
+    width: auto;
+    z-index: 999;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 5px 10px 5px;
+    font-family: 'mseaves', serif;
+    text-align: center;
+    text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
+    h2 {
+      margin: 0;
+      font-weight: normal;
+      font-size: 13px;
+      white-space: nowrap;
+      color: #fff;
+      text-align: center;
+    }
+    main p {
+      font-size: 12px;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 0;
+    }
+    &:after {
+        border-left: .75em solid transparent;
+        border-right: .75em solid transparent;
+        border-top: 1em solid rgba(0, 0, 0, 0.75);
+        content: '';
+        height: 0;
+        left: 50%;
+        position: absolute;
+        top: 100%;
+        transform: translateX(-50%);
+        width: 0;
+    }
+  }
+}
+
+
+
+/* humphreys center map */
+
+.humphreys-map .map {
+  position: relative;
+      width: 300px;
+    height: 300px;
+  &-markers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-marker {
+    position: absolute;
+    cursor: pointer;
+    padding: 0!important;
+    &:after { 
+      animation-duration: 5s;
+      animation-iteration-count: infinite;
+      animation-name: pop;
+      border-radius: 50%;
+      border: 1px solid $color-primary;
+      content: '';
+      height: 2em;
+      left: 16px;
+      margin: -.5em 0 0 -.5em;
+      opacity: 0;
+      position: absolute;
+      top: 1px;
+      width: 2em;
+    }
+    &:hover {
+
+      .map-marker-info {
+        display: block;
+      }
+      &:after {
+      	animation-name: pop;
+      }
+    }
+    a {
+      background-color: $color-marker-bg;
+      border-radius: 50%;
+      height: 1em;
+      display: block;
+      width: 1em;
+      color: transparent;
+      margin-left: 15px;
+      font-size: 12px;
+      position: relative;
+      z-index: 9;
+      border: 2px solid #fff;
+    }
+  }
+  &-marker-baptist {
+    left: 12%;
+    top: 17%;
+     &:after {
+      animation-delay: 4s;
+    }
+  }
+  &-marker-190 {
+    left: 27%;
+    top: 18%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-220 {
+    left: 33%;
+    top: 22%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+   &-marker-100 {
+    left: 40%;
+    top: 25%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+   &-marker-225 {
+    left: 25%;
+    top: 26%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+   &-marker-cbhigschool {
+    left: 17%;
+    top: 36%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+   &-marker-nwcorner {
+    left: 56%;
+    top: 34%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+   &-marker-hospital {
+    left: 34%;
+    top: 50%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+   &-marker-hampton {
+    left: 55%;
+    top: 47%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-shops {
+    left: 67%;
+    top: 50%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-80 {
+    left: 63%;
+    top: 58%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-baptistwomens {
+    left: 73%;
+    top: 62%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-6305 {
+    left: 86%;
+    top: 73%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-6325 {
+    left: 89%;
+    top: 78%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-cloisters {
+    left: 43%;
+    bottom: 4%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+ 
+  &-marker-info {
+    display: none;
+    left: 78%;
+    position: absolute;
+    bottom: 0;
+    transform: translate(-50%, -2em);
+    width: auto;
+    z-index: 999;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 5px 10px 5px;
+    font-family: 'mseaves', serif;
+    text-align: center;
+    text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
+    h2 {
+      margin: 0;
+      font-weight: normal;
+      font-size: 13px;
+      white-space: nowrap;
+      color: #fff;
+      text-align: center;
+    }
+    main p {
+      font-size: 12px;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 0;
+    }
+    &:after {
+        border-left: .75em solid transparent;
+        border-right: .75em solid transparent;
+        border-top: 1em solid rgba(0, 0, 0, 0.75);
+        content: '';
+        height: 0;
+        left: 50%;
+        position: absolute;
+        top: 100%;
+        transform: translateX(-50%);
+        width: 0;
+    }
+  }
+}
+
+
+/* town center at berry farms map */
+
+.towncenter-map .map {
+  position: relative;
+      width: 300px;
+    height: 300px;
+  &-markers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-marker {
+    position: absolute;
+    cursor: pointer;
+    padding: 0!important;
+    &:after { 
+      animation-duration: 5s;
+      animation-iteration-count: infinite;
+      animation-name: pop;
+      border-radius: 50%;
+      border: 1px solid $color-primary;
+      content: '';
+      height: 2em;
+      left: 16px;
+      margin: -.5em 0 0 -.5em;
+      opacity: 0;
+      position: absolute;
+      top: 1px;
+      width: 2em;
+    }
+    &:hover {
+
+      .map-marker-info {
+        display: block;
+      }
+      &:after {
+      	animation-name: pop;
+      }
+    }
+    a {
+      background-color: $color-marker-bg;
+      border-radius: 50%;
+      height: 1em;
+      display: block;
+      width: 1em;
+      color: transparent;
+      margin-left: 15px;
+      font-size: 12px;
+      position: relative;
+      z-index: 9;
+      border: 2px solid #fff;
+    }
+  }
+  &-marker-commons {
+    left: 12%;
+    top: 17%;
+     &:after {
+      animation-delay: 4s;
+    }
+  }
+  &-marker-commons2 {
+    left: 11%;
+    top: 29%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-townhomes2 {
+    left: 19%;
+    top: 25%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+   &-marker-commons3 {
+    left: 13%;
+    top: 37%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+   &-marker-townhomes {
+    left: 19%;
+    top: 36%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+   &-marker-marketplace3 {
+    left: 27%;
+    top: 30%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+   &-marker-commons4 {
+    left: 40%;
+    top: 19%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+   &-marker-marketplace6 {
+    left: 40%;
+    top: 27%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+   &-marker-center-park {
+    left: 54%;
+    top: 14%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-commons5 {
+    left: 62%;
+    top: 10%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-centerpark4 {
+    left: 76%;
+    top: 14%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-centerpark2 {
+    left: 55%;
+    top: 23%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-neighborhood {
+    left: 24%;
+    top: 40%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-marketplace4 {
+    left: 32%;
+    top: 37%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-marketplace7 {
+    left: 42%;
+    top: 35%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-centerpark3 {
+    left: 61%;
+    top: 35%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-marketplace {
+    left: 8%;
+    top: 47%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+   &-marker-marketplace2 {
+    left: 21%;
+    top: 50%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-marketplace5 {
+    left: 35%;
+    top: 48%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-marketplace8 {
+    left: 47%;
+    top: 45%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-specialty {
+    left: 39%;
+    top: 55%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-specialty2 {
+    left: 58%;
+    top: 51%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+ 
+  &-marker-info {
+    display: none;
+    left: 78%;
+    position: absolute;
+    bottom: 0;
+    transform: translate(-50%, -2em);
+    width: auto;
+    z-index: 999;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 5px 10px 5px;
+    font-family: 'mseaves', serif;
+    text-align: center;
+    text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
+    h2 {
+      margin: 0;
+      font-weight: normal;
+      font-size: 13px;
+      white-space: nowrap;
+      color: #fff;
+      text-align: center;
+    }
+    main p {
+      font-size: 12px;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 0;
+    }
+    &:after {
+        border-left: .75em solid transparent;
+        border-right: .75em solid transparent;
+        border-top: 1em solid rgba(0, 0, 0, 0.75);
+        content: '';
+        height: 0;
+        left: 50%;
+        position: absolute;
+        top: 100%;
+        transform: translateX(-50%);
+        width: 0;
+    }
+  }
+}
+
+
+/* ridgeway center map */
+
+.ridgeway-map .map {
+  position: relative;
+      width: 300px;
+    height: 300px;
+  &-markers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-marker {
+    position: absolute;
+    cursor: pointer;
+    padding: 0!important;
+    &:after { 
+      animation-duration: 5s;
+      animation-iteration-count: infinite;
+      animation-name: pop;
+      border-radius: 50%;
+      border: 1px solid $color-primary;
+      content: '';
+      height: 2em;
+      left: 16px;
+      margin: -.5em 0 0 -.5em;
+      opacity: 0;
+      position: absolute;
+      top: 1px;
+      width: 2em;
+    }
+    &:hover {
+
+      .map-marker-info {
+        display: block;
+      }
+      &:after {
+      	animation-name: pop;
+      }
+    }
+    a {
+      background-color: $color-marker-bg;
+      border-radius: 50%;
+      height: 1em;
+      display: block;
+      width: 1em;
+      color: transparent;
+      margin-left: 15px;
+      font-size: 12px;
+      position: relative;
+      z-index: 9;
+      border: 2px solid #fff;
+    }
+  }
+  &-marker-church {
+    left: 16%;
+    top: 0%;
+     &:after {
+      animation-delay: 4s;
+    }
+  }
+  &-marker-775 {
+    left: 11%;
+    top: 4%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-866 {
+    left: 27%;
+    top: 17%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-889 {
+    left: 5%;
+    top: 27%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-860 {
+    left: 22%;
+    top: 29%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-850 {
+    left: 25%;
+    top: 23%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-871 {
+    left: 33%;
+    bottom: 66%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-benihana {
+    left: 16%;
+    top: 35%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-staybridge {
+    left: 16%;
+    top: 40%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-959 {
+    left: 34%;
+    top: 45%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-100ridgeway {
+    left: 47%;
+    top: 45%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-949 {
+    left: 66%;
+    top: 47%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-5409 {
+    left: 32%;
+    top: 49%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-1100 {
+    left: 50%;
+    top: 55%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-999 {
+    left: 64%;
+    top: 54%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-hampton {
+    left: 80%;
+    top: 53%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-embasy {
+    left: 83%;
+    top: 60%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-regalia {
+    left: 88%;
+    top: 69%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-hilton {
+    left: 2%;
+    top: 51%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-965 {
+    left: 15%;
+    top: 55%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-5865 {
+    left: 23%;
+    top: 55%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-5885 {
+    left: 26%;
+    top: 62%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-5900 {
+    left: 37%;
+    top: 63%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-info {
+    display: none;
+    left: 78%;
+    position: absolute;
+    bottom: 0;
+    transform: translate(-50%, -2em);
+    width: auto;
+    z-index: 999;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 5px 10px 5px;
+    font-family: 'mseaves', serif;
+    text-align: center;
+    text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
+    h2 {
+      margin: 0;
+      font-weight: normal;
+      font-size: 13px;
+      white-space: nowrap;
+      color: #fff;
+      text-align: center;
+    }
+    main p {
+      font-size: 12px;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 0;
+    }
+    &:after {
+        border-left: .75em solid transparent;
+        border-right: .75em solid transparent;
+        border-top: 1em solid rgba(0, 0, 0, 0.75);
+        content: '';
+        height: 0;
+        left: 50%;
+        position: absolute;
+        top: 100%;
+        transform: translateX(-50%);
+        width: 0;
+    }
+  }
+}
+
+
+
+/* citypark map */
+
+.citypark-map .map {
+  position: relative;
+      width: 300px;
+    height: 300px;
+  &-markers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-marker {
+    position: absolute;
+    cursor: pointer;
+    padding: 0!important;
+    &:after { 
+      animation-duration: 5s;
+      animation-iteration-count: infinite;
+      animation-name: pop;
+      border-radius: 50%;
+      border: 1px solid $color-primary;
+      content: '';
+      height: 2em;
+      left: 16px;
+      margin: -.5em 0 0 -.5em;
+      opacity: 0;
+      position: absolute;
+      top: 1px;
+      width: 2em;
+    }
+    &:hover {
+
+      .map-marker-info {
+        display: block;
+      }
+      &:after {
+      	animation-name: pop;
+      }
+    }
+    a {
+      background-color: $color-marker-bg;
+      border-radius: 50%;
+      height: 1em;
+      display: block;
+      width: 1em;
+      color: transparent;
+      margin-left: 15px;
+      font-size: 12px;
+      position: relative;
+      z-index: 9;
+      border: 2px solid #fff;
+    }
+  }
+  &-marker-one {
+    left: 37%;
+    top: 13%;
+     &:after {
+      animation-delay: 4s;
+    }
+  }
+  &-marker-six {
+    left: 75%;
+    top: 21%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-three {
+    left: 53%;
+    top: 29%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-two {
+    left: 28%;
+    top: 25%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-retaila {
+    left: 21%;
+    top: 31%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-retailb {
+    left: 18%;
+    top: 39%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-retailc {
+    left: 30%;
+    top: 35%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-retaild {
+    left: 27%;
+    top: 43%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-retaile {
+    left: 39%;
+    top: 39%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-retailf {
+    left: 37%;
+    top: 46%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-mooreland {
+    left: 47%;
+    top: 47%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-hilton {
+    left: 52%;
+    top: 49%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-seven {
+    left: 63%;
+    top: 57%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-four {
+    left: 19%;
+    top: 49%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-five {
+    left: 32%;
+    top: 66%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-info {
+    display: none;
+    left: 78%;
+    position: absolute;
+    bottom: 0;
+    transform: translate(-50%, -2em);
+    width: auto;
+    z-index: 999;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 5px 10px 5px;
+    font-family: 'mseaves', serif;
+    text-align: center;
+    text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
+    h2 {
+      margin: 0;
+      font-weight: normal;
+      font-size: 13px;
+      white-space: nowrap;
+      color: #fff;
+      text-align: center;
+    }
+    main p {
+      font-size: 12px;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 0;
+    }
+    &:after {
+        border-left: .75em solid transparent;
+        border-right: .75em solid transparent;
+        border-top: 1em solid rgba(0, 0, 0, 0.75);
+        content: '';
+        height: 0;
+        left: 50%;
+        position: absolute;
+        top: 100%;
+        transform: translateX(-50%);
+        width: 0;
+    }
+  }
+}
+
+
+
+/* chadwell at berry farms map */
+
+.chadwell-map .map {
+  position: relative;
+      width: 300px;
+    height: 300px;
+  &-markers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-marker {
+    position: absolute;
+    cursor: pointer;
+    padding: 0!important;
+    &:after { 
+      animation-duration: 5s;
+      animation-iteration-count: infinite;
+      animation-name: pop;
+      border-radius: 50%;
+      border: 1px solid $color-primary;
+      content: '';
+      height: 2em;
+      left: 16px;
+      margin: -.5em 0 0 -.5em;
+      opacity: 0;
+      position: absolute;
+      top: 1px;
+      width: 2em;
+    }
+    &:hover {
+
+      .map-marker-info {
+        display: block;
+      }
+      &:after {
+      	animation-name: pop;
+      }
+    }
+    a {
+      background-color: $color-marker-bg;
+      border-radius: 50%;
+      height: 1em;
+      display: block;
+      width: 1em;
+      color: transparent;
+      margin-left: 15px;
+      font-size: 12px;
+      position: relative;
+      z-index: 9;
+      border: 2px solid #fff;
+    }
+  }
+  &-marker-hotel {
+    left: 82%;
+    top: 22%;
+     &:after {
+      animation-delay: 4s;
+    }
+  }
+  &-marker-park {
+    left: 74%;
+    top: 49%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-village {
+    left: 50%;
+    top: 44%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-village2 {
+    left: 45%;
+    top: 61%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-village3 {
+    left: 51%;
+    top: 63%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-marketplace {
+    left: 71%;
+    top: 32%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-park2 {
+    left: 68%;
+    bottom: 32%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-info {
+    display: none;
+    left: 78%;
+    position: absolute;
+    bottom: 0;
+    transform: translate(-50%, -2em);
+    width: auto;
+    z-index: 999;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 5px 10px 5px;
+    font-family: 'mseaves', serif;
+    text-align: center;
+    text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
+    h2 {
+      margin: 0;
+      font-weight: normal;
+      font-size: 13px;
+      white-space: nowrap;
+      color: #fff;
+      text-align: center;
+    }
+    main p {
+      font-size: 12px;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 0;
+    }
+    &:after {
+        border-left: .75em solid transparent;
+        border-right: .75em solid transparent;
+        border-top: 1em solid rgba(0, 0, 0, 0.75);
+        content: '';
+        height: 0;
+        left: 50%;
+        position: absolute;
+        top: 100%;
+        transform: translateX(-50%);
+        width: 0;
+    }
+  }
+}
+
+
+
+/* Meridian Cool Springs map */
+
+.meridian-map .map {
+  position: relative;
+      width: 300px;
+    height: 300px;
+  &-markers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-marker {
+    position: absolute;
+    cursor: pointer;
+    padding: 0!important;
+    &:after { 
+      animation-duration: 5s;
+      animation-iteration-count: infinite;
+      animation-name: pop;
+      border-radius: 50%;
+      border: 1px solid $color-primary;
+      content: '';
+      height: 2em;
+      left: 16px;
+      margin: -.5em 0 0 -.5em;
+      opacity: 0;
+      position: absolute;
+      top: 1px;
+      width: 2em;
+    }
+    &:hover {
+
+      .map-marker-info {
+        display: block;
+      }
+      &:after {
+      	animation-name: pop;
+      }
+    }
+    a {
+      background-color: $color-marker-bg;
+      border-radius: 50%;
+      height: 1em;
+      display: block;
+      width: 1em;
+      color: transparent;
+      margin-left: 15px;
+      font-size: 12px;
+      position: relative;
+      z-index: 9;
+      border: 2px solid #fff;
+    }
+  }
+  &-marker-ranch {
+    left: 33%;
+    top: 3%;
+     &:after {
+      animation-delay: 4s;
+    }
+  }
+  &-marker-estates {
+    left: 76%;
+    top: 16%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-retreat {
+    left: 25%;
+    top: 19%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-fayette {
+    left: 45%;
+    top: 19%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-grandmanor {
+    left: 42%;
+    top: 29%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-manor {
+    left: 59%;
+    top: 24%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-openspace {
+    left: 69%;
+    top: 26%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-recreation {
+    left: 57%;
+    top: 32%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-village {
+    left: 66%;
+    top: 33%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-future {
+    left: 24%;
+    top: 36%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-1175 {
+    left: 62%;
+    top: 44%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-fitness {
+    left: 54%;
+    top: 40%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-residence {
+    left: 51%;
+    top: 46%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-5005 {
+    left: 34%;
+    top: 45%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-one {
+    left: 32%;
+    top: 63%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-two {
+    left: 44%;
+    bottom: 8%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-info {
+    display: none;
+    left: 78%;
+    position: absolute;
+    bottom: 0;
+    transform: translate(-50%, -2em);
+    width: auto;
+    z-index: 999;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 5px 10px 5px;
+    font-family: 'mseaves', serif;
+    text-align: center;
+    text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
+    h2 {
+      margin: 0;
+      font-weight: normal;
+      font-size: 13px;
+      white-space: nowrap;
+      color: #fff;
+      text-align: center;
+    }
+    main p {
+      font-size: 12px;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 0;
+    }
+    &:after {
+        border-left: .75em solid transparent;
+        border-right: .75em solid transparent;
+        border-top: 1em solid rgba(0, 0, 0, 0.75);
+        content: '';
+        height: 0;
+        left: 50%;
+        position: absolute;
+        top: 100%;
+        transform: translateX(-50%);
+        width: 0;
+    }
+  }
+}
+
+
+
+
+/* Spring Creek Ranch map */
+
+.springcreek-map .map {
+  position: relative;
+      width: 300px;
+    height: 300px;
+  &-markers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-marker {
+    position: absolute;
+    cursor: pointer;
+    padding: 0!important;
+    &:after { 
+      animation-duration: 5s;
+      animation-iteration-count: infinite;
+      animation-name: pop;
+      border-radius: 50%;
+      border: 1px solid $color-primary;
+      content: '';
+      height: 2em;
+      left: 16px;
+      margin: -.5em 0 0 -.5em;
+      opacity: 0;
+      position: absolute;
+      top: 1px;
+      width: 2em;
+    }
+    &:hover {
+
+      .map-marker-info {
+        display: block;
+      }
+      &:after {
+      	animation-name: pop;
+      }
+    }
+    a {
+      background-color: $color-marker-bg;
+      border-radius: 50%;
+      height: 1em;
+      display: block;
+      width: 1em;
+      color: transparent;
+      margin-left: 15px;
+      font-size: 12px;
+      position: relative;
+      z-index: 9;
+      border: 2px solid #fff;
+    }
+  }
+  &-marker-ranch {
+    left: 18%;
+    top: 22%;
+     &:after {
+      animation-delay: 4s;
+    }
+  }
+  &-marker-estates {
+    left: 58%;
+    top: 31%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-retreat {
+    left: 59%;
+    top: 44%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-fayette {
+    left: 79%;
+    top: 63%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-grandmanor {
+    left: 38%;
+    top: 42%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-manor {
+    left: 56%;
+    top: 60%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-openspace {
+    left: 22%;
+    bottom: 23%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-recreation {
+    left: 27%;
+    bottom: 16%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-village {
+    left: 47%;
+    bottom: 21%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-future {
+    left: 9%;
+    bottom: 41%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-info {
+    display: none;
+    left: 78%;
+    position: absolute;
+    bottom: 0;
+    transform: translate(-50%, -2em);
+    width: auto;
+    z-index: 999;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 5px 10px 5px;
+    font-family: 'mseaves', serif;
+    text-align: center;
+    text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
+    h2 {
+      margin: 0;
+      font-weight: normal;
+      font-size: 13px;
+      white-space: nowrap;
+      color: #fff;
+      text-align: center;
+    }
+    main p {
+      font-size: 12px;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 0;
+    }
+    &:after {
+        border-left: .75em solid transparent;
+        border-right: .75em solid transparent;
+        border-top: 1em solid rgba(0, 0, 0, 0.75);
+        content: '';
+        height: 0;
+        left: 50%;
+        position: absolute;
+        top: 100%;
+        transform: translateX(-50%);
+        width: 0;
+    }
+  }
+}
+
+
+
+
+/* schilling farms map */
+
+.schilling-farms-map .map {
+  position: relative;
+      width: 300px;
+    height: 300px;
+  &-markers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-marker {
+    position: absolute;
+    cursor: pointer;
+    padding: 0!important;
+    &:after { 
+      animation-duration: 5s;
+      animation-iteration-count: infinite;
+      animation-name: pop;
+      border-radius: 50%;
+      border: 1px solid $color-primary;
+      content: '';
+      height: 2em;
+      left: 16px;
+      margin: -.5em 0 0 -.5em;
+      opacity: 0;
+      position: absolute;
+      top: 1px;
+      width: 2em;
+    }
+    &:hover {
+
+      .map-marker-info {
+        display: block;
+      }
+      &:after {
+      	animation-name: pop;
+      }
+    }
+    a {
+      background-color: $color-marker-bg;
+      border-radius: 50%;
+      height: 1em;
+      display: block;
+      width: 1em;
+      color: transparent;
+      margin-left: 15px;
+      font-size: 12px;
+      position: relative;
+      z-index: 9;
+      border: 2px solid #fff;
+    }
+  }
+  &-marker-1313 {
+    left: 15%;
+    top: 12%;
+     &:after {
+      animation-delay: 4s;
+    }
+  }
+  &-marker-1255 {
+    left: 44%;
+    top: 7%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-bank-branch {
+    left: 50%;
+    top: 7%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-jiffy {
+    left: 65%;
+    top: 7%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-verizon {
+    left: 68%;
+    top: 7%;
+    &:after {
+      animation-delay: 3s;
+    }
+  }
+  &-marker-bank-tn{
+    left: 57%;
+    top: 7%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-popeyes {
+    left: 61%;
+    top: 7%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-1190 {
+    left: 44%;
+    top: 16%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-11 {
+    left: 71%;
+    top: 11%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-schilling-gardens {
+    left: 79%;
+    top: 13%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-telerythmics {
+    left: 68%;
+    top: 15%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-10 {
+    left: 77%;
+    top: 18%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+   &-marker-business-center {
+    left: 60%;
+    top: 20%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-D1 {
+    left: 68%;
+    top: 21%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+   &-marker-rural-metro {
+    left: 61%;
+    top: 25%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-ortho {
+    left: 72%;
+    top: 26%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-100-market {
+    left: 78%;
+    top: 27%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-legacy-farm-appartments {
+    left: 10%;
+    top: 30%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-signature {
+    left: 29%;
+    top: 33%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-mcr {
+    left: 39%;
+    top: 28%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-200 {
+    left: 47%;
+    top: 28%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-YMCA {
+    left: 53%;
+    top: 27%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+   &-marker-kidtech {
+    left: 58%;
+    top: 29%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-pediatrics {
+    left: 68%;
+    top: 29%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-dental {
+    left: 63%;
+    top: 32%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-juice {
+    left: 75%;
+    top: 32%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-chemical {
+    left: 40%;
+    top: 35%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-madison {
+    left: 55%;
+    top: 36%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-fresenius {
+    left: 68%;
+    top: 36%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-grant-homes {
+    left: 69%;
+    top: 40%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-860 {
+    left: 69%;
+    top: 45%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-carrington-west {
+    left: 32%;
+    top: 45%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-carrington-farms {
+    left: 50%;
+    top: 44%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-oaks-farms {
+    left: 8%;
+    top: 53%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-life-church {
+    left: 22%;
+    top: 55%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-neighborhood {
+    left: 44%;
+    top: 58%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-sterling-square {
+    left: 59%;
+    top: 52%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-855 {
+    left: 74%;
+    top: 51%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-village {
+    left: 80%;
+    top: 55%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-wynstone-mill {
+    left: 22%;
+    top: 73%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-middle-school {
+    left: 43%;
+    top: 72%;
+    &:after {
+      animation-delay: 5s;
+    }
+  }
+  &-marker-info {
+    display: none;
+    left: 78%;
+    position: absolute;
+    bottom: 0;
+    transform: translate(-50%, -2em);
+    width: auto;
+    z-index: 999;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 5px 10px 5px;
+    font-family: 'mseaves', serif;
+    text-align: center;
+    text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
+    h2 {
+      margin: 0;
+      font-weight: normal;
+      font-size: 13px;
+      white-space: nowrap;
+      color: #fff;
+      text-align: center;
+    }
+    main p {
+      font-size: 12px;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 0;
+    }
+    &:after {
+        border-left: .75em solid transparent;
+        border-right: .75em solid transparent;
+        border-top: 1em solid rgba(0, 0, 0, 0.75);
+        content: '';
+        height: 0;
+        left: 50%;
+        position: absolute;
+        top: 100%;
+        transform: translateX(-50%);
+        width: 0;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+// Animations
+.animate {
+  animation-duration: 4s infinite;
+  animation-fill-mode: both;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    opacity: .4;
+    background-color: #ccc;
+  }
+  100% {
+  	opacity: 0;
+  	transform: scale(1);
+  	background-color: #fff;
+  }
+}
+
+@keyframes pulse {
+
+  50% {
+    background-color: #fff!important;
+  }
+  100% {
+  	background-color: #fff!important;
+  }
+}
+
+
+.animate-pop {
+  animation-duration: 4s;
+  animation-name: pop;
+}
+
+
+
+
 
 

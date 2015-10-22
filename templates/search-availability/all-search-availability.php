@@ -130,14 +130,14 @@ if($the_query->max_num_pages>1){?>
     <p class="navrechts">
     <?php
       if ($paged > 1) { ?>
-        <a href="<?php echo '?paged=' . ($paged -1); //prev link ?>"><</a>
+        <a href="<?php echo '?paged=' . ($paged -1); //prev link ?>">«</a>
                         <?php }
     for($i=1;$i<=$the_query->max_num_pages;$i++){?>
         <a href="<?php echo '?paged=' . $i; ?>" <?php echo ($paged==$i)? 'class="selected"':'';?>><?php echo $i;?></a>
         <?php
     }
     if($paged < $the_query->max_num_pages){?>
-        <a href="<?php echo '?paged=' . ($paged + 1); //next link ?>">></a>
+        <a href="<?php echo '?paged=' . ($paged + 1); //next link ?>">»</a>
     <?php } ?>
     </p>
 <?php } ?>

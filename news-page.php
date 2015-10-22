@@ -13,6 +13,18 @@ Template Name: News Page
 	<div id="post-<?php the_ID(); ?>" class="property-sub-navigation portfolio-sub-navigation">
 		<?php wp_nav_menu( array('menu' => 'News Regions Menu' )); ?>
 	</div>
+	<div class="visible-mobile">
+	<strong>Select a Region: </strong>
+	<?php
+    	wp_nav_menu( array(
+	    	'menu' => 'News Regions Menu',
+	        'theme_location' => 'mobile-nav',
+	        'items_wrap'     => '<select id="drop-nav"><option value="">Select a page...</option>%3$s</select>',
+	        'walker'  => new Walker_Nav_Menu_Dropdown())
+        );
+	?>
+	<br>
+</div>
 <div id="content" class="static-container static-contact-container news-page" >
 	<?php the_post(); ?>
 	<!-- featured properties sidebar -->
@@ -33,6 +45,18 @@ Template Name: News Page
 	?>
 	<?php if( $the_query->have_posts() ): ?>
 	<div class="services-sidebar-container news-sidebar">
+
+		<div class="featured-news-item">
+	           
+	        	<h3><a class="Title-Blue" href="<?php echo get_permalink( 2397 ); ?>">Boyle Report</a>	</h3>
+	        	<img width="150" height="150" src="http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/07/2014COVER_6-26-14-150x150.jpg" class="featured-news-image wp-post-image" alt="The grand opening for The Carrington at Schilling
+Farms in Collierville was held in June. The project
+consists of 111 above-market boutique flats,
+town homes, and corner retail."> 
+	            <p>This section contains Boyle Reports from Spring of 1994 to the Present</p>
+	            
+	            <p><a href="http://www.maxtestdomain.com/boyle/news/boyle-report/" class="pull-right">» Read More</a></p>
+            </div>
 	    
 	    <?php while( $the_query->have_posts() ) : $the_query->the_post(); ?>
 	        

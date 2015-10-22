@@ -78,6 +78,9 @@
 	float: left;
 	@media (max-width: 960px) {
 		padding: 0 1em;
+		&.availability-report {
+			padding: 0;
+		}
 	}
 }
 .entry-col-content {

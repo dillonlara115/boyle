@@ -22,6 +22,9 @@
 } 
 
 .news-container {
+	h1.agent-title {
+		text-align: center;
+	}
 	.Title-Blue {
 		margin-bottom: 1em;
 	}
@@ -45,6 +48,7 @@
 .report-content-container {
 	float: left;
 	width: 67%;
+	font-size: 13px;
 	@media (max-width: 960px) {
 		float: none;
 		width: 100%;

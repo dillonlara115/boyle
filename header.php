@@ -28,14 +28,14 @@
 		<?php if (! is_front_page()) {  ?> 
 		<ul class="header-nav-primary-sub">
 			<li class="nav-logo"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="header-logo"><img src="<?php bloginfo('template_directory'); ?>/images/boyle-blue-logo.gif"></a></li>
-			<li class="TopNav TopNav-sub"><a href="#">REGISTER/LOGIN</a></li>
+			
 	    	<li class="TopNav TopNav-sub"><a href="#">BOYLE BLOG</a></li>
 	    	<li class="TopNav TopNav-sub"><a href="http://www.boyleinsuranceagency.com/">BOYLE INSURANCE AGENCY</a></li>
 	    	<li class="TopNav TopNav-sub"><a href="<?php echo get_permalink( 985 ); ?>">AVAILABILITY REPORT</a></li>
     	</ul>
 		<?php } else { ?> 
 		<ul>
-	    	<li class="TopNav"><a href="#">REGISTER/LOGIN</a></li>
+	    	
 	    	<li class="TopNav"><a href="#">BOYLE BLOG</a></li>
 	    	<li class="TopNav"><a href="http://www.boyleinsuranceagency.com/">BOYLE INSURANCE AGENCY</a></li>
 	    	<li class="TopNav TopNav-sub"><a href="<?php echo get_permalink( 985 ); ?>">AVAILABILITY REPORT</a></li>
@@ -76,19 +76,16 @@
 	<div id="sidr" data-mobile="nav">
 		<!-- Responsive Menu Content -->
 		<ul class="mobile-nav">
-            <li id="ctl00_PanelSearch" onkeypress="javascript:return WebForm_FireDefaultButton(event, 'ctl00_ImageButtonSearch')" style="padding-bottom: 5px;">
-                
-                <input name="ctl00$TextBoxSearch" type="text" placeholder="SEARCH BOYLE" id="ctl00_TextBoxSearch" class="Text-Gray" OnFocus="return ClearKeywordTextBox(this);" OnBlur="return ClearKeywordTextBox(this);"/>&nbsp;
-                <input type="image" name="ctl00$ImageButtonSearch" id="ctl00_ImageButtonSearch" src="<?php bloginfo('template_directory'); ?>/images/Button-Search-Off.gif" align="absmiddle" class="mobile-search-button" />
-           
+            <li style="padding-bottom: 5px;">
+                <?php get_search_form( true ); ?>
             </li>
+            <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
 			<li><a href="<?php echo get_permalink( 1059 ); ?>">Search Availability</a></li>
 			<li><a href="<?php echo get_permalink( 1512 ); ?>">Property Portfolio</a></li>
 			<li><a href="<?php echo get_permalink( 13 ); ?>">Services</a></li>
 			<li><a href="<?php echo get_permalink( 1894 ); ?>">News</a></li>
 			<li><a href="<?php echo get_permalink( 2 ); ?>">About Us</a></li>
 			<li><a href="<?php echo get_permalink( 25 ); ?>">Contact</a></li>
-            <li><a href="#">Register/Login</a></li>
             <li><a href="#">Boyle Blog</a></li>
             <li><a href="http://www.boyleinsuranceagency.com/">Boyle Insurance Agency</a></li>
 			<li class="simple-menu-social">

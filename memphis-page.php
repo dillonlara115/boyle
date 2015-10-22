@@ -17,9 +17,15 @@ Template Name: Memphis Team Pages
 		<div class="static-pages-content">
 			<?php the_content(); ?>
 
-			<?php	$query = new WP_Query( array( 'post_type' => 'staff_directory', 'orderby'=>'title','order'=>'ASC' ) );
-				if ( $query->have_posts() ) : ?>
-
+			<?php $query = new WP_Query( 
+				array( 
+					'post_type' => 'staff_directory', 
+					'meta_key'	=>	'last_name',
+					'orderby'	=>	'meta_value',
+					'order'		=>	'ASC' 
+					) 
+				);
+			if ( $query->have_posts() ) : ?>
 
 			<ul class="static-expandable-content">
 				<li>
@@ -61,7 +67,7 @@ Template Name: Memphis Team Pages
 				<li>
 					<h3 data-toggle-title="closed">Office Division</h3>
 					<div class="toggle-content is-hidden">
-						<p class="content-left">Meet our Boyle office properties team.  From elegant ‘Class-A’ office buildings in the heart of East Memphis to custom headquarters for companies like Thomas & Betts, Baptist Memorial Health Care, ServiceMaster, and Helena Chemical, these seasoned real estate pros have been providing tenants with unparalleled service and attention for a combined two centuries.  No team combines world-class service with local knowledge and expertise like the management and leasing specialists at Boyle.  Make your next office lease as simple and seamless as possible by calling Mark Halperin and his team of experts at Boyle</p><img src="http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/04/BoyleOfficeTeam.png" class="image-right" />
+						<p>Meet our Boyle office properties team.  From elegant ‘Class-A’ office buildings in the heart of East Memphis to custom headquarters for companies like Thomas & Betts, Baptist Memorial Health Care, ServiceMaster, and Helena Chemical, these seasoned real estate pros have been providing tenants with unparalleled service and attention for a combined two centuries.  No team combines world-class service with local knowledge and expertise like the management and leasing specialists at Boyle.  Make your next office lease as simple and seamless as possible by calling Mark Halperin and his team of experts at Boyle</p>
 						<div class="agent-container staff-container">
 				
 							<?php while ( $query->have_posts() ) : $query->the_post(); ?>	
@@ -125,8 +131,8 @@ Template Name: Memphis Team Pages
 				<li>
 					<h3 data-toggle-title="closed">Residential Division</h3>
 					<div class="toggle-content is-hidden">
-						<div class="content-left"><p>Boyle’s residential development team has years of experience in creating some of Memphis’ finest neighborhoods.  Boyle knows that finding the perfect home begins with finding the perfect neighborhood.  Our strong residential track record dates all the way back to 1906 when Boyle family ancestor, Edward Boyle, developed the iconic Belvedere Boulevard in midtown Memphis.  Since then, our residential team has developed elegant neighborhoods that have all stood the test of time, from River Oaks to The Cloisters to Blue Heron.  With our attention to detail and strict covenants, you can rest assured that your home will be a sound financial investment.  Let us welcome you to one of our neighborhoods.<br><br>Gary Thompson, 901-766-4246, <a href="mailto:garyt@boyle.com">garyt@boyle.com</a></p></div>
-						<img src="http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/04/BoyleResTeamTwinLakesHorz.png" class="image-right" />
+						<div><p>Boyle’s residential development team has years of experience in creating some of Memphis’ finest neighborhoods.  Boyle knows that finding the perfect home begins with finding the perfect neighborhood.  Our strong residential track record dates all the way back to 1906 when Boyle family ancestor, Edward Boyle, developed the iconic Belvedere Boulevard in midtown Memphis.  Since then, our residential team has developed elegant neighborhoods that have all stood the test of time, from River Oaks to The Cloisters to Blue Heron.  With our attention to detail and strict covenants, you can rest assured that your home will be a sound financial investment.  Let us welcome you to one of our neighborhoods.<br><br>Gary Thompson, 901-766-4246, <a href="mailto:garyt@boyle.com">garyt@boyle.com</a></p></div>
+						
 						<div class="agent-container staff-container">
 
 							<?php while ( $query->have_posts() ) : $query->the_post(); ?>	

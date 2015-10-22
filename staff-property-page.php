@@ -19,8 +19,8 @@ $image = get_field('picture'); ?>
 		<?php foreach($agents as $agent): 
 		$image = get_field('picture', $agent->ID); ?>
 			<div class="single-property-agent-container agent-property-page-agent-container">
-				<h1><?php echo get_the_title( $agent->ID ); ?></h1>
 				<img src="<?php echo $image['url'];?>"/>
+				<h1><?php echo get_the_title( $agent->ID ); ?></h1>
 				<strong><a href="mailto:<?php echo the_field('email', $agent->ID); ?>"><?php echo get_field('email', $agent->ID ); ?></a></strong>
 				<span><?php echo the_field('phone_number', $agent->ID ); ?></span>
 				<ul>
@@ -53,17 +53,30 @@ $image = get_field('picture'); ?>
 		<div class="acf-map">
 			<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
 				<?php
-					$location = get_field('location');
-					$gtemp = explode (',',  implode($location));
-					$coord = explode (',', implode($gtemp));
-				?>
+							$location = get_field('location');
+							$gtemp = explode (',',  implode($location));
+							$coord = explode (',', implode($gtemp));
+							$images = get_field('property_gallery');
+							$image_1 = $images[0]; 
+						?>
 
-				<div class="marker" data-lat="<?php echo $location[lat]; ?>" data-lng="<?php echo $location[lng]; ?>">
-					<p class="address"><?php the_title(); ?></p>		
-				</div>		
-			<?php endwhile; ?>
-		</div>
-		<?php endif; ?>
+							<div class="marker" style="display: none;" data-lat="<?php echo $location[lat]; ?>" data-lng="<?php echo $location[lng]; ?>" data-col="available">
+								<a href="<?php the_permalink(); ?>" class="map-image">
+									<?php if( $images ) { ?>
+					            		<img src="<?php echo $image_1['sizes']['thumbnail']; ?>" alt="<?php echo $image_1['alt']; ?>" class="availability-report-image"/>
+									<?php } elseif (has_post_thumbnail()) { ?>
+										<?php echo get_the_post_thumbnail( $page->ID, 'thumbnail', array( 'class'	=> "availability-report-image") ); ?>
+									<?php 	} else { ?>
+										<img src="http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/09/No-Photo-Available.gif" class="availability-report-image"/>
+									<?php } ?> 
+								</a>
+								<p class="address map-text"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></p>
+								<p class="map-text black-text"><?php the_field('address'); ?>, <?php the_field('city'); ?>, <?php the_field('zip_code'); ?></p>		
+							</div>
+
+									
+						<?php endwhile; ?>
+					<?php endif; ?>
 
 </div>
 <div style="clear:both;"></div>
@@ -84,7 +97,13 @@ Properties
 				<li class="result-item">
 				<div class="pull-left">
 					<a href="<?php the_permalink(); ?>">
-						<img src="<?php echo $image_1['sizes']['thumbnail']; ?>" alt="<?php echo $image_1['alt']; ?>" class="availability-report-image"/>
+						<?php if( $images ) { ?>
+		            		<img src="<?php echo $image_1['sizes']['thumbnail']; ?>" alt="<?php echo $image_1['alt']; ?>" class="availability-report-image"/>
+						<?php } elseif (has_post_thumbnail()) { ?>
+							<?php echo get_the_post_thumbnail( $page->ID, 'thumbnail', array( 'class'	=> "availability-report-image") ); ?>
+						<?php 	} else { ?>
+							<img src="http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/09/No-Photo-Available.gif" class="availability-report-image"/>
+						<?php } ?> 
 					</a>
 					<?php if($agents) { ?>
 					<?php foreach($agents as $agent): ?>
@@ -127,7 +146,7 @@ Properties
 						<?php elseif( have_rows('suite_information_feet') ): ?>
 							<table class="List" width="100%" cellpadding="5" cellspacing="1" border="0">
 							    <tbody><tr class="Header">
-							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Lot</td>
+							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Suite</td>
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Sq. Feet</td>
 							        <td style="text-align: center; vertical-align: middle; font-weight: bold;" class="Text-White">Price</td>
 							    </tr>
@@ -195,20 +214,20 @@ Properties
 */
  
 function render_map( $el ) {
- 
+ 	
 	// var
 	var $markers = $el.find('.marker');
- 
+
 	// vars
 	var args = {
-		zoom		: 16,
+		zoom		: 8,
 		center		: new google.maps.LatLng(0, 0),
 		mapTypeId	: google.maps.MapTypeId.HYBRID
 	};
- 
+ 	
 	// create map	        	
 	var map = new google.maps.Map( $el[0], args);
- 
+ 	
 	// add a markers reference
 	map.markers = [];
  
@@ -224,6 +243,12 @@ function render_map( $el ) {
  
 }
  
+// create info window outside of each - then tell that singular infowindow to swap content based on click
+var infowindow = new google.maps.InfoWindow({
+	content		: '' 
+});
+
+
 /*
 *  add_marker
 *
@@ -241,27 +266,15 @@ function render_map( $el ) {
 function add_marker( $marker, map ) {
  
 	var latlng = new google.maps.LatLng( $marker.attr('data-lat'), $marker.attr('data-lng') );
-	var color = '#466989';
-	var pincolor = '#466989';
-
-	// if(color === "YOUR_ACF_VARIABLE") { var pincolor = 'teal'; }
-	// else if(color === "YOUR_ACF_VARIABLE") { var pincolor = 'red'; }
-
-	function pinSymbol(color) {
-		return {
-			path: 'm56.9631,0.75c-31.05667,0 -56.2131,25.16236 -56.2131,56.20168c0,31.05099 56.2131,135.79832 56.2131,135.79832s56.19011,-104.74733 56.19011,-135.79832c0,-31.03931 -25.15656,-56.20168 -56.19011,-56.20168zm0,83.06174c-14.84224,0 -26.87169,-12.01827 -26.87169,-26.86006s12.02945,-26.85426 26.87169,-26.85426s26.84848,12.02344 26.84848,26.85426s-12.0293,26.86006 -26.84848,26.86006z',
-			fillColor: color,
-			fillOpacity: 1,
-			strokeColor: '#000',
-			strokeWeight: 1,
-			scale: .2,
-			};
-		}
+	var color = $marker.attr('data-col');
+	 if(color === "available") { var $icon = 'http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/08/GoogleMaps-Marker-RedDot.png'; }
+	 else if(color === "not-available") { var $icon = 'http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/08/GoogleMaps-Marker-GreenDot.png'; }
 
 	var marker = new google.maps.Marker({
 		position: latlng,
 		map: map,
-		icon: pinSymbol(pincolor)
+		icon: 'http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/08/GoogleMaps-Marker-GreenDot.png'
+
 		});
  
 	// add to array
@@ -270,17 +283,21 @@ function add_marker( $marker, map ) {
 	// if marker contains HTML, add it to an infoWindow
 	if( $marker.html() )
 	{
-		// create info window
-		var infowindow = new google.maps.InfoWindow({
-			content		: $marker.html()
-		});
- 
-		// show info window when marker is clicked
-		google.maps.event.addListener(marker, 'click', function() {
- 
-			infowindow.open( map, marker );
- 
-		});
+// show info window when marker is clicked & close other markers
+	google.maps.event.addListener(marker, 'click', function() {
+		//swap content of that singular infowindow
+				infowindow.setContent($marker.html());
+		        infowindow.open(map, marker);
+	});
+	
+	// close info window when map is clicked
+	     google.maps.event.addListener(map, 'click', function(event) {
+	        if (infowindow) {
+	            infowindow.close(); }
+			}); 
+
+
+		
 	}
  
 }
@@ -311,22 +328,31 @@ function center_map( map ) {
 		bounds.extend( latlng );
  
 	});
- 
+ 	if( map.markers.length == 0 )
+	{
+		map.setCenter({lat: 35.496456, lng: -89.165039});
+		map.setZoom(5);
+	}
 	// only 1 marker?
-	if( map.markers.length == 1 )
+	else if( map.markers.length == 1 )
 	{
 		// set center of map
 	    map.setCenter( bounds.getCenter() );
-	    map.setZoom( 14 );
+	    map.setZoom( 8 );
 	}
 	else
-	{
+	{	
 		// fit to bounds
 		map.fitBounds( bounds );
 	}
  
 }
  
+
+
+
+
+
 /*
 *  document ready
 *
@@ -352,5 +378,4 @@ $(document).ready(function(){
  
 })(jQuery);
 </script>
-
 <?php get_footer(); ?>

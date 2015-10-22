@@ -46,6 +46,19 @@
 </div>
 
 <?php wp_footer(); ?>
+<script type='text/javascript'>
+/* <![CDATA[ */
+//var infinite_scroll = "{\"loading\":{\"msgText\":\"<em>Loading...<\\\/em>\",\"finishedMsg\":\"<em>No additional posts.<\\\/em>\",\"img\":\"http:\\\/\\\/maxtestdomain.com\\\/boyle\\\/wp-content\\\/plugins\\\/infinite-scroll\\\/img\\\/ajax-loader.gif\"},\"nextSelector\":\".next-page\",\"navSelector\":\".navigation\",\"itemSelector\":\".result-item\",\"contentSelector\":\".search-availability-results\",\"debug\":false,\"behavior\":\"\",\"callback\":\"\",\"theme\":\"boyle\"}";
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://maxtestdomain.com/boyle/wp-content/plugins/infinite-scroll/js/front-end/jquery.infinitescroll.js?ver=2.6.1'></script>
+
+<script type="text/javascript">
+// Because the `wp_localize_script` method makes everything a string
+//var infinite_scroll = jQuery.parseJSON(infinite_scroll);
+
+//jQuery( infinite_scroll.contentSelector ).infinitescroll( infinite_scroll, function(newElements, data, url) { eval(infinite_scroll.callback); });
+</script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.5.0/slick.min.js"></script>
 
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/common.js"></script>

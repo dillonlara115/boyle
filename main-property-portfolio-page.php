@@ -24,6 +24,17 @@ Template Name: Main Property Portfolio Page
 	<div id="post-<?php the_ID(); ?>" class="property-sub-navigation portfolio-sub-navigation">
 		<?php wp_nav_menu( array('menu' => 'Property Portfolio Regions Menu' )); ?>
 	</div>
+	<div class="visible-mobile">
+		<strong>Select a Region: </strong>
+		<?php
+	    	wp_nav_menu( array(
+		    	'menu' => 'Property Portfolio Regions Menu',
+		        'theme_location' => 'mobile-nav',
+		        'items_wrap'     => '<select id="drop-nav"><option value="">Select a page...</option>%3$s</select>',
+		        'walker'  => new Walker_Nav_Menu_Dropdown())
+	        );
+		?>
+	</div>
 <div id="content" class="static-container static-contact-container" >
 	<?php the_post(); ?>
 	<?php $posts = get_field('featured_properties'); ?>
@@ -82,7 +93,7 @@ Template Name: Main Property Portfolio Page
 				<?php foreach($agents as $agent): 
 				$image = get_field('picture', $agent->ID); ?>
 					<div class="single-property-agent-container">
-						<strong class="agent-name"><a href="#"><?php echo get_the_title( $agent->ID ); ?></a></strong>
+						<strong class="result-item-agent"><a href="<?php echo the_field('agent_property_page', $agent->ID); ?>"><?php echo get_the_title( $agent->ID ); ?></a></strong>
 						<small><?php echo the_field('phone_number', $agent->ID); ?></small>
 						<p><a href="mailto:<?php echo the_field('email', $agent->ID); ?>"><?php echo the_field('email', $agent->ID); ?></a>
 						</p>
