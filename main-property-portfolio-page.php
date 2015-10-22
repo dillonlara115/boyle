@@ -24,13 +24,13 @@ Template Name: Main Property Portfolio Page
 	<div id="post-<?php the_ID(); ?>" class="property-sub-navigation portfolio-sub-navigation">
 		<?php wp_nav_menu( array('menu' => 'Property Portfolio Regions Menu' )); ?>
 	</div>
-	<div class="visible-mobile">
+	<div class="visible-mobile property-portfolio-region">
 		<strong>Select a Region: </strong>
 		<?php
 	    	wp_nav_menu( array(
 		    	'menu' => 'Property Portfolio Regions Menu',
 		        'theme_location' => 'mobile-nav',
-		        'items_wrap'     => '<select id="drop-nav"><option value="">Select a page...</option>%3$s</select>',
+		        'items_wrap'     => '<select class="drop-nav"><option value="">Select a page...</option>%3$s</select>',
 		        'walker'  => new Walker_Nav_Menu_Dropdown())
 	        );
 		?>

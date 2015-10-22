@@ -23,9 +23,12 @@ $news = get_posts(array(
 <div class="entry-content">
 <?php endif; ?>
 <h1 class="agent-title"><?php the_title(); ?>, <?php the_field('title'); ?>, <?php the_field('office'); ?></h1>
-<?php the_content(); 
-$image = get_field('picture'); ?>
+
+<?php $image = get_field('picture'); ?>
 	<div class="content-pull-left">
+		<div class="pull-left">
+			<img src="<?php echo $image['url'];?>"/>
+		</div>
 		<?php if(get_field('responsibilities')) { ?>
 			<p><strong>Responsibilities: </strong><?php echo the_field('responsibilities'); ?></p>
 		<?php } ?>
@@ -52,14 +55,12 @@ $image = get_field('picture'); ?>
 				Email: <a href="mailto:<?php echo the_field('email'); ?>"><?php echo the_field('email'); ?></a></p>
 		</div>
 	</div>
-	<div class="pull-left">
-		<img src="<?php echo $image['url'];?>"/>
-	</div>
+	<?php the_content(); ?>
 </div>
 
 <?php if( $news ): ?>
 	<div class="news-col-sidebar">
-		<h3 class="side-property-header side-property-header-community-news"><span>C</span>ommunity <span>N</span>ews</h3>
+		<h3 class="side-property-header side-property-header-community-news"><span>B</span>roker <span>N</span>ews</h3>
 		<ul>
 		<?php foreach( $news as $item ): ?>
 			<li>

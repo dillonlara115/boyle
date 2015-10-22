@@ -108,13 +108,20 @@
 		}
 	}
 }
+.search-availability-mobile {
+	margin-bottom: 1em;
+}
 
+#search-houses {
+	strong {
+		margin-bottom: 0;
+	}
+}
 
 .visible-mobile {
 	display: none;
 	@media (max-width: 960px) {
 		display: inline-block;
-		margin-bottom: 1em;
 		margin-left: 1em;
 	}
 	strong {
@@ -133,11 +140,19 @@
 		display: inline-block;
 	}
 }
-.search-availability-container {
+.search-availability-container, .property-portfolio-region, .boyle-news-mobile {
+	margin-left: 0;
 	.visible-mobile {
 		margin-left: 0;
 	}
 }
+
+.property-portfolio-region {
+	strong {
+		color: #355c88;
+	}
+}
+
 .map-image {
 	float: left;
     width: 50px;
@@ -377,6 +392,9 @@
 	width: 100%;
 	-webkit-box-size: border-box;
 	box-sizing: border-box;
+	@media (max-width: 960px) {
+		margin-top: 1em;
+	}
 	strong {
 		color: #000000!important;
 		font-family: Tahoma, Arial!important;
@@ -461,6 +479,14 @@ p.navrechts {
 
 	}
 }
+
+
+.search-availability-link, .availability-report-link {
+	@media (max-width: 48em) {
+		display: none;
+	}
+}
+
 .search-availability-results.property-list-container {
 	hr {
 		margin-top: 0;
@@ -525,6 +551,9 @@ p.navrechts {
     width: 100%;
     -webkit-box-sizing:border-box;
     box-sizing:border-box;
+    @media (max-width: 48em) {
+    	padding: 10px 5px;
+    }
     .pull-left	{
     	width: 50%!important;
     	@media (max-width: 48em) {
@@ -555,6 +584,9 @@ p.navrechts {
 		display: block;
 		width: 100%;
 		margin: 10px 0;
+		strong {
+			text-align: left;
+		}
 	}
 }
 

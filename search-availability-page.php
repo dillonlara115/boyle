@@ -81,7 +81,7 @@ Template Name: Search Availability Page
 			<form class='search-availability-form' name="searchform" id="searchform" action="" method="post">
 			<div class="property-type-list-content" id="search-houses">
 				<div class="left-content">
-					<div class="visible-mobile">
+					<div class="visible-mobile search-availability-mobile">
 						<strong>Property Type: </strong>
 						<select id="drop-nav">
 							<option value="?type=all" <?php if ('all' == $_GET['type'] || empty($_GET))  print 'selected'; ?>>All</option>
@@ -1415,7 +1415,7 @@ Template Name: Search Availability Page
 								$attachment = get_sub_field('lot_file'); ?>
 
 						         <tr class="Item">
-							        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
+							        <td style="text-align: center; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
 							        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size'); ?></td>
 							        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
 							    </tr> 
@@ -1436,7 +1436,7 @@ Template Name: Search Availability Page
 								$attachment = get_sub_field('lot_file'); ?>
 
 						         <tr class="Item">
-							        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
+							        <td style="text-align: center; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
 							        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size'); ?></td>
 							        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
 							    </tr> 

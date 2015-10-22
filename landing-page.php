@@ -12,7 +12,7 @@ Template Name: Memphis Landing Page
 		<h2><?php echo the_title(); ?></h2>
 	</div>
     <div class="bucket-container">
-        <div class="homepage-sub">
+        <div class="homepage-sub hidden-sm">
            
         <div class="homepage-sub-section landing-page-sub-section" >
         	<img src="http://maxtestdomain.com/boyle/wp-content/themes/boyle/images/Icons/Icon-Trees.png" alt="Company History" />
@@ -23,7 +23,7 @@ Template Name: Memphis Landing Page
 	            </div>
 	            <a href="<?php echo get_permalink( 1059 ); ?>?region=memphis_metro_area" class="Text-Blue-Small bucket-cta">&raquo&nbsp;Click here to search</a>
             </div>
-            <i class="mobile-icon"></i>
+           
         </div>
                 
         <div class="homepage-sub-section landing-page-sub-section" >
@@ -35,7 +35,7 @@ Template Name: Memphis Landing Page
                 <a href="<?php echo get_permalink( 1506 ); ?>" class="Text-Blue-Small bucket-cta">&raquo&nbsp;Click here to read</a>
                                     
             </div>  
-          <i class="mobile-icon"></i> 
+          
         </div>
         <div class="homepage-sub-section landing-page-sub-section" >
         <img src="http://maxtestdomain.com/boyle/wp-content/themes/boyle/images/Icon-Book.png" alt="Company History" />
@@ -45,12 +45,46 @@ Template Name: Memphis Landing Page
                 </div>  
                 <a href="<?php echo get_permalink( 70 ); ?>" class="Text-Blue-Small bucket-cta">&raquo&nbsp;Click here to read</a>
             </div>
-            <i class="mobile-icon"></i>  
+              
         </div>
     </div>    
-              
-    <div class="homepage-divider"></div>
+<div class="homepage-divider"></div>
+
+    <div class="homepage-sub visible-sm">
+    	<div class="homepage-sub-section landing-page-sub-section" >
+        	<a href="<?php echo get_permalink( 1059 ); ?>?region=memphis_metro_area" class="">
+        	<div class="Text-Black-Small">
+	            <div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">S</span>EARCH <span style="font-size: 9pt;">M</span>EMPHIS:</div>
+                <div class="homepage-sub-section-content-text">Search our Memphis properties.</div>
+            </div>
+            <i class="mobile-icon"></i>
+            </a>
+        </div>
+                
+        <div class="homepage-sub-section landing-page-sub-section" >
+        	<a href="<?php echo get_permalink( 1506 ); ?>">
+            <div class="Text-Black-Small">
+                <div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">P</span>ROPERTY <span style="font-size: 9pt;">P</span>ORTFOLIO:</div>
+                <div class="homepage-sub-section-content-text">View our Memphis Properties.<br />
+                </div>         
+            </div>  
+          	<i class="mobile-icon"></i> 
+          </a>
+        </div>
+        <div class="homepage-sub-section landing-page-sub-section" >
+        	<a href="<?php echo get_permalink( 70 ); ?>">
+	            <div class="Text-Black-Small">
+	                <div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">M</span>EMPHIS <span style="font-size: 9pt;">T</span>EAM:</div>
+	                <div class="homepage-sub-section-content-text">Meet our Memphis Team.<br />
+	                </div>  
+                
+            	</div>
+            <i class="mobile-icon"></i>  
+            </a>
+        </div>
     </div>
+              
+        </div>
 <div id="content" class="static-container static-contact-container landing-page-content"  >
 	<?php the_post(); ?>
 	

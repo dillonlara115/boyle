@@ -5,7 +5,7 @@
     	wp_nav_menu( array(
 	    	'menu' => 'News Other Regions Menu',
 	        'theme_location' => 'mobile-nav',
-	        'items_wrap'     => '<select id="drop-nav"><option value="">Select a page...</option>%3$s</select>',
+	        'items_wrap'     => '<select class="drop-nav"><option value="">Select a page...</option>%3$s</select>',
 	        'walker'  => new Walker_Nav_Menu_Dropdown())
         );
 	?>

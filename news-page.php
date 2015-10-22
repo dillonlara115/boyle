@@ -13,17 +13,16 @@ Template Name: News Page
 	<div id="post-<?php the_ID(); ?>" class="property-sub-navigation portfolio-sub-navigation">
 		<?php wp_nav_menu( array('menu' => 'News Regions Menu' )); ?>
 	</div>
-	<div class="visible-mobile">
+	<div class="visible-mobile boyle-news-mobile">
 	<strong>Select a Region: </strong>
 	<?php
     	wp_nav_menu( array(
 	    	'menu' => 'News Regions Menu',
 	        'theme_location' => 'mobile-nav',
-	        'items_wrap'     => '<select id="drop-nav"><option value="">Select a page...</option>%3$s</select>',
+	        'items_wrap'     => '<select class="drop-nav"><option value="">Select a page...</option>%3$s</select>',
 	        'walker'  => new Walker_Nav_Menu_Dropdown())
         );
 	?>
-	<br>
 </div>
 <div id="content" class="static-container static-contact-container news-page" >
 	<?php the_post(); ?>

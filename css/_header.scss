@@ -60,11 +60,13 @@
 
 
 .mobile-header {
-	
-	padding: .3em .5em 0;
-	display: block;
-	height: 30px;
+	max-width: 819px;
+    margin: 0 auto;
+    clear: both;
+    padding: 0px;
+    width: 96%;
 	line-height: 30px;
+	position: relative;
 	@media (min-width: 60em) {
 		display: none;
 	}
@@ -75,7 +77,6 @@
 		display: inline-block;
 		float: left;
 		margin-bottom: .5em;
-		margin-left: 2.7%;
 		@media (min-width: 60em) {
 			display: none;
 		}
@@ -99,7 +100,10 @@
 		display: block;
 		font-size: 3em;
 		float: right;
-		margin: -.18em .7% 0 0;
+		font-family: times;
+		margin: -.18em -1% 0 0;
+		position: absolute;
+		right: 0;
 
 	}
 	.lte9 & {
@@ -119,8 +123,12 @@
 	//@media (min-width: 60em) {
 		display: none;
 	//}
+	border-bottom: 0!important;
 	.simple-menu-social {
 		padding-top: 1em;
+		background: transparent!important;
+		border-bottom: 0!important;
+		box-shadow: none!important;
 		a {
 			display: inline-block;
 			margin: 0 1em;
@@ -142,6 +150,12 @@
 	}
 }
 
+.sidr ul, .mobile-nav {
+	border-bottom: 0!important;
+}
+#twitter {
+	display: none;
+}
 .header-nav-1 {
 	margin: 0 auto;
 	background: url('http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/04/nav-bg-boyle.png') no-repeat;

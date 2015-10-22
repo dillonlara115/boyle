@@ -351,7 +351,7 @@ function dropdown_menu_scripts() {
     ?>
         <script>
           jQuery(document).ready(function ($) {
-            $("#drop-nav").change( function() {
+            $(".drop-nav").change( function() {
                     document.location.href =  $(this).val();
             });
           });

@@ -5,7 +5,7 @@
     	wp_nav_menu( array(
 	    	'menu' => 'Property Portfolio All Regions Menu',
 	        'theme_location' => 'mobile-nav',
-	        'items_wrap'     => '<select id="drop-nav"><option value="">Select a page...</option>%3$s</select>',
+	        'items_wrap'     => '<select class="drop-nav"><option value="">Select a page...</option>%3$s</select>',
 	        'walker'  => new Walker_Nav_Menu_Dropdown())
         );
 	?>
@@ -201,7 +201,7 @@
 								$attachment = get_sub_field('lot_file'); ?>
 
 						         <tr class="Item">
-							        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
+							        <td style="text-align: center; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
 							        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size'); ?></td>
 							        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
 							    </tr> 
@@ -222,7 +222,7 @@
 								$attachment = get_sub_field('lot_file'); ?>
 
 						         <tr class="Item">
-							        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
+							        <td style="text-align: center; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
 							        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size'); ?></td>
 							        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
 							    </tr> 

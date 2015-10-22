@@ -5,53 +5,89 @@ Template Name: Nashville Landing Page
 ?>
 
 <?php get_header(); ?>
-	<div class="outer-image-container property-image-container">
-		<div class="static-header-image-container">
-			<?php echo get_the_post_thumbnail( $page->ID, 'large', array( 'class'	=> "static-header-image") ); ?> 
-		</div> 
-		<h2><?php echo the_title(); ?></h2>
-	</div>
-    <div class="bucket-container">
-        <div class="homepage-sub">
-           
-        <div class="homepage-sub-section landing-page-sub-section" >
-        	<img src="http://maxtestdomain.com/boyle/wp-content/themes/boyle/images/Icons/Icon-Trees.png" alt="Company History" />
-        	<div class="Text-Black-Small">
+<div class="outer-image-container property-image-container">
+	<div class="static-header-image-container">
+		<?php echo get_the_post_thumbnail( $page->ID, 'large', array( 'class'	=> "static-header-image") ); ?> 
+	</div> 
+	<h2><?php echo the_title(); ?></h2>
+</div>
+<div class="bucket-container">
+<div class="homepage-sub hidden-sm" >
 
-	            <div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">S</span>EARCH <span style="font-size: 9pt;">N</span>ASHVILLE:</div>
-	            <div>
-	                <div class="homepage-sub-section-content-text">Search our Nashville properties.</div>
-	            </div>
-	            <a href="<?php echo get_permalink( 1059 ); ?>?region=memphis_metro_area" class="Text-Blue-Small bucket-cta">&raquo&nbsp;Click here to search</a>
-            </div>
-            <i class="mobile-icon"></i>
-        </div>
-                
-        <div class="homepage-sub-section landing-page-sub-section" >
-        <img src="http://maxtestdomain.com/boyle/wp-content/themes/boyle/images/Icons/Icon-Trees.png" alt="Company History" />
-            <div class="Text-Black-Small">
-                <div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">P</span>ROPERTY <span style="font-size: 9pt;">P</span>ORTFOLIO:</div>
-                <div class="homepage-sub-section-content-text">View our Nashville Properties.<br />
-                </div>
-                <a href="<?php echo get_permalink( 1548 ); ?>" class="Text-Blue-Small bucket-cta">&raquo&nbsp;Click here to read</a>
-                                    
-            </div>  
-          <i class="mobile-icon"></i> 
-        </div>
-        <div class="homepage-sub-section landing-page-sub-section" >
-        	<img src="http://maxtestdomain.com/boyle/wp-content/themes/boyle/images/Icon-Book.png" alt="Company History" />
-            <div class="Text-Black-Small">
-                <div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">N</span>ASHVILLE <span style="font-size: 9pt;">T</span>EAM:</div>
-                <div class="homepage-sub-section-content-text">Meet our Nashville Team.<br />
-                </div>  
-                <a href="<?php echo get_permalink( 72 ); ?>" class="Text-Blue-Small bucket-cta">&raquo&nbsp;Click here to read</a>
-            </div>
-            <i class="mobile-icon"></i>  
-        </div>
-    </div>    
-              
-    <div class="homepage-divider"></div>
-    </div>
+		<div class="homepage-sub-section landing-page-sub-section" >
+			<img src="http://maxtestdomain.com/boyle/wp-content/themes/boyle/images/Icons/Icon-Trees.png" alt="Company History" />
+			<div class="Text-Black-Small">
+				<div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">S</span>EARCH <span style="font-size: 9pt;">N</span>ASHVILLE:</div>
+				<div>
+					<div class="homepage-sub-section-content-text">Search our Nashville properties.</div>
+				</div>
+				<a href="<?php echo get_permalink( 1059 ); ?>?region=memphis_metro_area" class="Text-Blue-Small bucket-cta">&raquo&nbsp;Click here to search</a>
+			</div>
+
+		</div>
+
+		<div class="homepage-sub-section landing-page-sub-section" >
+			<img src="http://maxtestdomain.com/boyle/wp-content/themes/boyle/images/Icons/Icon-Trees.png" alt="Company History" />
+			<div class="Text-Black-Small">
+				<div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">P</span>ROPERTY <span style="font-size: 9pt;">P</span>ORTFOLIO:</div>
+				<div class="homepage-sub-section-content-text">View our Nashville Properties.<br />
+				</div>
+				<a href="<?php echo get_permalink( 1548 ); ?>" class="Text-Blue-Small bucket-cta">&raquo&nbsp;Click here to read</a>
+
+			</div>  
+
+		</div>
+		<div class="homepage-sub-section landing-page-sub-section" >
+			<img src="http://maxtestdomain.com/boyle/wp-content/themes/boyle/images/Icon-Book.png" alt="Company History" />
+			<div class="Text-Black-Small">
+				<div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">N</span>ASHVILLE <span style="font-size: 9pt;">T</span>EAM:</div>
+				<div class="homepage-sub-section-content-text">Meet our Nashville Team.<br />
+				</div>  
+				<a href="<?php echo get_permalink( 72 ); ?>" class="Text-Blue-Small bucket-cta">&raquo&nbsp;Click here to read</a>
+			</div>
+
+		</div>
+	</div>    
+<div class="homepage-divider"></div>
+	<div class="homepage-sub visible-sm">
+		<div class="homepage-sub-section landing-page-sub-section" >
+			<a href="<?php echo get_permalink( 1059 ); ?>?region=nashville_metro_area">
+				<div class="Text-Black-Small">
+					<div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">S</span>EARCH <span style="font-size: 9pt;">N</span>ASHVILLE:</div>
+					<div>
+						<div class="homepage-sub-section-content-text">Search our Nashville properties.</div>
+					</div>
+
+				</div>
+				<i class="mobile-icon"></i>
+			</a>
+		</div>
+
+		<div class="homepage-sub-section landing-page-sub-section" >
+			<a href="<?php echo get_permalink( 1548 ); ?>">
+				<div class="Text-Black-Small">
+					<div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">P</span>ROPERTY <span style="font-size: 9pt;">P</span>ORTFOLIO:</div>
+					<div class="homepage-sub-section-content-text">View our Nashville Properties.<br />
+					</div>            
+				</div>  
+				<i class="mobile-icon"></i> 
+			</a>
+		</div>
+		<div class="homepage-sub-section landing-page-sub-section" >
+			<a href="<?php echo get_permalink( 72 ); ?>">
+				<div class="Text-Black-Small">
+					<div class="Title-Blue-Small homepage-sub-section-content-title"><span style="font-size: 9pt;">N</span>ASHVILLE <span style="font-size: 9pt;">T</span>EAM:</div>
+					<div class="homepage-sub-section-content-text">Meet our Nashville Team.<br />
+					</div>  
+
+				</div>
+				<i class="mobile-icon"></i>  
+			</a>
+		</div>
+	</div>
+
+	
+</div>
 <div id="content" class="static-container static-contact-container landing-page-content"  >
 	<?php the_post(); ?>
 	
@@ -98,7 +134,7 @@ Template Name: Nashville Landing Page
 		<hr>
 
 		<h3><?php echo the_title(); ?> News</h3>
-				<?php 
+		<?php 
 		$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 		// args for residential property types
 		$args = array(
@@ -114,18 +150,18 @@ Template Name: Nashville Landing Page
 					'key'		=> 'tag_a_region',
 					'value'		=> 'greater Nashville',
 					'compare'	=> 'LIKE'
-				),
+					),
 				
-			)
-		);
+				)
+			);
 		// query
 		$the_query = new WP_Query( $args );
 		?>
 		<?php if( $the_query->have_posts() ): ?>
 			<ul>
-			<?php while ( $the_query->have_posts() ) : $the_query->the_post(); 
- 	
-			?>
+				<?php while ( $the_query->have_posts() ) : $the_query->the_post(); 
+
+				?>
 				<li>
 					<h3><a class="Title-Blue" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 					<strong class="news-date"><?php echo the_field('date'); ?></strong>
@@ -133,21 +169,21 @@ Template Name: Nashville Landing Page
 					<p><a href="<?php the_permalink(); ?>">» Read More</a></p>
 				</li>
 			<?php endwhile; ?>
-			</ul>
-		<?php else : ?>
-			<p>No news articles have been found.</p>
-		<?php endif; ?>
-		<?php wp_reset_query();	 // Restore global post data stomped by the_post(). ?>
+		</ul>
+	<?php else : ?>
+		<p>No news articles have been found.</p>
+	<?php endif; ?>
+	<?php wp_reset_query();	 // Restore global post data stomped by the_post(). ?>
 
-		<?php
-		if($the_query->max_num_pages>1){?>
-		    <p class="navrechts">
-		    	<a href="<?php echo get_permalink( 1933 ); ?>">View More News Articles</a>
-		    </p>
-		<?php } ?>
-	</div>
+	<?php
+	if($the_query->max_num_pages>1){?>
+	<p class="navrechts">
+		<a href="<?php echo get_permalink( 1933 ); ?>">View More News Articles</a>
+	</p>
+	<?php } ?>
+</div>
 
-	
+
 </div>
 
 

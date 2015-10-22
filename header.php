@@ -11,12 +11,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><?php wp_title(' | ', true, 'right'); ?></title>
 
-
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <link rel="stylesheet" href="http://maxtestdomain.com/reinhardt/wp-content/themes/reinhardt/sidr/jquery.sidr.dark.css">
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.0/slick.css"/>
 <link href="<?php bloginfo('template_url'); ?>/css/slick-theme.css" rel='stylesheet' type='text/css'>
-
+<link href="<?php bloginfo('template_url'); ?>/css/popup.css" rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_uri(); ?>" />
 <?php wp_head(); ?>
 </head>
@@ -47,7 +46,9 @@
 	        	<a href="http://www.facebook.com/?ref=logo#!/pages/Memphis-TN/Boyle-Investment-Company/73372158561" target="_blank" >
 	        		<img src="<?php bloginfo('template_directory'); ?>/Media/Images/Icons/Icon-Facebook-Small.png" alt="Follow Us on Facebook" title="Follow Us on Facebook" style="border-width: 0px; width: 22px; height: 22px;">
 	        	</a>
-	        	<input type="image" name="ctl00$ImageButtonTwitter" id="ctl00_ImageButtonTwitter" src="<?php bloginfo('template_directory'); ?>/Media/Images/Icons/Icon-Twitter-Small.png" style="border-width:0px;margin-left: 11px;" />
+	        	<a href="#twitter" class="popup">
+    	        	<input type="image" name="ctl00$ImageButtonTwitter" id="ctl00_ImageButtonTwitter" src="<?php bloginfo('template_directory'); ?>/Media/Images/Icons/Icon-Twitter-Small.png" style="border-width:0px;margin-left: 11px;"  />
+	        	</a>
 	        	<a href="http://blog.boyle.com/" style="text-decoration:none; margin-left: 11px;" target="_blank">
 	        		<img src="<?php bloginfo('template_directory'); ?>/Media/Images/Icons/Icon-Wordpress-Small.png" alt="Read our Blog" style="border:0; width:22px; height:22px;" title="Read our Blog" />
 	        	</a>
@@ -88,6 +89,7 @@
 			<li><a href="<?php echo get_permalink( 25 ); ?>">Contact</a></li>
             <li><a href="#">Boyle Blog</a></li>
             <li><a href="http://www.boyleinsuranceagency.com/">Boyle Insurance Agency</a></li>
+            <li><a href="<?php echo get_permalink( 985 ); ?>">Availability Report</a></li>
 			<li class="simple-menu-social">
 	        	<a href="http://www.facebook.com/?ref=logo#!/pages/Memphis-TN/Boyle-Investment-Company/73372158561" target="_blank">
 	        		<img src="<?php bloginfo('template_directory'); ?>/Media/Images/Icons/Icon-Facebook-Small.png" alt="Follow Us on Facebook" title="Follow Us on Facebook" style=" width: 22px; height: 22px;">
@@ -104,5 +106,9 @@
 		</ul>
 	</div>
 
-
+<div id="twitter">
+	<h2>Choose Twitter Feed:</h2>
+	<p><a href="https://twitter.com/BoyleInvestment" target="_blank"><img src="http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/10/Icon-Twitter-Large.png"><br>Memphis Team</a></p>
+	<p><a href="https://twitter.com/BoyleNashville" target="_blank"><img src="http://www.maxtestdomain.com/boyle/wp-content/uploads/2015/10/Icon-Twitter-Large.png"><br>Nashville Team</a></p>
+</div>
 <div id="page">

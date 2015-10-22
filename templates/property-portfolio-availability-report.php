@@ -55,7 +55,7 @@ $subproperties = get_posts(
 						$attachment = get_sub_field('lot_file', $property->ID); ?>
 
 				         <tr class="Item">
-					        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title', $property->ID); ?></td>
+					        <td style="text-align: center; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title', $property->ID); ?></td>
 					        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size', $property->ID); ?></td>
 					        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price', $property->ID); ?></td>
 					    </tr> 
@@ -76,7 +76,7 @@ $subproperties = get_posts(
 						$attachment = get_sub_field('lot_file', $property->ID); ?>
 
 				         <tr class="Item">
-					        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title', $property->ID); ?></td>
+					        <td style="text-align: center; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title', $property->ID); ?></td>
 					        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size', $property->ID); ?></td>
 					        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price', $property->ID); ?></td>
 					    </tr> 

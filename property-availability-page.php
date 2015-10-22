@@ -28,7 +28,7 @@ Template Name: Availability Report Page
 		    	wp_nav_menu( array(
 			    	'menu' => 'Availability Report Regions Menu',
 			        'theme_location' => 'mobile-nav',
-			        'items_wrap'     => '<select id="drop-nav"><option value="">Select a page...</option>%3$s</select>',
+			        'items_wrap'     => '<select class="drop-nav"><option value="">Select a page...</option>%3$s</select>',
 			        'walker'  => new Walker_Nav_Menu_Dropdown())
 		        );
 			?>

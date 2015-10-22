@@ -63,7 +63,7 @@
 
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/common.js"></script>
 <!-- Include the Sidr JS -->
-
+<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/jquery.popup.min.js"></script>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/jquery.min.sidr.js"></script>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/navigation.js"></script>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/main.js"></script>

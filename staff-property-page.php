@@ -19,13 +19,14 @@ $image = get_field('picture'); ?>
 		<?php foreach($agents as $agent): 
 		$image = get_field('picture', $agent->ID); ?>
 			<div class="single-property-agent-container agent-property-page-agent-container">
+				<h1 class="agent-property-page-name Title-Blue"><?php echo get_the_title( $agent->ID ); ?></h1>
 				<img src="<?php echo $image['url'];?>"/>
-				<h1><?php echo get_the_title( $agent->ID ); ?></h1>
+				
 				<strong><a href="mailto:<?php echo the_field('email', $agent->ID); ?>"><?php echo get_field('email', $agent->ID ); ?></a></strong>
 				<span><?php echo the_field('phone_number', $agent->ID ); ?></span>
 				<ul>
-					<li><a href="mailto:<?php echo the_field('email', $agent->ID); ?>">Contact <?php echo get_the_title( $agent->ID ); ?></a></li>
-					<li><a href="<?php echo get_permalink( $agent->ID ); ?>">About <?php echo get_the_title( $agent->ID ); ?></a></li>
+					<li><a href="mailto:<?php echo the_field('email', $agent->ID); ?>">Contact Me</a></li>
+					<li><a href="<?php echo get_permalink( $agent->ID ); ?>">About Me</a></li>
 				</ul>
 			</div>
 		<?php endforeach; ?>
@@ -50,6 +51,7 @@ $image = get_field('picture'); ?>
 ?>
 
 	<?php if( $the_query->have_posts() ): ?>
+		<div class="outer-map">
 		<div class="acf-map">
 			<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
 				<?php
@@ -78,6 +80,7 @@ $image = get_field('picture'); ?>
 						<?php endwhile; ?>
 					<?php endif; ?>
 
+</div>
 </div>
 <div style="clear:both;"></div>
 <hr>
@@ -134,7 +137,7 @@ Properties
 								$attachment = get_sub_field('lot_file'); ?>
 
 						         <tr class="Item">
-							        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
+							        <td style="text-align: center; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
 							        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size'); ?></td>
 							        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
 							    </tr> 
@@ -155,7 +158,7 @@ Properties
 								$attachment = get_sub_field('lot_file'); ?>
 
 						         <tr class="Item">
-							        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
+							        <td style="text-align: center; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
 							        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size'); ?></td>
 							        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
 							    </tr> 
@@ -185,14 +188,23 @@ Properties
 <style type="text/css">
 
 .acf-map {
-	width: 500px;
-	height: 300px;
+	width: 100%;
+	height: 250px;
 	border: #ccc solid 1px;
+	
+}
+
+.outer-map {
+	border-left: 1px dashed #ccc;
+	padding-left: 1em;
+	width: 65%;
 	display: inline-block;
 	float: right;
 }
 @media (max-width: 48em) {
-	float: none;
+	.acf-map {
+		float: none;
+	}
 }
 
 </style>

@@ -5,14 +5,14 @@
     	wp_nav_menu( array(
 	    	'menu' => 'Availability Report Greater Nashville Menu',
 	        'theme_location' => 'mobile-nav',
-	        'items_wrap'     => '<select id="drop-nav"><option value="">Select a page...</option>%3$s</select>',
+	        'items_wrap'     => '<select class="drop-nav"><option value="">Select a page...</option>%3$s</select>',
 	        'walker'  => new Walker_Nav_Menu_Dropdown())
         );
 	?>
 	<br>
 </div>
 <div class="property-type-list-content property-list-container">
-	<h2><?php the_title(); ?></h2>
+	<h2 class="property-portfolio-title"><?php the_title(); ?></h2>
 	<?php if (is_page(989) ) {
 			$value = array('Residential', 'Hotels', 'Land', 'Mixed-Use', 'Industrial', 'Retail', 'Office');
 	 	} elseif (is_page(532) ) { 
@@ -37,8 +37,7 @@
 			'meta_key'	=> 'zip_code',
 			'orderby'	=> 'meta_value_num title',
 			'order'		=> 'ASC',
-			'posts_per_page'	=> 15,
-			'paged'		=> $paged,
+			'posts_per_page'	=> -1,
 			'meta_query'	=> array(
 				'relation'		=> 'AND',
 				array(
@@ -67,7 +66,7 @@
 		$the_query = new WP_Query( $args );
 		?>
 		<?php if( $the_query->have_posts() ): ?>
-			<p>There are <strong><?php echo $the_query->found_posts ?></strong> properties available within this region.</p>
+			<p>There are <b><?php echo $the_query->found_posts ?></b> properties available within this region.</p>
 			<ul>
 			<?php while ( $the_query->have_posts() ) : $the_query->the_post(); 
 				$images = get_field('property_gallery');
@@ -114,7 +113,7 @@
 								$attachment = get_sub_field('lot_file'); ?>
 
 						         <tr class="Item">
-							        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
+							        <td style="text-align: center; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
 							        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size'); ?></td>
 							        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
 							    </tr> 
@@ -135,7 +134,7 @@
 								$attachment = get_sub_field('lot_file'); ?>
 
 						         <tr class="Item">
-							        <td style="text-align: left; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
+							        <td style="text-align: center; vertical-align: top; width: auto;"><?php echo the_sub_field('lot_title'); ?></td>
 							        <td style="text-align: center; vertical-align: top; width: 125px;"><?php echo the_sub_field('lot_size'); ?></td>
 							        <td style="text-align: center; vertical-align: middle;"><?php echo the_sub_field('lot_price'); ?></td>
 							    </tr> 
@@ -152,22 +151,7 @@
 			</ul>
 		<?php endif; ?>
 		<?php wp_reset_query();	 // Restore global post data stomped by the_post(). ?>
-		<?php
-if($the_query->max_num_pages>1){?>
-    <p class="navrechts">
-    <?php
-      if ($paged > 1) { ?>
-        <a href="<?php echo '?paged=' . ($paged -1); //prev link ?>">«</a>
-                        <?php }
-    for($i=1;$i<=$the_query->max_num_pages;$i++){?>
-        <a href="<?php echo '?paged=' . $i; ?>" <?php echo ($paged==$i)? 'class="selected"':'';?>><?php echo $i;?></a>
-        <?php
-    }
-    if($paged < $the_query->max_num_pages){?>
-        <a href="<?php echo '?paged=' . ($paged + 1); //next link ?>">»</a>
-    <?php } ?>
-    </p>
-<?php } ?>
+	
 </div>
 
 
